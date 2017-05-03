@@ -7,8 +7,30 @@
     "email": "masayuki@izumin.info",
     "url": "https://github.com/izumin5210"
   },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "electron": "^1.6.6",
+    "html-webpack-plugin": "^2.28.0",
+    "npm-run-all": "^4.0.2",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-merge": "^4.1.0"
+  },
   "license": "MIT",
   "main": "index.js",
   "private": true,
-  "repository": "git@github.com:izumin5210/smap.git"
+  "repository": "git@github.com:izumin5210/smap.git",
+  "scripts": {
+    "start": "electron ./dist/main.js",
+    "start:dev": "run-p start:dev:*",
+    "start:dev:app": "electron -r babel-register ./src/main.js",
+    "start:dev:server": "webpack-dev-server --config ./scripts/webpack/config.renderer.dev.js"
+  }
 }
