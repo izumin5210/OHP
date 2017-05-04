@@ -49,4 +49,5 @@ jspm_packages
 .yarn-integrity
 
 
-
+# type definitions from flow-typed repository
+flow-typed

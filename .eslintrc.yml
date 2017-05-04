@@ -13,12 +13,19 @@ parserOptions:
     jsx: true
   sourceType: module
 
+plugins:
+- flowtype-errors
+
 extends:
 - izumin5210
 - izumin5210/react
+- izumin5210/flow
 
 settings:
   import/resolver:
     node:
       moduleDirectory:
       - node_modules
+
+rules:
+  flowtype-errors/show-errors: error
