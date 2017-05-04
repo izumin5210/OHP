@@ -2116,9 +2116,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-izumin5210@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/eslint-config-izumin5210/-/eslint-config-izumin5210-0.2.4.tgz#f87a0ea6c4d3bf326b065abb4a16205494ae28bc"
+eslint-config-izumin5210@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/eslint-config-izumin5210/-/eslint-config-izumin5210-0.2.5.tgz#0000ef2b0f050795ba2a8608070412ef6c7c66c8"
   dependencies:
     eslint-config-standard "^10.2.1"
     eslint-config-standard-react "^5.0.0"
