@@ -39,7 +39,6 @@ class EditorContainer extends PureComponent<void, Props, void> {
   props: Props
 
   render () {
-    console.log(Actions)
     const { body, setBody } = this.props
     return (
       <AceEditor

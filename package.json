@@ -36,7 +36,7 @@
     "css-loader": "^0.28.1",
     "electron": "^1.6.6",
     "eslint": "^3.19.0",
-    "eslint-config-izumin5210": "^0.2.4",
+    "eslint-config-izumin5210": "^0.2.5",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-flowtype-errors": "^3.2.0",
     "extract-text-webpack-plugin": "^2.1.0",
@@ -75,9 +75,11 @@
     "lint:js:scripts": "eslint scripts",
     "lint:js:src": "eslint src",
     "postinstall": "flow-typed install",
+    "pretest": "run-p lint typecheck",
     "start": "electron ./dist/main.js",
     "start:dev": "run-p start:dev:*",
     "start:dev:app": "electron -r babel-register ./src/main.js",
-    "start:dev:server": "webpack-dev-server --config ./scripts/webpack/config.renderer.dev.js"
+    "start:dev:server": "webpack-dev-server --config ./scripts/webpack/config.renderer.dev.js",
+    "typecheck": "flow"
   }
 }
