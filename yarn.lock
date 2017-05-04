@@ -3089,6 +3089,10 @@ ignore@^3.0.11, ignore@^3.2.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.0.tgz#3812d22cbe9125f2c2b4915755a1b8abd745a001"
 
+"immutable@https://github.com/oreqizer/immutable-js.git#1f66a82":
+  version "4.0.0-rc.2"
+  resolved "https://github.com/oreqizer/immutable-js.git#1f66a82"
+
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
