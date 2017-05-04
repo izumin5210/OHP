@@ -75,9 +75,11 @@
     "lint:js:scripts": "eslint scripts",
     "lint:js:src": "eslint src",
     "postinstall": "flow-typed install",
+    "pretest": "run-p lint typecheck",
     "start": "electron ./dist/main.js",
     "start:dev": "run-p start:dev:*",
     "start:dev:app": "electron -r babel-register ./src/main.js",
-    "start:dev:server": "webpack-dev-server --config ./scripts/webpack/config.renderer.dev.js"
+    "start:dev:server": "webpack-dev-server --config ./scripts/webpack/config.renderer.dev.js",
+    "typecheck": "flow"
   }
 }

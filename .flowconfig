@@ -1,4 +1,7 @@
 [ignore]
+.*/node_modules/immutable/type-definitions/tests/.*
+.*/node_modules/conventional-changelog-core/test/.*
+.*/node_modules/stylelint/.*
 ./decls
 
 [include]
