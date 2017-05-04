@@ -13,6 +13,7 @@
   "devDependencies": {
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
@@ -22,6 +23,9 @@
     "babel-register": "^6.24.1",
     "css-loader": "^0.28.1",
     "electron": "^1.6.6",
+    "eslint": "^3.19.0",
+    "eslint-config-izumin5210": "^0.2.4",
+    "eslint-loader": "^1.7.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "html-webpack-plugin": "^2.28.0",
     "npm-run-all": "^4.0.2",
@@ -34,8 +38,9 @@
     "postcss-reporter": "^3.0.0",
     "postcss-smart-import": "^0.6.12",
     "style-loader": "^0.17.0",
+    "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",
-    "stylelint-declaration-strict-value": "^1.0.3",
+    "stylelint-declaration-use-variable": "^1.6.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.5",
     "webpack-merge": "^4.1.0"
@@ -47,6 +52,9 @@
   "scripts": {
     "lint": "run-p lint:*",
     "lint:css": "stylelint 'src/**/*.css'",
+    "lint:js": "run-p lint:js:*",
+    "lint:js:scripts": "eslint scripts",
+    "lint:js:src": "eslint src",
     "start": "electron ./dist/main.js",
     "start:dev": "run-p start:dev:*",
     "start:dev:app": "electron -r babel-register ./src/main.js",
