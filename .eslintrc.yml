@@ -27,5 +27,8 @@ settings:
       moduleDirectory:
       - node_modules
 
+globals:
+  React: true
+
 rules:
   flowtype-errors/show-errors: error
