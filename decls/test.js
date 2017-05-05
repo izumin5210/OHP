@@ -1,0 +1,2 @@
+declare var assert: any;
+

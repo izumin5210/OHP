@@ -1,4 +1,3 @@
-
 {
   "plugins": [
     "transform-runtime",
@@ -15,5 +14,20 @@
       }
     ],
     "react"
-  ]
+  ],
+  "env": {
+    "development": {
+      "presets": [
+        "power-assert"
+      ],
+      "plugins": [
+        [
+          "espower",
+          {
+            "embedAst": true
+          }
+        ]
+      ]
+    }
+  }
 }
