@@ -10,6 +10,7 @@
   "dependencies": {
     "brace": "^0.10.0",
     "immutable": "https://github.com/oreqizer/immutable-js.git#1f66a82",
+    "mdast-util-toc": "^2.0.1",
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",
     "react-ace": "^4.2.1",
