@@ -3,17 +3,17 @@ import SplitPane from 'react-split-pane'
 
 import type { Element } from 'react'
 
-import styles from './View.css'
+import styles from './Panes.css'
 
 type Props = {
+  split: 'vertical' | 'horizontal',
   children?: Element<*> | Array<Element<*>>,
 }
 
-export default function View ({ children }: Props) {
+export default function Panes ({ children, ...rest }: Props) {
   return (
     <SplitPane
-      split='vertical'
-      defaultSize='50%'
+      {...rest}
       resizerClassName={styles.resizer}
     >
       { children }
