@@ -19,6 +19,9 @@ describe('remark-newpage-directive', () => {
       options: {},
     },
     {
+      type: 'no-newpage',
+    },
+    {
       type: 'classname',
       options: { className: 'test-page' },
     },
