@@ -19,7 +19,7 @@ describe('remark-newpage-directive', () => {
     it(`should work on ${fixture}`, () => {
       const dir = join(FIXTURES, fixture)
       const input = read(join(dir, 'input.md'), 'utf-8')
-      const output = read(join(dir, 'output.md'), 'utf-8')
+      const output = read(join(dir, 'output.html'), 'utf-8')
 
       assert(process(input) === output)
     })
