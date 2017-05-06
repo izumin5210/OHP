@@ -8,20 +8,27 @@ import newpage from 'utils/remark-newpage-directive'
 
 const FIXTURES = join(__dirname, 'fixtures')
 
-function process (value: string) {
-  return remark().use(newpage).use(html).processSync(value).toString()
+function process (value: string, opts: any) {
+  return remark().use(newpage, opts).use(html).processSync(value).toString()
 }
 
 describe('remark-newpage-directive', () => {
   [
-    'normal',
-  ].forEach((fixture) => {
-    it(`should work on ${fixture}`, () => {
-      const dir = join(FIXTURES, fixture)
+    {
+      type: 'normal',
+      options: {},
+    },
+    {
+      type: 'classname',
+      options: { className: 'test-page' },
+    },
+  ].forEach(({ type, options }) => {
+    it(`should work on ${type}`, () => {
+      const dir = join(FIXTURES, type)
       const input = read(join(dir, 'input.md'), 'utf-8')
       const output = read(join(dir, 'output.html'), 'utf-8')
 
-      assert(process(input) === output)
+      assert(process(input, options) === output)
     })
   })
 })

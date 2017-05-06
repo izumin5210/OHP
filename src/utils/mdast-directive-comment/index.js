@@ -6,9 +6,10 @@ import type { Parent } from 'unist'
 import type { HTML } from 'mdast'
 import type { Marker } from 'mdast-comment-marker'
 
-export interface DirectiveCommentVisitor {
+export interface DirectiveCommentVisitor<Options> {
   static directiveName: string,
   static reverse: boolean,
+  constructor(options: Options): DirectiveCommentVisitor<Options>,
   beforeVisiting(parent: Parent): void,
   afterVisiting(parent: Parent): void,
   visit(marker: Marker, index: number, parent: ?Parent): ?boolean,
@@ -18,16 +19,16 @@ function isComment ({ value }: HTML): boolean {
   return value.startsWith('<!--') && value.endsWith('-->')
 }
 
-export default function createPlugin (Visitor: Class<DirectiveCommentVisitor>) {
+export default function createPlugin<O: Object> (Visitor: Class<DirectiveCommentVisitor<O>>) {
   return plugin
 
-  function plugin () {
+  function plugin (options: O) {
     let visitorInstance
 
     return transformer
 
     function transformer (tree: Parent) {
-      visitorInstance = new Visitor()
+      visitorInstance = new Visitor(options)
       visitorInstance.beforeVisiting(tree)
       visit(tree, 'html', visitor, Visitor.reverse || false)
       visitorInstance.afterVisiting(tree)
