@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path')
 
+const pkg = require('../../package.json')
+
 const { src } = require('./configuration')
 const base = require('./config.base')
 
@@ -39,6 +41,7 @@ const config = {
 
   plugins: [
     new HtmlWebpackPlugin({
+      title: pkg.name,
       filename: 'index.html',
       template: path.resolve(src, 'index.html'),
       inject: true
