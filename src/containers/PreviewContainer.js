@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import type { Connector } from 'react-redux'
 
-import { getBodyElement } from 'store/selectors/processor'
+import { getBodyElementRenderer } from 'store/selectors/processor'
 
 import type { RootState } from 'store/modules'
 
@@ -19,7 +19,7 @@ type Props = RequiredProps & InjectedProps
 
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
-    bodyElement: getBodyElement(state),
+    bodyElement: getBodyElementRenderer(state)({ pageClassName: 'hoge' }),
   }),
 )
 
