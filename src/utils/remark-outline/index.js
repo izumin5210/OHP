@@ -29,8 +29,6 @@ export default function (
 
   function transformer (node: Parent) {
     const result = util(node, opts)
-    if (result.map != null) {
-      node.children = [].concat(result.map)
-    }
+    node.children = [].concat(result.map || [])
   }
 }

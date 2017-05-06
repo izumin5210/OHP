@@ -8,6 +8,7 @@ import remarkNewpageDirective, {
 } from 'utils/remark-newpage-directive'
 import githubSanitize from 'hast-util-sanitize/lib/github'
 import merge from 'lodash/merge'
+import memoize from 'lodash/memoize'
 
 import { getBody as getRawBody } from './entities/document'
 
@@ -24,14 +25,22 @@ const handlers = Object.assign({}, newpageDirectiveHandlers)
 const toHast = { handlers }
 const rendererOptions = { sanitize, toHast }
 
-const bodyProcessor = remark()
-  .use(remarkNewpageDirective)
-  .use(remarkRenderer, rendererOptions)
 const outlineProcessor = remark().use(remarkOutline).use(remarkRenderer)
 
-export const getBodyAst = createSelector(
+type BodyProcessorOptions = {
+  pageClassName: string,
+}
+const getBodyProcessor = ({ pageClassName }: BodyProcessorOptions) => (
+  remark()
+    .use(remarkNewpageDirective, { className: pageClassName })
+    .use(remarkRenderer, rendererOptions)
+)
+
+export const getBodyAstRenderer = createSelector(
   getRawBody,
-  (body: string) => bodyProcessor.processSync(body),
+  (body: string) => memoize((opts: BodyProcessorOptions) => (
+    getBodyProcessor(opts).processSync(body)
+  )),
 )
 
 export const getOutlineAst = createSelector(
@@ -39,9 +48,11 @@ export const getOutlineAst = createSelector(
   (body: string) => outlineProcessor.processSync(body),
 )
 
-export const getBodyElement = createSelector(
-  getBodyAst,
-  ({ contents }: any) => contents,
+export const getBodyElementRenderer = createSelector(
+  getBodyAstRenderer,
+  (getBodyAst: (opts: BodyProcessorOptions) => any) => (
+    memoize((opts: BodyProcessorOptions) => getBodyAst(opts).contents
+  )),
 )
 
 export const getOutlineElement = createSelector(

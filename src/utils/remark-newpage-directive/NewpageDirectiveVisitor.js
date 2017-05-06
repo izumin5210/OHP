@@ -5,9 +5,31 @@ import toHast from 'mdast-util-to-hast'
 import type { Parent, Node } from 'unist'
 import type { Marker } from 'mdast-comment-marker'
 
+type Options = {
+  typeName?: string,
+  tagName?: string,
+  className?: string,
+}
+
 export default class NewpageDirectiveVisitor {
   static directiveName = 'newpage'
   static reverse = true
+  static defaultOptions = {
+    typeName: 'page',
+    tagName: 'div',
+    className: 'page',
+  }
+
+  constructor ({ typeName, tagName, className }: Options = {}) {
+    const { defaultOptions } = NewpageDirectiveVisitor
+    this.typeName = typeName || defaultOptions.typeName
+    this.tagName = tagName = defaultOptions.tagName
+    this.className = className || defaultOptions.className
+  }
+
+  typeName: string
+  tagName: string
+  className: string
 
   prev: {
     marker: Marker,
@@ -23,6 +45,10 @@ export default class NewpageDirectiveVisitor {
       parent.children = [].concat(
         [this.buildPage(parent.children.slice(0, this.prev.index))],
         parent.children.slice(this.prev.index),
+      )
+    } else {
+      parent.children = [].concat(
+        [this.buildPage(parent.children)],
       )
     }
   }
@@ -50,10 +76,10 @@ export default class NewpageDirectiveVisitor {
 
   buildPage (children: Array<Node>) {
     const data = {
-      hName: 'div',
-      hProperties: { className: 'page' },
+      hName: this.tagName,
+      hProperties: { className: this.className },
       hChildren: children.map(toHast),
     }
-    return u('page', { data }, children)
+    return u(this.typeName, { data }, children)
   }
 }

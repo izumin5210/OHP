@@ -14,6 +14,7 @@ function process (value: string) {
 describe('remark-outline', () => {
   [
     'normal',
+    'no-headings',
   ].forEach((fixture) => {
     it(`should work on ${fixture}`, () => {
       const dir = join(FIXTURES, fixture)
