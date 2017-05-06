@@ -10,6 +10,7 @@
   "dependencies": {
     "brace": "^0.10.0",
     "immutable": "https://github.com/oreqizer/immutable-js.git#1f66a82",
+    "mdast-comment-marker": "https://github.com/izumin5210/mdast-comment-marker.git#3c5966c",
     "mdast-util-toc": "^2.0.1",
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",
@@ -21,7 +22,8 @@
     "redux-actions": "^2.0.2",
     "remark": "^7.0.1",
     "remark-react": "^4.0.0",
-    "reselect": "^3.0.0"
+    "reselect": "^3.0.0",
+    "unist-util-visit": "^1.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
