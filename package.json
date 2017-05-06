@@ -10,6 +10,9 @@
   "dependencies": {
     "brace": "^0.10.0",
     "immutable": "https://github.com/oreqizer/immutable-js.git#1f66a82",
+    "lodash": "^4.17.4",
+    "mdast-comment-marker": "https://github.com/izumin5210/mdast-comment-marker.git#3c5966c",
+    "mdast-util-to-hast": "^2.4.0",
     "mdast-util-toc": "^2.0.1",
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",
@@ -21,7 +24,9 @@
     "redux-actions": "^2.0.2",
     "remark": "^7.0.1",
     "remark-react": "^4.0.0",
-    "reselect": "^3.0.0"
+    "reselect": "^3.0.0",
+    "unist-builder": "^1.0.2",
+    "unist-util-visit": "^1.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
@@ -63,6 +68,7 @@
     "redux-devtools-dock-monitor": "^1.1.2",
     "redux-devtools-log-monitor": "^1.3.0",
     "redux-logger": "^3.0.1",
+    "remark-html": "^6.0.0",
     "style-loader": "^0.17.0",
     "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",
