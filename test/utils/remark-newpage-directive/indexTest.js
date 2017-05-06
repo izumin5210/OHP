@@ -20,6 +20,7 @@ describe('remark-newpage-directive', () => {
     },
     {
       type: 'no-newpage',
+      options: {},
     },
     {
       type: 'classname',
