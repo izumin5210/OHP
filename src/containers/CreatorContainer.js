@@ -15,6 +15,7 @@ export default class CreatorContainer extends PureComponent<void, Props, void> {
       <Panes
         split='vertical'
         defaultSize='50%'
+        pane2Style={{ overflowY: 'scroll' }}
       >
         <EditorContainer />
         <PreviewContainer />
