@@ -23,7 +23,7 @@ export default class NewpageDirectiveVisitor {
   constructor ({ typeName, tagName, className }: Options = {}) {
     const { defaultOptions } = NewpageDirectiveVisitor
     this.typeName = typeName || defaultOptions.typeName
-    this.tagName = tagName = defaultOptions.tagName
+    this.tagName = tagName || defaultOptions.tagName
     this.className = className || defaultOptions.className
   }
 
@@ -78,7 +78,7 @@ export default class NewpageDirectiveVisitor {
     const data = {
       hName: this.tagName,
       hProperties: { className: this.className },
-      hChildren: children.map(toHast),
+      hChildren: children.map(toHast).filter(n => n != null),
     }
     return u(this.typeName, { data }, children)
   }

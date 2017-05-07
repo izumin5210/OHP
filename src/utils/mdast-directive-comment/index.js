@@ -41,7 +41,7 @@ export default function createPlugin<O: Object> (Visitor: Class<DirectiveComment
 
       const marker = commentMarker(node)
 
-      if (marker.name === Visitor.directiveName) {
+      if (marker != null && marker.name === Visitor.directiveName) {
         return visitorInstance.visit(marker, index, parent)
       }
     }

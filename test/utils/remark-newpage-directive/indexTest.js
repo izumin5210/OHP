@@ -26,6 +26,10 @@ describe('remark-newpage-directive', () => {
       type: 'classname',
       options: { className: 'test-page' },
     },
+    {
+      type: 'broken-comment',
+      options: {},
+    },
   ].forEach(({ type, options }) => {
     it(`should work on ${type}`, () => {
       const dir = join(FIXTURES, type)
