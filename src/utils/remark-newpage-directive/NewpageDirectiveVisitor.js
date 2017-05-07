@@ -78,7 +78,7 @@ export default class NewpageDirectiveVisitor {
     const data = {
       hName: this.tagName,
       hProperties: { className: this.className },
-      hChildren: children.map(toHast),
+      hChildren: children.map(toHast).filter(n => n != null),
     }
     return u(this.typeName, { data }, children)
   }
