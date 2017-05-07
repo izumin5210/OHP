@@ -23,7 +23,7 @@ export default class NewpageDirectiveVisitor {
   constructor ({ typeName, tagName, className }: Options = {}) {
     const { defaultOptions } = NewpageDirectiveVisitor
     this.typeName = typeName || defaultOptions.typeName
-    this.tagName = tagName = defaultOptions.tagName
+    this.tagName = tagName || defaultOptions.tagName
     this.className = className || defaultOptions.className
   }
 
