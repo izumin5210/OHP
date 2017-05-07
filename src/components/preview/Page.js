@@ -40,11 +40,15 @@ export default class Page extends PureComponent<void, Props, State> {
   }
 
   get style (): Object {
-    const height = 0.75 * this.state.width
+    const { width } = this.state
+    // TODO: tweak slide acpect ratio
+    const height = 0.75 * width
     return {
       height,
       minHeight: height,
       maxHeight: height,
+      // TODO: tweak base font-size
+      fontSize: 36 * (width / 800)
     }
   }
 
