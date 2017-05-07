@@ -15,6 +15,7 @@ export default function Panes ({ children, ...rest }: Props) {
     <SplitPane
       {...rest}
       resizerClassName={styles.resizer}
+      paneStyle={{ overflowY: 'scroll' }}
     >
       { children }
     </SplitPane>
