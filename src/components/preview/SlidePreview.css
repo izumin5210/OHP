@@ -1,0 +1,14 @@
+.pages {
+  background-color: #333;
+  min-height: 100%;
+  padding: 16px;
+}
+
+.page {
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.page:not(:first-child) {
+  margin-top: 16px;
+}

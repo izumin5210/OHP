@@ -61,7 +61,7 @@ export const getOutlineAst = createSelector(
   (body: string) => outlineProcessor.processSync(body),
 )
 
-export const getBodyElementRenderer = createSelector(
+export const getRenderBodyElement = createSelector(
   getBodyAstRenderer,
   (getBodyAst: (opts: BodyProcessorOptions) => any) => (
     memoize((opts: BodyProcessorOptions) => getBodyAst(opts).contents
