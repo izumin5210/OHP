@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import type { Connector } from 'react-redux'
 
-import { getRenderBodyElement } from 'store/selectors/processor'
+import { getBodyElement } from 'store/selectors/processor'
 import { SlidePreview } from 'components/preview'
 
 import type { RootState } from 'store/modules'
@@ -13,14 +13,14 @@ type RequiredProps = {
 }
 
 type InjectedProps = {
-  renderBodyElement: ({ pageClassName: string }) => React$Element<*>,
+  bodyElement: React$Element<*>,
 }
 
 type Props = RequiredProps & InjectedProps
 
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
-    renderBodyElement: getRenderBodyElement(state),
+    bodyElement: getBodyElement(state),
   }),
 )
 
@@ -29,9 +29,9 @@ class PreviewContainer extends PureComponent<void, Props, void> {
   props: Props
 
   render () {
-    const { renderBodyElement } = this.props
+    const { bodyElement } = this.props
     return (
-      <SlidePreview {...{ renderBodyElement }} />
+      <SlidePreview {...{ bodyElement }} />
     )
   }
 }

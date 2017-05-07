@@ -1,46 +1,23 @@
 // @flow
 import { PureComponent } from 'react'
-import Measure from 'react-measure'
-import type { Children } from 'react'
+import ShadowDom from 'react-shadow'
+
+import type { Children, Element } from 'react'
+
+import styles from './SlidePreview.css'
 
 type Props = {
-  className: string,
+  width: number,
+  userStyles: Array<string>,
   children?: Children,
 }
 
-type State = {
-  width: number,
-}
-
-/* eslint-disable react/no-unused-prop-types */
-type Dimension = {
-  width: number,
-  height: number,
-  top: number,
-  right: number,
-  bottom: number,
-  left: number,
-}
-/* eslint-enable */
-
-export default class Page extends PureComponent<void, Props, State> {
-  constructor (props: Props) {
-    super(props)
-    this.state = {
-      width: 0,
-    }
-  }
-
-  state: State
-
-  onMeasure = ({ width }: Dimension) => {
-    if (this.state.width !== width) {
-      this.setState({ width })
-    }
-  }
+export default class Page extends PureComponent<void, Props, void> {
+  // for lint
+  props: Props
 
   get style (): Object {
-    const { width } = this.state
+    const { width } = this.props
     // TODO: tweak slide acpect ratio
     const height = 0.75 * width
     return {
@@ -52,17 +29,23 @@ export default class Page extends PureComponent<void, Props, State> {
     }
   }
 
+  get userStyles (): Array<Element<*>> {
+    return this.props.userStyles.map((style, i) => (
+      <style type='text/css' key={`userStyle[${i}]`}>{ style }</style>
+    ))
+  }
+
   render () {
-    const { className, children } = this.props
     return (
-      <Measure onMeasure={this.onMeasure}>
+      <ShadowDom>
         <section
-          {...{ className }}
+          className={styles.page}
           style={this.style}
         >
-          { children }
+          { this.props.children }
+          { this.userStyles }
         </section>
-      </Measure>
+      </ShadowDom>
     )
   }
 }

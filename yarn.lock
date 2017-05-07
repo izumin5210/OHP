@@ -5457,7 +5457,7 @@ react-dock@^0.2.4:
     lodash.debounce "^3.1.1"
     prop-types "^15.5.8"
 
-react-dom@^15.5.4:
+"react-dom@>=0.14.7 <=15.x", react-dom@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
   dependencies:
@@ -5498,6 +5498,13 @@ react-redux@^5.0.4:
     loose-envify "^1.1.0"
     prop-types "^15.0.0"
 
+react-shadow@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-2.0.2.tgz#5cbda6c488a6cfd256a4a62475e355f14d462c3b"
+  dependencies:
+    react ">=0.14.7 <=15.x"
+    react-dom ">=0.14.7 <=15.x"
+
 react-split-pane@^0.1.63:
   version "0.1.63"
   resolved "https://registry.yarnpkg.com/react-split-pane/-/react-split-pane-0.1.63.tgz#fadb3960cc659911dd05ffbc88acee4be9f53583"
@@ -5519,7 +5526,7 @@ react-test-renderer@^15.5.4:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
 
-react@^15.5.4:
+"react@>=0.14.7 <=15.x", react@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
   dependencies:
