@@ -14,3 +14,11 @@ export const mainWindowUrl = format(
     slashes: true,
   }
 )
+
+export const events = {
+  openNewFile: 'openNewFile',
+  exportPdf: 'exportPdf',
+  toggleFullScreen: 'toggleFullScreen',
+  openLearnMore: 'openLearnMore',
+  quit: 'quit',
+}
