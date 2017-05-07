@@ -7,23 +7,36 @@ import remarkNewpageDirective, {
   handlers as newpageDirectiveHandlers
 } from 'utils/remark-newpage-directive'
 import githubSanitize from 'hast-util-sanitize/lib/github'
-import merge from 'lodash/merge'
+import mergeWith from 'lodash/mergeWith'
+import isArray from 'lodash/isArray'
 import memoize from 'lodash/memoize'
+
+import { Page } from 'components/preview'
 
 import { getBody as getRawBody } from './entities/document'
 
-const sanitize = merge(
+const sanitize = mergeWith(
+  {},
   githubSanitize,
   {
+    tagNames: [
+      'page',
+    ],
     attributes: {
-      div: ['className'],
+      page: ['className'],
     }
   },
+  (obj, src) => {
+    if (isArray(obj) && isArray(src)) {
+      return [].concat(obj, src)
+    }
+  }
 )
 
 const handlers = Object.assign({}, newpageDirectiveHandlers)
 const toHast = { handlers }
-const rendererOptions = { sanitize, toHast }
+const remarkReactComponents = { page: Page }
+const rendererOptions = { sanitize, toHast, remarkReactComponents }
 
 const outlineProcessor = remark().use(remarkOutline).use(remarkRenderer)
 
@@ -32,7 +45,7 @@ type BodyProcessorOptions = {
 }
 const getBodyProcessor = ({ pageClassName }: BodyProcessorOptions) => (
   remark()
-    .use(remarkNewpageDirective, { className: pageClassName })
+    .use(remarkNewpageDirective, { tagName: 'page', className: pageClassName })
     .use(remarkRenderer, rendererOptions)
 )
 
