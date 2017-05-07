@@ -3,6 +3,7 @@ import { createSelector } from 'reselect'
 import remark from 'remark'
 import remarkRenderer from 'remark-react'
 import remarkOutline from 'utils/remark-outline'
+import remarkExtractStyles from 'utils/remark-extract-styles'
 import remarkNewpageDirective, {
   handlers as newpageDirectiveHandlers
 } from 'utils/remark-newpage-directive'
@@ -10,7 +11,7 @@ import githubSanitize from 'hast-util-sanitize/lib/github'
 import mergeWith from 'lodash/mergeWith'
 import isArray from 'lodash/isArray'
 
-import { Page } from 'components/preview'
+import SlideContainer from 'containers/SlideContainer'
 
 import { getBody as getRawBody } from './entities/document'
 
@@ -34,13 +35,14 @@ const sanitize = mergeWith(
 
 const handlers = Object.assign({}, newpageDirectiveHandlers)
 const toHast = { handlers }
-const remarkReactComponents = { page: Page }
+const remarkReactComponents = { page: SlideContainer }
 const rendererOptions = { sanitize, toHast, remarkReactComponents }
 
 const outlineProcessor = remark().use(remarkOutline).use(remarkRenderer)
 
 const bodyProcessor = remark()
   .use(remarkNewpageDirective, { tagName: 'page' })
+  .use(remarkExtractStyles)
   .use(remarkRenderer, rendererOptions)
 
 export const getBodyAst = createSelector(
