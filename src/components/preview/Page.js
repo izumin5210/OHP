@@ -1,10 +1,12 @@
 // @flow
 import { PureComponent } from 'react'
 import Measure from 'react-measure'
+
 import type { Children } from 'react'
 
+import styles from './SlidePreview.css'
+
 type Props = {
-  className: string,
   children?: Children,
 }
 
@@ -53,11 +55,11 @@ export default class Page extends PureComponent<void, Props, State> {
   }
 
   render () {
-    const { className, children } = this.props
+    const { children } = this.props
     return (
       <Measure onMeasure={this.onMeasure}>
         <section
-          {...{ className }}
+          className={styles.page}
           style={this.style}
         >
           { children }
