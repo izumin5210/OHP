@@ -1,0 +1,16 @@
+@import '../../settings';
+
+.pages {
+  background-color: var(--black-foreground800);
+  min-height: 100%;
+  padding: calc(2 * var(--spacing));
+}
+
+.page {
+  background-color: var(--white);
+  overflow: hidden;
+}
+
+.page:not(:first-child) {
+  margin-top: calc(2 * var(--spacing));
+}
