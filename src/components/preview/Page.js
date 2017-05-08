@@ -4,7 +4,7 @@ import ShadowDom from 'react-shadow'
 
 import type { Children, Element } from 'react'
 
-import styles from './SlidePreview.css'
+import styles from './Page.css'
 
 type Props = {
   width: number,
@@ -21,6 +21,7 @@ export default class Page extends PureComponent<void, Props, void> {
     // TODO: tweak slide acpect ratio
     const height = 0.75 * width
     return {
+      width,
       height,
       minHeight: height,
       maxHeight: height,

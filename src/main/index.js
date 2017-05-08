@@ -1,8 +1,13 @@
 // @flow
-const { app, Menu } = require('electron')
-const { MainWindow, PrintWindow } = require('./windows')
+const { app, BrowserWindow, Menu, ipcMain } = require('electron')
+
+const { MainWindow } = require('./windows')
 const MainMenu = require('./MainMenu')
 const { events } = require('./constants')
+const PdfWriter = require('./services/PdfWriter')
+const dialog = require('./services/dialog')
+
+const channels = require('../settings/ipc')
 
 let win
 let mainMenu
@@ -22,7 +27,10 @@ app.on('ready', () => {
   })
 
   mainMenu.on(events.exportPdf, () => {
-    PrintWindow.create()
+    const focusedWindow = BrowserWindow.getFocusedWindow()
+    if (focusedWindow != null) {
+      focusedWindow.webContents.send(channels.exportAsPdf.prepare)
+    }
   })
 })
 
@@ -36,4 +44,20 @@ app.on('activate', () => {
   if (win === null) {
     createWindow()
   }
+})
+
+ipcMain.on(channels.exportAsPdf.start, async (event, args) => {
+  try {
+    const srcContents = event.sender
+    const srcWin = BrowserWindow.fromWebContents(srcContents)
+    const opts = {
+      title: 'Export to PDF...',
+      filters: [{ name: 'PDF file', extensions: ['pdf'] }],
+    }
+    const filename = await dialog.showSaveDialog(srcWin, opts)
+    await PdfWriter.execute(srcContents, filename)
+  } catch (e) {
+    console.log(e)
+  }
+  event.sender.send(channels.exportAsPdf.complete)
 })

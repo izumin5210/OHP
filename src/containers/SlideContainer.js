@@ -6,6 +6,7 @@ import Measure from 'react-measure'
 import type { Children } from 'react'
 import type { Connector } from 'react-redux'
 
+import { isExportingAsPdf } from 'store/selectors/exportAsPdf'
 import { getBodyAst } from 'store/selectors/processor'
 import { Page } from 'components/preview'
 
@@ -16,6 +17,7 @@ type RequiredProps = {
 }
 
 type InjectedProps = {
+  exportingAsPdf: boolean,
   userStyles: Array<string>,
 }
 
@@ -38,6 +40,7 @@ type Dimension = {
 
 const connector: Connector<RequiredProps, Props> = connect(
   (state: RootState) => ({
+    exportingAsPdf: isExportingAsPdf(state),
     userStyles: getBodyAst(state).styles,
   }),
 )
@@ -50,7 +53,14 @@ class SlideContainer extends PureComponent<void, Props, State> {
     }
   }
 
+  props: Props
   state: State
+
+  get width (): number {
+    // FIXME
+    // eslint-disable-next-line react/prop-types
+    return this.props.exportingAsPdf ? 1024 : this.state.width
+  }
 
   onMeasure = ({ width }: Dimension) => {
     if (this.state.width !== width) {
@@ -61,7 +71,7 @@ class SlideContainer extends PureComponent<void, Props, State> {
   render () {
     // eslint-disable-next-line react/prop-types
     const { children, userStyles } = this.props
-    const { width } = this.state
+    const { width } = this
     return (
       <Measure onMeasure={this.onMeasure}>
         <Page {...{ width, userStyles }} >

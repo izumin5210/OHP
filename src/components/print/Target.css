@@ -1,0 +1,7 @@
+@media not print {
+  .target {
+    visibility: hidden;
+    overflow: hidden;
+    height: 0;
+  }
+}

@@ -49,9 +49,10 @@ declare module 'electron' {
   // declare type MenuItem = electron$MenuItem;
   declare type BrowserWindowOptions = electron$BrowserWindowOptions;
   declare type MenuItemOptions = electron$MenuItemOptions;
+  declare type DialogOpenOptions = electron$dialogOpenOptions;
   // declare type NativeImage = electron$NativeImage;
   // declare type Screen = electron$Screen;
-  // declare type WebContents = electron$WebContents;
+  declare type WebContents = electron$WebContents;
 }
 
 // very common struct
@@ -427,6 +428,8 @@ type electron$dialog = {
   showErrorBox(title: string, content: string): void,
 };
 
+type FileFilter = { name: string, extensions: Array<string> };
+
 /**
  * https://github.com/electron/electron/blob/master/docs/api/dialog.md
  * See `dialog.showOpenDialog()`
@@ -436,7 +439,7 @@ type electron$dialogOpenOptions = {
   title?: string,
   defaultPath?: string,
   buttonLabel?: string,
-  filters?: Array<string>,
+  filters?: Array<FileFilter>,
   properties?: Array<string>,
 };
 
@@ -449,7 +452,7 @@ type electron$dialogSaveOptions = {
   title?: string,
   defaultPath?: string,
   buttonLabel?: string,
-  filters?: Array<string>,
+  filters?: Array<FileFilter>,
 };
 
 /**
@@ -479,7 +482,12 @@ type electron$globalShortcut = {};
  * https://github.com/electron/electron/blob/master/docs/api/ipc-main.md
  */
 
-declare class electron$IpcMain {}
+declare class electron$IpcMain {
+  on(channel: string, callback: (...args: Array<any>) => any): electron$IpcMain,
+  once(channel: string, callback: (...args: Array<any>) => any): electron$IpcMain,
+  removeListener(channel: string, callback: (...args: Array<any>) => any): electron$IpcMain,
+  removeAllListeners(channel?: string): electron$IpcMain,
+}
 
 /**
  * https://github.com/electron/electron/blob/master/docs/api/menu.md
@@ -652,12 +660,11 @@ declare class electron$WebContents extends events$EventEmitter {
   unregisterServiceWorker(callback: (result: boolean) => void): void,
   print(options?: {silent?: boolean, printBackground?: boolean}): void,
   printToPDF(options: {
-    marginsType: number,
-    pageSize: string,
-    pageSize: string,
-    printBackground: boolean,
-    printSelectionOnly: boolean,
-    landscape: boolean,
+    marginsType?: number,
+    pageSize?: string | { width: number, height: number },
+    printBackground?: boolean,
+    printSelectionOnly?: boolean,
+    landscape?: boolean,
   }, callback: (err: ?mixed, data: ?Buffer) => void): void,
   addWorkSpace(path: string): void,
   removeWorkSpace(path: string): void,
