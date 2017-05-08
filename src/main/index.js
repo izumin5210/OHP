@@ -26,6 +26,9 @@ app.on('ready', () => {
     console.log('open new file')
   })
 
+  mainMenu.on(events.openExistingFile, () => {
+  })
+
   mainMenu.on(events.exportPdf, () => {
     const focusedWindow = BrowserWindow.getFocusedWindow()
     if (focusedWindow != null) {

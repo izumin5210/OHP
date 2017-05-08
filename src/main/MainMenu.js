@@ -58,6 +58,12 @@ class MainMenu extends EventEmitter {
       },
       MainMenu.SEPARATOR,
       {
+        label: 'Open...',
+        accelerator: 'CmdOrCtrl+O',
+        click: this.clickHandler(events.openExistingFile),
+      },
+      MainMenu.SEPARATOR,
+      {
         label: 'Export slides as PDF',
         accelerator: 'CmdOrCtrl+Shift+E',
         click: this.clickHandler(events.exportPdf),

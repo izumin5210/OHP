@@ -22,6 +22,7 @@ export const printWindowUrl = getWindowUrl('print.html')
 
 export const events = {
   openNewFile: 'openNewFile',
+  openExistingFile: 'openExistingFile',
   exportPdf: 'exportPdf',
   toggleFullScreen: 'toggleFullScreen',
   openLearnMore: 'openLearnMore',
