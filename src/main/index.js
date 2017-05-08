@@ -1,8 +1,10 @@
 // @flow
 const { app, BrowserWindow, Menu, ipcMain } = require('electron')
+
 const { MainWindow } = require('./windows')
 const MainMenu = require('./MainMenu')
 const { events } = require('./constants')
+const PdfWriter = require('./services/PdfWriter')
 
 const channels = require('../settings/ipc')
 
@@ -41,6 +43,11 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.on(channels.exportAsPdf.start, (event, args) => {
-  console.log('start exporting')
+ipcMain.on(channels.exportAsPdf.start, async (event, args) => {
+  try {
+    await PdfWriter.execute(event.sender.webContents)
+  } catch (e) {
+    console.log(e)
+  }
+  event.sender.send(channels.exportAsPdf.complete)
 })

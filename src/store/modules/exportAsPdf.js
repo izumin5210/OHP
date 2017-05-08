@@ -28,11 +28,16 @@ const initialState = new ExportAsPdfState()
 
 export const prepare = createAction('exportAsPdf:prepare')
 export const start = createAction('exportAsPdf:start')
+export const complete = createAction('exportAsPdf:complete')
 
 /* ======= Reducer ======= */
 
 export default handleActions({
   [prepare.toString()]: (state: ExportAsPdfState) => {
     return state.set('fetchStatus', 'loading')
+  },
+
+  [complete.toString()]: (state: ExportAsPdfState) => {
+    return state.set('fetchStatus', 'loaded')
   },
 }, initialState)

@@ -15,17 +15,26 @@ function * handleStart (): Generator<PutEffect, *, *> {
   yield call(ipc.startExportingAsPdf)
 }
 
+function * handleComplete (): Generator<PutEffect, *, *> {
+  yield put(pushLocation(getPathFromKey('document#edit')))
+}
+
 function * watchPrepare (): Generator<*, *, *> {
   yield takeEvery(ExportActions.prepare, handlePrepare)
 }
 
 function * watchStart (): Generator<*, *, *> {
-  yield takeEvery(ExportActions.prepare, handleStart)
+  yield takeEvery(ExportActions.start, handleStart)
+}
+
+function * watchComplete (): Generator<*, *, *> {
+  yield takeEvery(ExportActions.complete, handleComplete)
 }
 
 export default function * (): Generator<IOEffect, *, *> {
   yield [
     fork(watchPrepare),
     fork(watchStart),
+    fork(watchComplete),
   ]
 }

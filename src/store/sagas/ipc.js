@@ -14,6 +14,10 @@ function * subscribe () {
       emit(ExportActions.prepare())
     })
 
+    ipc.on(channels.exportAsPdf.complete, () => {
+      emit(ExportActions.complete())
+    })
+
     return () => {}
   })
 }
