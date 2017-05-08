@@ -1,6 +1,6 @@
 // @flow
 import run from 'framework/run'
-import configureStore from 'store/configure'
+import { app as configureStore } from 'store/configure'
 
 import CreatorContainer from 'containers/CreatorContainer'
 
