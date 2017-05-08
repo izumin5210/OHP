@@ -5,11 +5,16 @@ import { ipcRenderer as ipc } from 'electron'
 
 import type { CallEffect, IOEffect, PutEffect, TakeEffect } from 'redux-saga/effects'
 
+import * as DocumentActions from 'store/modules/entities/document'
 import * as ExportActions from 'store/modules/exportAsPdf'
 import * as channels from 'settings/ipc'
 
 function * subscribe () {
   return eventChannel((emit) => {
+    ipc.on(channels.entities.document.open, (_e: any, params: { filePath: string, body: string }) => {
+      emit(DocumentActions.open(params))
+    })
+
     ipc.on(channels.exportAsPdf.prepare, () => {
       emit(ExportActions.prepare())
     })

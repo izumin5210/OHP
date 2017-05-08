@@ -37,6 +37,14 @@ class Window {
     }
     this.didWindowDestroy()
   }
+
+  send (channel: string, ...args: Array<any>) {
+    const webContents = this.win && this.win.webContents
+    assert(webContents != null)
+    if (webContents != null) {
+      webContents.send(channel, ...args)
+    }
+  }
 }
 
 module.exports = Window
