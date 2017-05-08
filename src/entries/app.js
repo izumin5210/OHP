@@ -23,7 +23,6 @@ const store = configureStore({}, sagaMiddleware, routerMiddleware)
 store.runSaga = sagaMiddleware.run
 // $FlowFixMe
 store.close = () => store.dispatch(END)
-// $FlowFixMe
 store.runSaga(sagas)
 
 const containerElement = document.getElementById('container')
