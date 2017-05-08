@@ -15,27 +15,27 @@
 // process or a renderer process.
 declare module 'electron' {
   // Main process:
-  declare var app: ?electron$app;
-  declare var autoUpdater: ?electron$autoUpdater;
-  declare var BrowserWindow: ?typeof electron$BrowserWindow;
-  declare var contentTracing: ?electron$contentTracing;
-  declare var dialog: ?electron$dialog;
-  declare var globalShortcut: ?electron$globalShortcut;
-  declare var ipcMain: ?electron$IpcMain;
-  declare var Menu: ?typeof electron$Menu;
-  declare var MenuItem: ?typeof electron$MenuItem;
-  declare var powerMonitor: ?electron$powerMonitor;
-  declare var powerSaveBlocker: ?electron$powerSaveBlocker;
-  declare var protocol: ?electron$protocol;
-  declare var session: ?electron$session;
-  declare var electron$Tray: ?typeof electron$Tray;
-  declare var webContents: ?electron$webContents;
+  declare var app: electron$app;
+  declare var autoUpdater: electron$autoUpdater;
+  declare var BrowserWindow: typeof electron$BrowserWindow;
+  declare var contentTracing: electron$contentTracing;
+  declare var dialog: electron$dialog;
+  declare var globalShortcut: electron$globalShortcut;
+  declare var ipcMain: electron$IpcMain;
+  declare var Menu: typeof electron$Menu;
+  declare var MenuItem: typeof electron$MenuItem;
+  declare var powerMonitor: electron$powerMonitor;
+  declare var powerSaveBlocker: electron$powerSaveBlocker;
+  declare var protocol: electron$protocol;
+  declare var session: electron$session;
+  declare var electron$Tray: typeof electron$Tray;
+  declare var webContents: electron$webContents;
 
   // Renderer process:
-  declare var desktopCapturer: ?electron$desktopCapturer;
-  declare var ipcRenderer: ?electron$IpcRenderer;
-  declare var remote: ?electron$remote;
-  declare var webFrame: ?electron$webFrame;
+  declare var desktopCapturer: electron$desktopCapturer;
+  declare var ipcRenderer: electron$IpcRenderer;
+  declare var remote: electron$remote;
+  declare var webFrame: electron$webFrame;
 
   // Both:
   declare var clipboard: electron$clipboard;
@@ -44,12 +44,13 @@ declare module 'electron' {
   declare var screen: electron$Screen;
   declare var shell: electron$shell;
 
-  declare type electron$BrowserWindow = electron$BrowserWindow;
-  declare type electron$Menu = electron$Menu;
-  declare type electron$MenuItem = electron$MenuItem;
-  declare type electron$NativeImage = electron$NativeImage;
-  declare type electron$Screen = electron$Screen;
-  declare type electron$WebContents = electron$WebContents;
+  // declare type BrowserWindow = electron$BrowserWindow;
+  // declare type Menu = electron$Menu;
+  // declare type MenuItem = electron$MenuItem;
+  declare type MenuItemOptions = electron$MenuItemOptions;
+  // declare type NativeImage = electron$NativeImage;
+  // declare type Screen = electron$Screen;
+  // declare type WebContents = electron$WebContents;
 }
 
 // very common struct
@@ -105,6 +106,32 @@ declare class WebviewElement extends HTMLElement {
  * https://github.com/electron/electron/blob/master/docs/api/app.md
  */
 
+type electron$appEvents =
+  | 'will-finish-launching'
+  | 'ready'
+  | 'window-all-closed'
+  | 'before-quit'
+  | 'will-quit'
+  | 'quit'
+  | 'open-file'
+  | 'open-url'
+  | 'activate'
+  | 'continue-activity'
+  | 'browser-window-blur'
+  | 'browser-window-focus'
+  | 'browser-window-created'
+  | 'web-contents-created'
+  | 'certificate-error'
+  | 'select-client-certificate'
+  | 'login'
+  | 'gpu-process-crashed'
+  | 'accessibility-support-changed'
+
+type electron$appListener = (
+  event: electron$appEvents,
+  callback: (event: Object, ...args: Array<any>) => void,
+) => electron$app;
+
 type electron$app = {
   quit(): void,
   exit(exitCode?: number): void,
@@ -121,6 +148,11 @@ type electron$app = {
   makeSingleInstance(callback: (argv: Array<string>, workingDirectory: string) => void): boolean,
   releaseSingleInstance(): void,
   disableHardwareAcceleration(): void,
+
+  on: electron$appListener,
+  once: electron$appListener,
+  removeAllListeners(event?: electron$appEvents): electron$app,
+  removeListener(event?: electron$appEvents, callback: Function): electron$app,
 };
 
 /**
@@ -266,6 +298,7 @@ declare class electron$BrowserWindow {
   focus(): void,
   blur(): void,
   isFocused(): boolean,
+  isDestroyed(): boolean,
   show(): void,
   showInactive(): void,
   hide(): void,
@@ -491,7 +524,7 @@ type electron$MenuItemOptions = {
   enabled?: boolean,
   visible?: boolean,
   checked?: boolean,
-  submenu?: electron$MenuItem | electron$MenuItemOptions,
+  submenu?: electron$MenuItem | Array<electron$MenuItemOptions>,
   id?: string,
   position?: string,
 };
