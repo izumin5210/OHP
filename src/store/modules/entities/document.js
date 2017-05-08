@@ -44,6 +44,20 @@ export const setBody = createAction(
   (payload: string) => payload,
 )
 
+export type SavePayload = { new: boolean }
+export type Save = Action<SavePayload, void>
+export const save = createAction(
+  'entities:document:save',
+  (payload: SavePayload) => payload,
+)
+
+export type BeSavedPayload = { url: string }
+export type BeSaved = Action<BeSavedPayload, void>
+export const beSaved = createAction(
+  'entities:document:beSaved',
+  (payload: BeSavedPayload) => payload,
+)
+
 /* ======== Reducer ======= */
 
 export default handleActions({
@@ -60,6 +74,22 @@ export default handleActions({
     const { payload: body, error: isError } = action
     if (!isError) {
       return state.setIn(['entity', 'body'], body)
+    }
+    return state
+  },
+
+  [setBody.toString()]: (state: DocumentState, action: SetBody) => {
+    const { payload: body, error: isError } = action
+    if (!isError) {
+      return state.setIn(['entity', 'body'], body)
+    }
+    return state
+  },
+
+  [beSaved.toString()]: (state: DocumentState, action: BeSaved) => {
+    const { payload, error: isError } = action
+    if (!isError && !(payload instanceof Error)) {
+      return state.setIn(['entity', 'url'], payload.url)
     }
     return state
   },

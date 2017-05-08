@@ -1,10 +1,13 @@
 // @flow
+import type { DocumentConfig } from 'entities/Document'
+
 const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 
 const { MainWindow } = require('./windows')
 const MainMenu = require('./MainMenu')
 const { events } = require('./constants')
 const DocumentOpener = require('./services/DocumentOpener')
+const DocumentWriter = require('./services/DocumentWriter')
 const PdfWriter = require('./services/PdfWriter')
 const dialog = require('./services/dialog')
 
@@ -19,6 +22,14 @@ let mainMenu
 
 function createWindow () {
   win = MainWindow.create()
+}
+
+function getFocusedWindow (): BrowserWindow {
+  const focusedWindow = BrowserWindow.getFocusedWindow()
+  if (focusedWindow != null) {
+    return focusedWindow
+  }
+  throw new Error()
 }
 
 app.on('ready', () => {
@@ -41,11 +52,16 @@ app.on('ready', () => {
     }
   })
 
+  mainMenu.on(events.saveFile, () => {
+    getFocusedWindow().webContents.send(channels.entities.document.save, { new: false })
+  })
+
+  mainMenu.on(events.saveAs, () => {
+    getFocusedWindow().webContents.send(channels.entities.document.save, { new: true })
+  })
+
   mainMenu.on(events.exportPdf, () => {
-    const focusedWindow = BrowserWindow.getFocusedWindow()
-    if (focusedWindow != null) {
-      focusedWindow.webContents.send(channels.exportAsPdf.prepare)
-    }
+    getFocusedWindow().webContents.send(channels.exportAsPdf.prepare)
   })
 })
 
@@ -58,6 +74,19 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (win === null) {
     createWindow()
+  }
+})
+
+ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig, opts: { new: boolean }) => {
+  assert(win.win != null)
+  if (win.win == null) {
+    return
+  }
+  try {
+    const { url } = await DocumentWriter.execute(win.win, doc, opts)
+    getFocusedWindow().webContents.send(channels.entities.document.beSaved, { url })
+  } catch (e) {
+    console.log(e)
   }
 })
 
