@@ -41,6 +41,13 @@ app.on('ready', () => {
     }
   })
 
+  mainMenu.on(events.saveFile, () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow()
+    if (focusedWindow != null) {
+      focusedWindow.webContents.send(channels.entities.document.save, { new: false })
+    }
+  })
+
   mainMenu.on(events.exportPdf, () => {
     const focusedWindow = BrowserWindow.getFocusedWindow()
     if (focusedWindow != null) {
