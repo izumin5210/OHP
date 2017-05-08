@@ -50,11 +50,11 @@ ipcMain.on(channels.exportAsPdf.start, async (event, args) => {
   try {
     const srcContents = event.sender
     const srcWin = BrowserWindow.fromWebContents(srcContents)
-    const opts = {
+    const options = {
       title: 'Export to PDF...',
       filters: [{ name: 'PDF file', extensions: ['pdf'] }],
     }
-    const filename = await dialog.showSaveDialog(srcWin, opts)
+    const filename = await dialog.showSaveDialog({ window: srcWin, options })
     await PdfWriter.execute(srcContents, filename)
   } catch (e) {
     console.log(e)
