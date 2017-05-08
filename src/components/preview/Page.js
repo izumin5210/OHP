@@ -4,7 +4,7 @@ import ShadowDom from 'react-shadow'
 
 import type { Children, Element } from 'react'
 
-import styles from './SlidePreview.css'
+import styles from './Page.css'
 
 type Props = {
   width: number,

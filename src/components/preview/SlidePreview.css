@@ -5,12 +5,3 @@
   min-height: calc(100% - 4 * var(--spacing));
   padding: calc(2 * var(--spacing));
 }
-
-.page {
-  background-color: var(--white);
-  overflow: hidden;
-}
-
-.page:not(:first-child) {
-  margin-top: calc(2 * var(--spacing));
-}
