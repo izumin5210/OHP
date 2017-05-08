@@ -47,6 +47,7 @@ declare module 'electron' {
   // declare type BrowserWindow = electron$BrowserWindow;
   // declare type Menu = electron$Menu;
   // declare type MenuItem = electron$MenuItem;
+  declare type BrowserWindowOptions = electron$BrowserWindowOptions;
   declare type MenuItemOptions = electron$MenuItemOptions;
   // declare type NativeImage = electron$NativeImage;
   // declare type Screen = electron$Screen;

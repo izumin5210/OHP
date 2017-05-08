@@ -1,19 +1,24 @@
 // @flow
 const { join } = require('path')
-const { format } = require('url')
+const { format, resolve } = require('url')
 
-export const mainWindowUrl = format(
+const getWindowUrl = (filename: string) => format(
   process.env.NODE_ENV !== 'production'
   ? {
-    pathname: `localhost:${process.env.PORT || 8765}`,
+    hostname: 'localhost',
+    port: process.env.PORT || 8765,
+    pathname: filename,
     protocol: 'http',
     slashes: true,
   } : {
-    pathname: join(__dirname, '..', 'index.html'),
+    pathname: join(__dirname, '..', filename),
     protocol: 'file',
     slashes: true,
   }
 )
+
+export const mainWindowUrl = getWindowUrl('index.html')
+export const printWindowUrl = getWindowUrl('print.html')
 
 export const events = {
   openNewFile: 'openNewFile',

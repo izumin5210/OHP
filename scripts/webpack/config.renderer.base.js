@@ -14,6 +14,10 @@ const config = {
       path.resolve(src, 'index.css'),
       path.resolve(src, 'index'),
     ],
+    print: [
+      path.resolve(src, 'index.css'),
+      path.resolve(src, 'print'),
+    ],
   },
 
   module: {
@@ -44,6 +48,15 @@ const config = {
       title: pkg.name,
       filename: 'index.html',
       template: path.resolve(src, 'index.html'),
+      chunks: ['app'],
+      inject: true
+    }),
+
+    new HtmlWebpackPlugin({
+      title: pkg.name,
+      filename: 'print.html',
+      template: path.resolve(src, 'index.html'),
+      chunks: ['print'],
       inject: true
     }),
 
