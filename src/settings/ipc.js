@@ -1,2 +1,5 @@
 // @flow
-export const prepareToExportPdf = 'prepareToExportPdf'
+export const exportAsPdf = {
+  prepare: 'exportAsPdf:prepare',
+  start: 'exportAsPdf:start',
+}

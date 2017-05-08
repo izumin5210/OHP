@@ -1,5 +1,5 @@
 // @flow
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 const { MainWindow } = require('./windows')
 const MainMenu = require('./MainMenu')
 const { events } = require('./constants')
@@ -25,7 +25,7 @@ app.on('ready', () => {
 
   mainMenu.on(events.exportPdf, () => {
     const target = BrowserWindow.getFocusedWindow().webContents
-    target.send(channels.prepareToExportPdf)
+    target.send(channels.exportAsPdf.prepare)
   })
 })
 
@@ -39,4 +39,8 @@ app.on('activate', () => {
   if (win === null) {
     createWindow()
   }
+})
+
+ipcMain.on(channels.exportAsPdf.start, (event, args) => {
+  console.log('start exporting')
 })

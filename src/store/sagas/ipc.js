@@ -10,7 +10,7 @@ import * as channels from 'settings/ipc'
 
 function * subscribe () {
   return eventChannel((emit) => {
-    ipc.on(channels.prepareToExportPdf, () => {
+    ipc.on(channels.exportAsPdf.prepare, () => {
       emit(ExportActions.prepare())
     })
 
