@@ -3,8 +3,8 @@ const { join } = require('path')
 const { format } = require('url')
 
 export const mainWindowUrl = format(
-  process.env.NODE_ENV !== 'production' ?
-  {
+  process.env.NODE_ENV !== 'production'
+  ? {
     pathname: `localhost:${process.env.PORT || 8765}`,
     protocol: 'http',
     slashes: true,

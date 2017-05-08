@@ -1,4 +1,6 @@
 // @flow
+import type { BrowserWindow, MenuItem, MenuItemOptions } from 'electron'
+
 const EventEmitter = require('events')
 const { events } = require('./constants')
 
@@ -7,14 +9,14 @@ const isDarwin = process.platform === 'darwin'
 class MainMenu extends EventEmitter {
   static SEPARATOR = { type: 'separator' }
 
-  constructor (appName) {
+  constructor (appName: string) {
     super()
     this.appName = appName
   }
 
   appName: string
 
-  get template () {
+  get template (): Array<MenuItemOptions> {
     return [
       {
         label: this.appName,
@@ -47,7 +49,7 @@ class MainMenu extends EventEmitter {
     ]
   }
 
-  get fileSubmenuTemplate () {
+  get fileSubmenuTemplate (): Array<MenuItemOptions> {
     return [
       {
         label: 'New file',
@@ -63,7 +65,7 @@ class MainMenu extends EventEmitter {
     ]
   }
 
-  get editSubmenuTemplate () {
+  get editSubmenuTemplate (): Array<MenuItemOptions> {
     return [
       {
         label: 'Undo',
@@ -99,12 +101,12 @@ class MainMenu extends EventEmitter {
     ]
   }
 
-  get viewSubmenuTemplate() {
+  get viewSubmenuTemplate (): Array<MenuItemOptions> {
     return [
       {
         label: 'Reload',
         accelerator: 'CmdOrCtrl+R',
-        click: (item, focusedWindow) => {
+        click: (item: MenuItem, focusedWindow: BrowserWindow) => {
           if (focusedWindow) {
             focusedWindow.reload()
           }
@@ -119,16 +121,16 @@ class MainMenu extends EventEmitter {
         label: 'Toggle Developer Tools',
         accelerator: isDarwin ? 'Alt+Command+I' : 'Ctrl+Shift+I',
         enabled: process.env.NODE_ENV !== 'production',
-        click: (item, focusedWindow) => {
+        click: (item: MenuItem, focusedWindow: BrowserWindow) => {
           if (focusedWindow) {
-            focusedWindow.toggleDevTools()
+            focusedWindow.webContents.toggleDevTools()
           }
         },
       },
     ]
   }
 
-  get windowSubmenuTemplate() {
+  get windowSubmenuTemplate (): Array<MenuItemOptions> {
     return [
       {
         label: 'Minimize',
@@ -149,7 +151,7 @@ class MainMenu extends EventEmitter {
     ]
   }
 
-  get helpSubmenuTemplate() {
+  get helpSubmenuTemplate (): Array<MenuItemOptions> {
     return [
       {
         label: 'Learn More',
@@ -158,7 +160,7 @@ class MainMenu extends EventEmitter {
     ]
   }
 
-  get appSubmenuTemplate() {
+  get appSubmenuTemplate (): Array<MenuItemOptions> {
     return [
       {
         label: `About ${this.appName}`,
@@ -166,8 +168,8 @@ class MainMenu extends EventEmitter {
       },
       MainMenu.SEPARATOR,
       {
-        label: 'Service',
-        role: 'service',
+        label: 'Services',
+        role: 'services',
         submenu: [],
       },
       MainMenu.SEPARATOR,
@@ -194,8 +196,8 @@ class MainMenu extends EventEmitter {
     ]
   }
 
-  clickHandler(event: string) {
-    return () => this.emit(event)
+  clickHandler (event: string): () => void {
+    return () => { this.emit(event) }
   }
 }
 
