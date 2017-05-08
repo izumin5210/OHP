@@ -32,6 +32,11 @@
           }
         ]
       ]
+    },
+    "production": {
+      "plugins": [
+        "unassert"
+      ]
     }
   }
 }
