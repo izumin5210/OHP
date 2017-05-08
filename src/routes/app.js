@@ -6,27 +6,32 @@ import PreviewContainer from 'containers/PreviewContainer'
 
 type RouteDefinition = {
   component: ReactClass<*>,
-  key: string,
   path: string,
   exact?: boolean,
 }
 
-const defs: Array<RouteDefinition> = [
-  {
+const defs: { [string]: RouteDefinition } = {
+  'document#edit': {
     component: CreatorContainer,
-    key: 'document#edit',
     path: '/',
     exact: true,
   },
-  {
+  'document#show': {
     component: PreviewContainer,
-    key: 'document#show',
     path: '/preview',
   },
-]
+}
+
+export function getPathFromKey (key: $Keys<typeof defs>): string {
+  const route = defs[key]
+  if (route == null) {
+    throw new Error()
+  }
+  return route.path
+}
 
 export default (
   <Switch>
-    { defs.map(props => (<Route {...props} />)) }
+    { Object.keys(defs).map(key => (<Route key={key} {...defs[key]} />)) }
   </Switch>
 )
