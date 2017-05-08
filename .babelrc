@@ -9,8 +9,11 @@
       "env",
       {
         "targets": {
-          "electron": 1.6
-        }
+          "node": true,
+          "electron": 1.6,
+          "uglify": true
+        },
+        "modules": false
       }
     ],
     "react"
@@ -21,6 +24,7 @@
         "power-assert"
       ],
       "plugins": [
+        "babel-plugin-transform-es2015-modules-commonjs",
         [
           "espower",
           {

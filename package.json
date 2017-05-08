@@ -85,6 +85,9 @@
   "private": true,
   "repository": "git@github.com:izumin5210/OHP.git",
   "scripts": {
+    "build": "run-p build:*",
+    "build:main": "NODE_ENV=production webpack --bail --config ./scripts/webpack/config.main.prod.js",
+    "build:renderer": "NODE_ENV=production webpack --bail --config ./scripts/webpack/config.renderer.prod.js",
     "lint": "run-p lint:*",
     "lint:css": "stylelint 'src/**/*.css'",
     "lint:js": "run-p lint:js:*",

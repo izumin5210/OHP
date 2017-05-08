@@ -48,6 +48,8 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
-
 # type definitions from flow-typed repository
 flow-typed
+
+# Build results
+/dist
