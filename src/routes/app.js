@@ -2,7 +2,7 @@
 import { Route, Switch } from 'react-router'
 
 import CreatorContainer from 'containers/CreatorContainer'
-import PreviewContainer from 'containers/PreviewContainer'
+import PrintContainer from 'containers/PrintContainer'
 
 type RouteDefinition = {
   component: ReactClass<*>,
@@ -17,8 +17,8 @@ const defs: { [string]: RouteDefinition } = {
     exact: true,
   },
   'document#show': {
-    component: PreviewContainer,
-    path: '/preview',
+    component: PrintContainer,
+    path: '/print',
   },
 }
 

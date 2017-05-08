@@ -3,8 +3,11 @@
 .page {
   background-color: var(--white);
   overflow: hidden;
+  page-break-after: always;
 }
 
-.page:not(:first-child) {
-  margin-top: calc(2 * var(--spacing));
+@media not print {
+  .page:not(:first-child) {
+    margin-top: calc(2 * var(--spacing));
+  }
 }
