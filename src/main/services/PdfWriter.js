@@ -1,12 +1,13 @@
 // @flow
 import type { webContents } from 'electron'
 
+const { dialog } = require('electron')
 const fs = require('fs')
 
 class PdfWriter {
-  static async execute (contents: webContents): Promise<PdfWriter> {
+  static async execute (contents: webContents, filename: string): Promise<PdfWriter> {
     const writer = new PdfWriter(contents)
-    await writer.execute()
+    await writer.execute(filename)
     return writer
   }
 
@@ -16,14 +17,14 @@ class PdfWriter {
 
   contents: webContents
 
-  async execute (): Promise<void> {
+  async execute (filename: string): Promise<void> {
     const data = await this.loadData()
-    this.write(data)
+    this.write(filename, data)
   }
 
-  write (data: Buffer): Promise<void> {
+  write (filename: string, data: Buffer): Promise<void> {
     return new Promise((resolve, reject) => {
-      fs.writeFile('/tmp/print.pdf', data, (err) => {
+      fs.writeFile(filename, data, (err) => {
         if (err) {
           reject(err)
         } else {

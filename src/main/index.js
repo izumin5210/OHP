@@ -5,6 +5,7 @@ const { MainWindow } = require('./windows')
 const MainMenu = require('./MainMenu')
 const { events } = require('./constants')
 const PdfWriter = require('./services/PdfWriter')
+const dialog = require('./services/dialog')
 
 const channels = require('../settings/ipc')
 
@@ -45,7 +46,14 @@ app.on('activate', () => {
 
 ipcMain.on(channels.exportAsPdf.start, async (event, args) => {
   try {
-    await PdfWriter.execute(event.sender.webContents)
+    const srcContents = event.sender
+    const srcWin = BrowserWindow.fromWebContents(srcContents)
+    const opts = {
+      title: 'Export to PDF...',
+      filters: [{ name: 'PDF file', extensions: ['pdf'] }],
+    }
+    const filename = await dialog.showSaveDialog(srcWin, opts)
+    await PdfWriter.execute(srcContents, filename)
   } catch (e) {
     console.log(e)
   }
