@@ -5,14 +5,18 @@ const path = require('path')
 
 const pkg = require('../../package.json')
 
-const { src } = require('./configuration')
+const { src, entries } = require('./configuration')
 const base = require('./config.base')
 
 const config = {
   entry: {
     app: [
-      path.resolve(src, 'index.css'),
-      path.resolve(src, 'index'),
+      path.resolve(entries, 'index.css'),
+      path.resolve(entries, 'app'),
+    ],
+    print: [
+      path.resolve(entries, 'index.css'),
+      path.resolve(entries, 'print'),
     ],
   },
 
@@ -44,6 +48,15 @@ const config = {
       title: pkg.name,
       filename: 'index.html',
       template: path.resolve(src, 'index.html'),
+      chunks: ['app'],
+      inject: true
+    }),
+
+    new HtmlWebpackPlugin({
+      title: pkg.name,
+      filename: 'print.html',
+      template: path.resolve(src, 'index.html'),
+      chunks: ['print'],
       inject: true
     }),
 
