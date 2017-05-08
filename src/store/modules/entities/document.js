@@ -44,6 +44,13 @@ export const setBody = createAction(
   (payload: string) => payload,
 )
 
+export type SavePayload = { new: boolean }
+export type Save = Action<SavePayload, void>
+export const save = createAction(
+  'entities:document:save',
+  (payload: SavePayload) => payload,
+)
+
 /* ======== Reducer ======= */
 
 export default handleActions({
