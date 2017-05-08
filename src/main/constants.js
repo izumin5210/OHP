@@ -24,6 +24,7 @@ export const events = {
   openNewFile: 'openNewFile',
   openExistingFile: 'openExistingFile',
   saveFile: 'saveFile',
+  saveAs: 'saveAs',
   exportPdf: 'exportPdf',
   toggleFullScreen: 'toggleFullScreen',
   openLearnMore: 'openLearnMore',

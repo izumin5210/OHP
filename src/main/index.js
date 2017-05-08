@@ -56,6 +56,10 @@ app.on('ready', () => {
     getFocusedWindow().webContents.send(channels.entities.document.save, { new: false })
   })
 
+  mainMenu.on(events.saveAs, () => {
+    getFocusedWindow().webContents.send(channels.entities.document.save, { new: true })
+  })
+
   mainMenu.on(events.exportPdf, () => {
     getFocusedWindow().webContents.send(channels.exportAsPdf.prepare)
   })
@@ -73,13 +77,13 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig) => {
+ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig, opts: { new: boolean }) => {
   assert(win.win != null)
   if (win.win == null) {
     return
   }
   try {
-    const { url } = await DocumentWriter.execute(win.win, doc, { new: false })
+    const { url } = await DocumentWriter.execute(win.win, doc, opts)
     getFocusedWindow().webContents.send(channels.entities.document.beSaved, { url })
   } catch (e) {
     console.log(e)

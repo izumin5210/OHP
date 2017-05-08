@@ -9,13 +9,14 @@ import { getDocument } from 'store/selectors/entities/document'
 function * handleSave (
   action: Actions.Save,
 ): Generator<SelectEffect | CallEffect, *, *> {
-  const { error: isError } = action
-  if (isError) {
+  const { payload, error: isError } = action
+  if (isError || payload instanceof Error) {
     return
   }
 
+  assert('new' in payload)
   const doc = yield select(getDocument)
-  yield call(ipc.save, doc)
+  yield call(ipc.save, doc, payload)
 }
 
 function * watchSave (): Generator<*, *, *> {
