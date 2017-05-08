@@ -8,6 +8,7 @@ import styles from './Page.css'
 
 type Props = {
   width: number,
+  exportingAsPdf: boolean,
   userStyles: Array<string>,
   children?: Children,
 }
@@ -16,18 +17,35 @@ export default class Page extends PureComponent<void, Props, void> {
   // for lint
   props: Props
 
-  get style (): Object {
-    const { width } = this.props
+  get width (): number {
+    // FIXME
+    const { width, exportingAsPdf } = this.props
+    return exportingAsPdf ? 1024 : width
+  }
+
+  get height (): number {
     // TODO: tweak slide acpect ratio
-    const height = 0.75 * width
-    return {
-      width,
-      height,
-      minHeight: height,
-      maxHeight: height,
-      // TODO: tweak base font-size
-      fontSize: 36 * (width / 800)
-    }
+    return 0.75 * this.width
+  }
+
+  get fontSize (): number {
+    // TODO: tweak base font-size
+    return 36 * (this.width / 800)
+  }
+
+  get style (): Object {
+    const { exportingAsPdf } = this.props
+    const { width, height, fontSize } = this
+    return Object.assign(
+      {},
+      {
+        height,
+        minHeight: height,
+        maxHeight: height,
+        fontSize,
+      },
+      exportingAsPdf ? { width } : {},
+    )
   }
 
   get userStyles (): Array<Element<*>> {
