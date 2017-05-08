@@ -1,6 +1,6 @@
 // @flow
 const { app, Menu } = require('electron')
-const { MainWindow } = require('./windows')
+const { MainWindow, PrintWindow } = require('./windows')
 const MainMenu = require('./MainMenu')
 const { events } = require('./constants')
 
@@ -22,7 +22,7 @@ app.on('ready', () => {
   })
 
   mainMenu.on(events.exportPdf, () => {
-    console.log('export pdf')
+    PrintWindow.create()
   })
 })
 

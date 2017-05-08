@@ -1,6 +1,6 @@
 // @flow
 const { join } = require('path')
-const { format, resolve } = require('url')
+const { format } = require('url')
 
 const getWindowUrl = (filename: string) => format(
   process.env.NODE_ENV !== 'production'
