@@ -4,10 +4,15 @@ const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 const { MainWindow } = require('./windows')
 const MainMenu = require('./MainMenu')
 const { events } = require('./constants')
+const DocumentOpener = require('./services/DocumentOpener')
 const PdfWriter = require('./services/PdfWriter')
 const dialog = require('./services/dialog')
 
 const channels = require('../settings/ipc')
+
+if (process.env.NODE_ENV !== 'production') {
+  global.assert = require('power-assert')
+}
 
 let win
 let mainMenu
@@ -26,7 +31,14 @@ app.on('ready', () => {
     console.log('open new file')
   })
 
-  mainMenu.on(events.openExistingFile, () => {
+  mainMenu.on(events.openExistingFile, async () => {
+    try {
+      const opener = await DocumentOpener.execute()
+      console.log(opener.filePath)
+      console.log(opener.body)
+    } catch (e) {
+      console.log(e)
+    }
   })
 
   mainMenu.on(events.exportPdf, () => {

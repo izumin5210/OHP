@@ -23,6 +23,12 @@ function showDialog<T> (proc: (cb: (result: T) => any) => any): Promise<T> {
   })
 }
 
+export function showOpenDialog (
+  { window, options = {} }: Options = defaultOptions,
+): Promise<Array<string>> {
+  return showDialog(cb => dialog.showOpenDialog(window || undefined, options, cb))
+}
+
 export function showSaveDialog (
   { window, options = {} }: Options = defaultOptions,
 ): Promise<string> {
