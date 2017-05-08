@@ -81,7 +81,7 @@
     "webpack-merge": "^4.1.0"
   },
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/main/index.js",
   "private": true,
   "repository": "git@github.com:izumin5210/OHP.git",
   "scripts": {
@@ -93,9 +93,9 @@
     "lint:js:test": "eslint test",
     "postinstall": "flow-typed install",
     "pretest": "run-p lint typecheck",
-    "start": "electron ./dist/main.js",
+    "start": "electron ./dist/main/index.js",
     "start:dev": "run-p start:dev:*",
-    "start:dev:app": "electron -r babel-register ./src/main.js",
+    "start:dev:app": "electron -r babel-register ./src/main/index.js",
     "start:dev:server": "webpack-dev-server --config ./scripts/webpack/config.renderer.dev.js",
     "test": "run-p test:*",
     "test:js": "NODE_PATH=$PWD/src mocha",
