@@ -1,21 +1,20 @@
 // @flow
-import type { webContents } from 'electron'
+import type { WebContents } from 'electron'
 
-const { dialog } = require('electron')
 const fs = require('fs')
 
 class PdfWriter {
-  static async execute (contents: webContents, filename: string): Promise<PdfWriter> {
+  static async execute (contents: WebContents, filename: string): Promise<PdfWriter> {
     const writer = new PdfWriter(contents)
     await writer.execute(filename)
     return writer
   }
 
-  constructor (contents: webContents) {
+  constructor (contents: WebContents) {
     this.contents = contents
   }
 
-  contents: webContents
+  contents: WebContents
 
   async execute (filename: string): Promise<void> {
     const data = await this.loadData()
@@ -47,6 +46,9 @@ class PdfWriter {
       this.contents.printToPDF(opts, (err, data) => {
         if (err) {
           reject(err)
+        } else if (data == null) {
+          // TODO: should use custom error
+          reject(new Error())
         } else {
           resolve(data)
         }

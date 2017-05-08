@@ -27,8 +27,10 @@ app.on('ready', () => {
   })
 
   mainMenu.on(events.exportPdf, () => {
-    const target = BrowserWindow.getFocusedWindow().webContents
-    target.send(channels.exportAsPdf.prepare)
+    const focusedWindow = BrowserWindow.getFocusedWindow()
+    if (focusedWindow != null) {
+      focusedWindow.webContents.send(channels.exportAsPdf.prepare)
+    }
   })
 })
 
