@@ -24,6 +24,14 @@ function createWindow () {
   win = MainWindow.create()
 }
 
+function getFocusedWindow (): BrowserWindow {
+  const focusedWindow = BrowserWindow.getFocusedWindow()
+  if (focusedWindow != null) {
+    return focusedWindow
+  }
+  throw new Error()
+}
+
 app.on('ready', () => {
   createWindow()
   mainMenu = new MainMenu(app.getName())
@@ -45,17 +53,11 @@ app.on('ready', () => {
   })
 
   mainMenu.on(events.saveFile, () => {
-    const focusedWindow = BrowserWindow.getFocusedWindow()
-    if (focusedWindow != null) {
-      focusedWindow.webContents.send(channels.entities.document.save, { new: false })
-    }
+    getFocusedWindow().webContents.send(channels.entities.document.save, { new: false })
   })
 
   mainMenu.on(events.exportPdf, () => {
-    const focusedWindow = BrowserWindow.getFocusedWindow()
-    if (focusedWindow != null) {
-      focusedWindow.webContents.send(channels.exportAsPdf.prepare)
-    }
+    getFocusedWindow().webContents.send(channels.exportAsPdf.prepare)
   })
 })
 
@@ -77,7 +79,8 @@ ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig) => {
     return
   }
   try {
-    await DocumentWriter.execute(win.win, doc, { new: false })
+    const { url } = await DocumentWriter.execute(win.win, doc, { new: false })
+    getFocusedWindow().webContents.send(channels.entities.document.beSaved, { url })
   } catch (e) {
     console.log(e)
   }

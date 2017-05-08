@@ -9,5 +9,6 @@ export const entities = {
   document: {
     open: 'entities:document:open',
     save: 'entities:document:save',
+    beSaved: 'entities:document:beSaved',
   },
 }

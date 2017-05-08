@@ -21,11 +21,11 @@ class DocumentWriter {
   }
 
   async execute (doc: DocumentConfig, opts: Options): Promise<void> {
-    let filename = doc.url
-    if (opts.new == null || opts.new || filename.length === 0) {
-      filename = await this.getFilenameFromDialog()
+    this.url = doc.url
+    if (opts.new == null || opts.new || this.url.length === 0) {
+      this.url = await this.getFilenameFromDialog()
     }
-    await this.write(filename, doc.body)
+    await this.write(this.url, doc.body)
   }
 
   constructor (win: BrowserWindow) {
@@ -33,6 +33,7 @@ class DocumentWriter {
   }
 
   win: BrowserWindow
+  url: string
 
   async getFilenameFromDialog (): Promise<string> {
     const options = {

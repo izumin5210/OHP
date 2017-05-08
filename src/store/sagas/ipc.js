@@ -19,6 +19,10 @@ function * subscribe () {
       emit(DocumentActions.save({ new: false }))
     })
 
+    ipc.on(channels.entities.document.beSaved, (_e: any, params: { url: string }) => {
+      emit(DocumentActions.beSaved(params))
+    })
+
     ipc.on(channels.exportAsPdf.prepare, () => {
       emit(ExportActions.prepare())
     })
