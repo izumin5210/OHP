@@ -21,6 +21,7 @@ export default class Page extends PureComponent<void, Props, void> {
     // TODO: tweak slide acpect ratio
     const height = 0.75 * width
     return {
+      width,
       height,
       minHeight: height,
       maxHeight: height,
