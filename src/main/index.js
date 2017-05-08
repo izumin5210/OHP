@@ -1,10 +1,13 @@
 // @flow
+import type { DocumentConfig } from 'entities/Document'
+
 const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 
 const { MainWindow } = require('./windows')
 const MainMenu = require('./MainMenu')
 const { events } = require('./constants')
 const DocumentOpener = require('./services/DocumentOpener')
+const DocumentWriter = require('./services/DocumentWriter')
 const PdfWriter = require('./services/PdfWriter')
 const dialog = require('./services/dialog')
 
@@ -65,6 +68,18 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (win === null) {
     createWindow()
+  }
+})
+
+ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig) => {
+  assert(win.win != null)
+  if (win.win == null) {
+    return
+  }
+  try {
+    await DocumentWriter.execute(win.win, doc, { new: false })
+  } catch (e) {
+    console.log(e)
   }
 })
 
