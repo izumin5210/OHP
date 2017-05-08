@@ -34,8 +34,8 @@ app.on('ready', () => {
   mainMenu.on(events.openExistingFile, async () => {
     try {
       const opener = await DocumentOpener.execute()
-      console.log(opener.filePath)
-      console.log(opener.body)
+      const { filePath, body } = opener
+      win.send(channels.entities.document.open, { url: filePath, body })
     } catch (e) {
       console.log(e)
     }

@@ -31,6 +31,13 @@ const initialState = new DocumentState()
 
 /* ======== Actions ======= */
 
+export type OpenPayload = { url: string, body: string }
+export type Open = Action<OpenPayload, void>
+export const open = createAction(
+  'entities:document:open',
+  (payload: OpenPayload) => payload,
+)
+
 export type SetBody = Action<string, void>
 export const setBody = createAction(
   'entities:document:setBody',
@@ -40,6 +47,15 @@ export const setBody = createAction(
 /* ======== Reducer ======= */
 
 export default handleActions({
+  [open.toString()]: (state: DocumentState, action: Open) => {
+    const { payload, error: isError } = action
+    if (!isError && !(payload instanceof Error)) {
+      const { url, body } = payload
+      return state.set('entity', new Document({ url, body }))
+    }
+    return state
+  },
+
   [setBody.toString()]: (state: DocumentState, action: SetBody) => {
     const { payload: body, error: isError } = action
     if (!isError) {
