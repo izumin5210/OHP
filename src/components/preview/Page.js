@@ -15,6 +15,12 @@ type Props = {
 }
 
 export default class Page extends PureComponent<void, Props, void> {
+  static nodeStyle = {
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+  }
+
   // for lint
   props: Props
 
@@ -64,6 +70,7 @@ export default class Page extends PureComponent<void, Props, void> {
         >
           <div
             className={this.props.className}
+            style={Page.nodeStyle}
           >
             { this.props.children }
             { this.userStyles }
