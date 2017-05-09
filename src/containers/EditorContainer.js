@@ -5,6 +5,7 @@ import AceEditor from 'react-ace'
 import 'brace/mode/markdown'
 import 'brace/theme/tomorrow'
 import 'brace/keybinding/vim'
+import debounce from 'lodash/debounce'
 
 import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
@@ -35,7 +36,7 @@ const connector: Connector< RequiredProps, Props> = connect(
     outlineElement: getOutlineElement(state),
   }),
   (dispatch: Dispatch<Action<*, *>>) => ({
-    setBody: (body: string) => dispatch(Actions.setBody(body))
+    setBody: debounce((body: string) => dispatch(Actions.setBody(body)), 100, { maxWait: 500 }),
   }),
 )
 
