@@ -7,6 +7,7 @@ import remarkExtractStyles from 'utils/remark-extract-styles'
 import remarkNewpageDirective, {
   handlers as newpageDirectiveHandlers
 } from 'utils/remark-newpage-directive'
+import remarkPagePropsDirective from 'utils/remark-page-props-directive'
 import githubSanitize from 'hast-util-sanitize/lib/github'
 import mergeWith from 'lodash/mergeWith'
 import isArray from 'lodash/isArray'
@@ -42,6 +43,7 @@ const outlineProcessor = remark().use(remarkOutline).use(remarkRenderer)
 
 const bodyProcessor = remark()
   .use(remarkNewpageDirective, { tagName: 'page' })
+  .use(remarkPagePropsDirective)
   .use(remarkExtractStyles)
   .use(remarkRenderer, rendererOptions)
 

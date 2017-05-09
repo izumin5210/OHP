@@ -7,6 +7,7 @@ import type { Children, Element } from 'react'
 import styles from './Page.css'
 
 type Props = {
+  className: string,
   width: number,
   exportingAsPdf: boolean,
   userStyles: Array<string>,
@@ -14,6 +15,12 @@ type Props = {
 }
 
 export default class Page extends PureComponent<void, Props, void> {
+  static nodeStyle = {
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+  }
+
   // for lint
   props: Props
 
@@ -56,13 +63,18 @@ export default class Page extends PureComponent<void, Props, void> {
 
   render () {
     return (
-      <ShadowDom>
+      <ShadowDom nodeName='div'>
         <section
           className={styles.page}
           style={this.style}
         >
-          { this.props.children }
-          { this.userStyles }
+          <div
+            className={this.props.className}
+            style={Page.nodeStyle}
+          >
+            { this.props.children }
+            { this.userStyles }
+          </div>
         </section>
       </ShadowDom>
     )

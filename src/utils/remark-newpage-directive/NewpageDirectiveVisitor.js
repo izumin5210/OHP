@@ -5,11 +5,7 @@ import toHast from 'mdast-util-to-hast'
 import type { Parent, Node } from 'unist'
 import type { Marker } from 'mdast-comment-marker'
 
-type Options = {
-  typeName?: string,
-  tagName?: string,
-  className?: string,
-}
+import type { Options, Page } from './types'
 
 export default class NewpageDirectiveVisitor {
   static directiveName = 'newpage'
@@ -74,7 +70,7 @@ export default class NewpageDirectiveVisitor {
     this.prev = { marker, index }
   }
 
-  buildPage (children: Array<Node>) {
+  buildPage (children: Array<Node>): Page {
     const data = {
       hName: this.tagName,
       hProperties: { className: this.className },
