@@ -6,7 +6,7 @@ class MainWindow extends Window {
   static url = mainWindowUrl
 
   static create (): MainWindow {
-    const win = new MainWindow({ width: 800, height: 600 })
+    const win = new MainWindow({ width: 1024, height: 768 })
     win.create()
     return win
   }
