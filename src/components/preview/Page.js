@@ -30,7 +30,7 @@ export default class Page extends PureComponent<void, Props, void> {
 
   get fontSize (): number {
     // TODO: tweak base font-size
-    return 36 * (this.width / 800)
+    return 36 * (this.width / 1024)
   }
 
   get style (): Object {
