@@ -13,6 +13,7 @@ import { Page } from 'components/preview'
 import type { RootState } from 'store/modules'
 
 type RequiredProps = {
+  className: string,
   children?: Children,
 }
 
@@ -64,11 +65,11 @@ class SlideContainer extends PureComponent<void, Props, State> {
 
   render () {
     // eslint-disable-next-line react/prop-types
-    const { children, exportingAsPdf, userStyles } = this.props
+    const { className, children, exportingAsPdf, userStyles } = this.props
     const { width } = this.state
     return (
       <Measure onMeasure={this.onMeasure}>
-        <Page {...{ width, exportingAsPdf, userStyles }} >
+        <Page {...{ className, width, exportingAsPdf, userStyles }} >
           { children }
         </Page>
       </Measure>
