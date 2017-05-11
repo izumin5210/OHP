@@ -2,6 +2,7 @@
 import { createSelector } from 'reselect'
 import remark from 'remark'
 import remarkRenderer from 'remark-react'
+import remarkYamlMeta from 'remark-yaml-meta'
 import remarkOutline from 'utils/remark-outline'
 import remarkExtractStyles from 'utils/remark-extract-styles'
 import remarkNewpageDirective, {
@@ -42,6 +43,7 @@ const rendererOptions = { sanitize, toHast, remarkReactComponents }
 const outlineProcessor = remark().use(remarkOutline).use(remarkRenderer)
 
 const bodyProcessor = remark()
+  .use(remarkYamlMeta)
   .use(remarkNewpageDirective, { tagName: 'page' })
   .use(remarkPagePropsDirective)
   .use(remarkExtractStyles)
