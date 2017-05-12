@@ -2,6 +2,7 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Measure from 'react-measure'
+import throttle from 'lodash/throttle'
 
 import type { Children } from 'react'
 import type { Connector } from 'react-redux'
@@ -59,11 +60,14 @@ class SlideContainer extends PureComponent<void, Props, State> {
   props: Props
   state: State
 
-  onMeasure = ({ width }: Dimension) => {
-    if (this.state.width !== width) {
-      this.setState({ width })
-    }
-  }
+  onMeasure = throttle(
+    ({ width }: Dimension) => {
+      if (this.state.width !== width) {
+        this.setState({ width })
+      }
+    },
+    500,
+  )
 
   render () {
     // eslint-disable-next-line react/prop-types
