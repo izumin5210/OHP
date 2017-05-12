@@ -17,5 +17,5 @@ esproposal.decorators=ignore
 suppress_type=$FlowIssue
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 
-module.system.node.resolve_dirname=./node_modules
-module.system.node.resolve_dirname=./src
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=src
