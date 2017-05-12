@@ -68,3 +68,8 @@ export const getOutlineElement = createSelector(
   getOutlineAst,
   ({ contents }: any) => contents,
 )
+
+export const getBaseFontSize = createSelector(
+  getBodyAst,
+  ({ meta }: any) => meta && meta.fontSize,
+)
