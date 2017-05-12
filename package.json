@@ -17,6 +17,7 @@
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",
     "react-ace": "^4.2.1",
+    "react-addons-perf": "^15.4.2",
     "react-dom": "^15.5.4",
     "react-measure": "^1.4.7",
     "react-redux": "^5.0.4",
