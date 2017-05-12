@@ -30,6 +30,7 @@
     "redux-saga": "^0.15.3",
     "remark": "^7.0.1",
     "remark-react": "^4.0.0",
+    "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774",
     "reselect": "^3.0.0",
     "unist-builder": "^1.0.2",
     "unist-util-visit": "^1.1.1"

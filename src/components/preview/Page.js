@@ -8,6 +8,7 @@ import styles from './Page.css'
 
 type Props = {
   className: string,
+  fontSize: number,
   width: number,
   exportingAsPdf: boolean,
   userStyles: Array<string>,
@@ -37,7 +38,7 @@ export default class Page extends PureComponent<void, Props, void> {
 
   get fontSize (): number {
     // TODO: tweak base font-size
-    return 36 * (this.width / 1024)
+    return this.props.fontSize * (this.width / 1024)
   }
 
   get style (): Object {
