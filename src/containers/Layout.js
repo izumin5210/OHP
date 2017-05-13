@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 
 import type { Connector } from 'react-redux'
 
-import { defaultTitle } from 'settings/constants'
-import { getUrl } from 'store/selectors/entities/document'
+import { defaultTitle, editedSuffix } from 'settings/constants'
+import { getUrl, isSaved } from 'store/selectors/entities/document'
 
 import type { RootState } from 'store/modules'
 
@@ -16,6 +16,7 @@ type RequiredProps = {
 
 type InjectedProps = {
   url: string,
+  saved: boolean,
 }
 
 type Props = RequiredProps & InjectedProps
@@ -23,13 +24,15 @@ type Props = RequiredProps & InjectedProps
 const connector: Connector<RequiredProps, Props> = connect(
   (state: RootState) => ({
     url: getUrl(state),
+    saved: isSaved(state),
   }),
 )
 
 class Layout extends PureComponent<void, Props, void> {
   get title (): string {
-    const { url } = this.props
-    return url.length === 0 ? defaultTitle : url
+    const { url, saved } = this.props
+    const title = url.length === 0 ? defaultTitle : url
+    return saved ? title : `${title} ${editedSuffix}`
   }
 
   // for lint

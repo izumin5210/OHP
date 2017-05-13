@@ -18,3 +18,7 @@ export const getBody = createSelector(
   getDocument,
   ({ body }: Document & DocumentConfig) => body,
 )
+export const isSaved = createSelector(
+  getDocumentState,
+  ({ saved }: DocumentState & DocumentStateConfig) => saved,
+)
