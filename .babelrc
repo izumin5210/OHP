@@ -30,7 +30,8 @@
           {
             "embedAst": true
           }
-        ]
+        ],
+        "react-hot-loader/babel"
       ]
     },
     "production": {
