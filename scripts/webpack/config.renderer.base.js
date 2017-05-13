@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -40,6 +41,8 @@ const config = {
   },
 
   plugins: [
+    new webpack.NamedModulesPlugin(),
+
     new HtmlWebpackPlugin({
       title: pkg.name,
       filename: 'index.html',

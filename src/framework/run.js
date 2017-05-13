@@ -12,8 +12,18 @@ export default function run (
   container: HTMLElement,
   store: Store<*, *>
 ) {
-  render(
-    <Root {...{ element, store }} />,
-    container,
-  )
+  if (process.env.NODE_ENV === 'production') {
+    render(
+      <Root {...{ element, store }} />,
+      container,
+    )
+  } else {
+    const { AppContainer } = require('react-hot-loader')
+    render(
+      <AppContainer>
+        <Root {...{ element, store }} />
+      </AppContainer>,
+      container,
+    )
+  }
 }
