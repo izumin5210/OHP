@@ -10,6 +10,10 @@ export const getDocument = createSelector(
   getDocumentState,
   ({ entity }: DocumentState & DocumentStateConfig) => entity,
 )
+export const getUrl = createSelector(
+  getDocument,
+  ({ url }: Document & DocumentConfig) => url,
+)
 export const getBody = createSelector(
   getDocument,
   ({ body }: Document & DocumentConfig) => body,
