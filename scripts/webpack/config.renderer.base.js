@@ -14,10 +14,6 @@ const config = {
       path.resolve(entries, 'index.css'),
       path.resolve(entries, 'app'),
     ],
-    print: [
-      path.resolve(entries, 'index.css'),
-      path.resolve(entries, 'print'),
-    ],
   },
 
   module: {
