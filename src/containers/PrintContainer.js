@@ -6,7 +6,7 @@ import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
 
-import { getBodyElement } from 'store/selectors/processor'
+import { getBodyAst } from 'store/selectors/processor'
 import * as Actions from 'store/modules/exportAsPdf'
 import { Target } from 'components/print'
 
@@ -24,7 +24,7 @@ type Props = RequiredProps & InjectedProps
 
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
-    bodyElement: getBodyElement(state),
+    bodyElement: getBodyAst(state).content,
   }),
   (dispatch: Dispatch<Action<*, *>>) => ({
     startExporting: () => dispatch(Actions.start())

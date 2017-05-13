@@ -13,7 +13,7 @@ import type { Connector } from 'react-redux'
 
 import * as Actions from 'store/modules/entities/document'
 import { getBody } from 'store/selectors/entities/document'
-import { getOutlineElement } from 'store/selectors/processor'
+import { getOutlineAst } from 'store/selectors/processor'
 import Panes from 'components/common/Panes'
 import { Outline } from 'components/editor'
 
@@ -33,7 +33,7 @@ type Props = RequiredProps & InjectedProps
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
     body: getBody(state),
-    outlineElement: getOutlineElement(state),
+    outlineElement: getOutlineAst(state).contents,
   }),
   (dispatch: Dispatch<Action<*, *>>) => ({
     setBody: debounce((body: string) => dispatch(Actions.setBody(body)), 100, { maxWait: 500 }),

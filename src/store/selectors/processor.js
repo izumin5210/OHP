@@ -59,16 +59,6 @@ export const getOutlineAst = createSelector(
   (body: string) => outlineProcessor.processSync(body),
 )
 
-export const getBodyElement = createSelector(
-  getBodyAst,
-  ({ contents }: any) => contents,
-)
-
-export const getOutlineElement = createSelector(
-  getOutlineAst,
-  ({ contents }: any) => contents,
-)
-
 export const getBaseFontSize = createSelector(
   getBodyAst,
   ({ meta }: any) => meta && meta.fontSize,
