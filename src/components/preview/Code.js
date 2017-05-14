@@ -1,27 +1,51 @@
 // @flow
 import { PureComponent } from 'react'
 import Lowlight from 'react-lowlight'
-import js from 'highlight.js/lib/languages/javascript'
 
 import type { Children } from 'react'
+import langMap from 'settings/languageNameMap'
 
 type Props = {
   className:string,
   children: Children,
 }
 
-Lowlight.registerLanguage('js', js)
+type State = {
+  language: string,
+}
 
-export default class Code extends PureComponent<void, Props, void> {
+export default class Code extends PureComponent<void, Props, State> {
   static languageClassNamePattern = /\s*language-([\w-]+)\s*/
 
-  // for lint
-  props: Props
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      language: '',
+    }
+  }
 
-  get language (): string {
-    const match = (this.props.className || '').match(Code.languageClassNamePattern)
-    const lang = (match && match[1]) || ''
-    return Lowlight.hasLanguage(lang) ? lang : ''
+  state: State
+
+  componentWillMount () {
+    this.registerLanguage(this.props.className)
+  }
+
+  componentWillReceiveProps ({ className }: Props) {
+    this.registerLanguage(className)
+  }
+
+  async registerLanguage (className: string) {
+    const match = (className || '').match(Code.languageClassNamePattern)
+    const langName = (match && match[1]) || ''
+    const lang = langMap[langName]
+    if (lang == null) {
+      this.setState({ language: '' })
+    } else if (Lowlight.hasLanguage(langName)) {
+      this.setState({ language: langName })
+    } else {
+      Lowlight.registerLanguage(langName, await lang.load())
+      this.setState({ language: langName })
+    }
   }
 
   get value (): string {
@@ -31,7 +55,7 @@ export default class Code extends PureComponent<void, Props, void> {
   render () {
     return (
       <Lowlight
-        language={this.language}
+        language={this.state.language}
         value={this.value}
         inline
       />
