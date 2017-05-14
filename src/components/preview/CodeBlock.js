@@ -14,7 +14,7 @@ type State = {
   language: string,
 }
 
-export default class Code extends PureComponent<void, Props, State> {
+export default class CodeBlock extends PureComponent<void, Props, State> {
   static languageClassNamePattern = /\s*language-([\w-]+)\s*/
 
   constructor (props: Props) {
@@ -35,7 +35,7 @@ export default class Code extends PureComponent<void, Props, State> {
   }
 
   async registerLanguage (className: string) {
-    const match = (className || '').match(Code.languageClassNamePattern)
+    const match = (className || '').match(CodeBlock.languageClassNamePattern)
     const langName = (match && match[1]) || ''
     const lang = langMap[langName]
     if (lang == null) {

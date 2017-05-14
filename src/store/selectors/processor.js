@@ -14,7 +14,7 @@ import mergeWith from 'lodash/mergeWith'
 import isArray from 'lodash/isArray'
 
 import SlideContainer from 'containers/SlideContainer'
-import { Code } from 'components/preview'
+import { CodeBlock } from 'components/preview'
 
 import { getBody as getRawBody } from './entities/document'
 
@@ -40,7 +40,7 @@ const handlers = Object.assign({}, newpageDirectiveHandlers)
 const toHast = { handlers }
 const remarkReactComponents = {
   page: SlideContainer,
-  pre: Code,
+  pre: CodeBlock,
 }
 const rendererOptions = { sanitize, toHast, remarkReactComponents }
 
