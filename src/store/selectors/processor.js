@@ -40,7 +40,7 @@ const handlers = Object.assign({}, newpageDirectiveHandlers)
 const toHast = { handlers }
 const remarkReactComponents = {
   page: SlideContainer,
-  code: Code,
+  pre: Code,
 }
 const rendererOptions = { sanitize, toHast, remarkReactComponents }
 

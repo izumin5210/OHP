@@ -27,7 +27,7 @@ export default class Code extends PureComponent<void, Props, State> {
   state: State
 
   componentWillMount () {
-    this.registerLanguage(this.props.className)
+    this.registerLanguage(this.props.children[0].props.className)
   }
 
   componentWillReceiveProps ({ className }: Props) {
@@ -49,7 +49,7 @@ export default class Code extends PureComponent<void, Props, State> {
   }
 
   get value (): string {
-    return this.props.children[0]
+    return this.props.children[0].props.children[0]
   }
 
   render () {
@@ -57,7 +57,6 @@ export default class Code extends PureComponent<void, Props, State> {
       <Lowlight
         language={this.state.language}
         value={this.value}
-        inline
       />
     )
   }
