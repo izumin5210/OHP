@@ -24,7 +24,7 @@ type Props = RequiredProps & InjectedProps
 
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
-    bodyElement: getBodyAst(state).content,
+    bodyElement: getBodyAst(state).contents,
   }),
   (dispatch: Dispatch<Action<*, *>>) => ({
     startExporting: () => dispatch(Actions.start())
