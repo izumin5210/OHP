@@ -2,7 +2,8 @@
   "plugins": [
     "transform-runtime",
     "transform-class-properties",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "syntax-dynamic-import"
   ],
   "presets": [
     [
