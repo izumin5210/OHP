@@ -100,6 +100,7 @@
     "build": "run-p build:*",
     "build:main": "NODE_ENV=production webpack --bail --config ./scripts/webpack/config.main.prod.js",
     "build:renderer": "NODE_ENV=production webpack --bail --config ./scripts/webpack/config.renderer.prod.js",
+    "generate:langMap": "node -r babel-register ./scripts/createLangMap.js",
     "lint": "run-p lint:*",
     "lint:css": "stylelint 'src/**/*.css'",
     "lint:js": "run-p lint:js:*",
