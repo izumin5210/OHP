@@ -44,6 +44,29 @@ class EditorContainer extends PureComponent<void, Props, void> {
   // for lint
   props: Props
 
+  get insertNewpageDirectiveCommand () {
+    return {
+      Name: 'Insert newpage directive',
+      bindKey: {
+        win: 'Ctrl-Enter',
+        mac: 'Command-Enter',
+      },
+      exec: (editor) => {
+        const { row } = editor.getCursorPosition()
+        const lineLength = editor.getSession().getLine(row).length
+        const br = `\n${lineLength > 0 ? '\n' : ''}`
+        editor.moveCursorTo(row, lineLength)
+        editor.insert(`${br}<!-- newpage -->${br}`)
+      },
+    }
+  }
+
+  get commands () {
+    return [
+      this.insertNewpageDirectiveCommand,
+    ]
+  }
+
   render () {
     const { body, outlineElement, setBody } = this.props
     return (
@@ -62,6 +85,7 @@ class EditorContainer extends PureComponent<void, Props, void> {
           height='100%'
           value={body}
           onChange={setBody}
+          commands={this.commands}
         />
       </Panes>
     )
