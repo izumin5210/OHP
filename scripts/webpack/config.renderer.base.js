@@ -36,6 +36,7 @@ const config = {
             { loader: 'postcss-loader' },
           ],
         }),
+        exclude: /node_modules\/(highlight\.js)/
       },
     ],
   },

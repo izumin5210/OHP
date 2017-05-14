@@ -4,6 +4,8 @@ import ShadowDom from 'react-shadow'
 
 import type { Children, Element } from 'react'
 
+import { default as highlightDefault } from 'settings/highlightStyles'
+
 import styles from './Page.css'
 
 type Props = {
@@ -75,6 +77,7 @@ export default class Page extends PureComponent<void, Props, void> {
           >
             { this.props.children }
             { this.userStyles }
+            <link rel='stylesheet' href={highlightDefault} />
           </div>
         </section>
       </ShadowDom>
