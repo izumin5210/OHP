@@ -14,30 +14,44 @@ const defaultValue: ExportAsPdfStateConfig = {
 }
 
 export class ExportAsPdfState extends Record(defaultValue) {
+  // HACK: for typecheck
   // eslint-disable-next-line no-useless-constructor
   constructor (values: $Shape<ExportAsPdfStateConfig>) {
     super(values)
   }
 
-  entity: FetchStatus
+  // HACK: for typecheck
+  fetchStatus: FetchStatus
+
+  // HACK: for typecheck
+  set: <K: $Keys<ExportAsPdfStateConfig>>(key: K, value: any) => ExportAsPdfState;
 }
 
 const initialState = new ExportAsPdfState()
 
 /* ======= Actions ======= */
 
-export const prepare = createAction('exportAsPdf:prepare')
-export const start = createAction('exportAsPdf:start')
-export const complete = createAction('exportAsPdf:complete')
+const PREPARE = 'exportAsPdf:prepare'
+export const prepare = createAction(PREPARE)
+
+const START = 'exportAsPdf:start'
+export const start = createAction(START)
+
+const COMPLETE = 'exportAsPdf:complete'
+export const complete = createAction(COMPLETE)
 
 /* ======= Reducer ======= */
 
 export default handleActions({
-  [prepare.toString()]: (state: ExportAsPdfState) => {
+  // HACK: for typecheck
+  // [prepare.toString()]: (state: ExportAsPdfState) => {
+  [PREPARE]: (state: ExportAsPdfState) => {
     return state.set('fetchStatus', 'loading')
   },
 
-  [complete.toString()]: (state: ExportAsPdfState) => {
+  // HACK: for typecheck
+  // [complete.toString()]: (state: ExportAsPdfState) => {
+  [COMPLETE]: (state: ExportAsPdfState) => {
     return state.set('fetchStatus', 'loaded')
   },
 }, initialState)

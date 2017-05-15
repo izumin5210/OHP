@@ -23,54 +23,65 @@ const defaultValue: $Shape<DocumentStateConfig> = {
 export class DocumentState extends Record(defaultValue) {
   // To suppress a following error:
   //   constructor call. Type is incompatible with (unclassified use type: ObjTestT) any member of intersection type
+  // HACK: for typecheck
   // eslint-disable-next-line no-useless-constructor
   constructor (values: $Shape<DocumentStateConfig>) {
     super(values)
   }
 
+  // HACK: for typecheck
   entity: Document
   saved: boolean
   lastSavedBody: string
+
+  // HACK: for typecheck
+  set: <K: $Keys<DocumentState>>(key: K, value: any) => DocumentState;
+  setIn: (keyPath: Iterable<any>, value: any) => DocumentState;
 }
 
 const initialState = new DocumentState()
 
 /* ======== Actions ======= */
 
+const OPEN = 'entities:document:open'
 export type OpenPayload = { url: string, body: string }
 export type Open = Action<OpenPayload, void>
 export const open = createAction(
-  'entities:document:open',
+  OPEN,
   (payload: OpenPayload) => payload,
 )
 
+const SET_BODY = 'entities:document:setBody'
 export type SetBody = Action<string, void>
 export const setBody = createAction(
-  'entities:document:setBody',
+  SET_BODY,
   (payload: string) => payload,
 )
 
+const SAVE = 'entities:document:save'
 export type SavePayload = { new: boolean }
 export type Save = Action<SavePayload, void>
 export const save = createAction(
-  'entities:document:save',
+  SAVE,
   (payload: SavePayload) => payload,
 )
 
+const BE_SAVED = 'entities:document:beSaved'
 export type BeSavedPayload = { url: string }
 export type BeSaved = Action<BeSavedPayload, void>
 export const beSaved = createAction(
-  'entities:document:beSaved',
+  BE_SAVED,
   (payload: BeSavedPayload) => payload,
 )
 
 /* ======== Reducer ======= */
 
 export default handleActions({
-  [open.toString()]: (state: DocumentState, action: Open) => {
-    const { payload, error: isError } = action
-    if (!isError && !(payload instanceof Error)) {
-      const { url, body } = payload
+  // HACK: for typecheck
+  // [open]: (state: DocumentState, action: Open) => {
+  [OPEN]: (state: DocumentState, action: Open) => {
+    if (!action.error) {
+      const { url, body } = action.payload
       return state
         .set('entity', new Document({ url, body }))
         .set('saved', true)
@@ -79,10 +90,11 @@ export default handleActions({
     return state
   },
 
-  [setBody.toString()]: (state: DocumentState, action: SetBody) => {
-    const { payload: body, error: isError } = action
-    if (!isError) {
-      console.log(body === state.lastSavedBody)
+  // HACK: for typecheck
+  // [setBody]: (state: DocumentState, action: SetBody) => {
+  [SET_BODY]: (state: DocumentState, action: SetBody) => {
+    if (!action.error) {
+      const { payload: body } = action
       return state
         .setIn(['entity', 'body'], body)
         .set('saved', body === state.lastSavedBody)
@@ -90,11 +102,12 @@ export default handleActions({
     return state
   },
 
-  [beSaved.toString()]: (state: DocumentState, action: BeSaved) => {
-    const { payload, error: isError } = action
-    if (!isError && !(payload instanceof Error)) {
+  // HACK: for typecheck
+  // [beSaved]: (state: DocumentState, action: BeSaved) => {
+  [BE_SAVED]: (state: DocumentState, action: BeSaved) => {
+    if (!action.error) {
       return state
-        .setIn(['entity', 'url'], payload.url)
+        .setIn(['entity', 'url'], action.payload.url)
         .set('saved', true)
         .set('lastSavedBody', state.entity.body)
     }
