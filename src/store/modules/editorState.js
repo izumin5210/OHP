@@ -3,13 +3,9 @@ import { createAction, handleActions } from 'redux-actions'
 import { Record } from 'immutable'
 
 import type { Action } from 'redux-actions'
+import type { Position } from 'types'
 
 /* ======= Types ======= */
-
-export type Position = {
-  row: number,
-  column: number,
-}
 
 export type EditorStateConfig = {
   cursorPosition: Position,

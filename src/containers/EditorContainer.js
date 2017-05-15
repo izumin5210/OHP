@@ -19,7 +19,7 @@ import Panes from 'components/common/Panes'
 import { Outline } from 'components/editor'
 
 import type { RootState } from 'store/modules'
-import type { Position } from 'store/modules/editorState'
+import type { Position } from 'types'
 
 type RequiredProps = {
 }

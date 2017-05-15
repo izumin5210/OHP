@@ -6,15 +6,13 @@ import throttle from 'lodash/throttle'
 
 import type { Children } from 'react'
 import type { Connector } from 'react-redux'
-// raise "Named import from module `unist`. This module has no named export called `Node`."
-// $FlowFixMe
-import type { Position } from 'unist'
 
 import { isExportingAsPdf } from 'store/selectors/exportAsPdf'
 import { getBodyAst, getBaseFontSize } from 'store/selectors/processor'
 import { Page } from 'components/preview'
 
 import type { RootState } from 'store/modules'
+import type { Position } from 'types'
 
 type RequiredProps = {
   className: string,
