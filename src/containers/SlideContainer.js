@@ -6,6 +6,9 @@ import throttle from 'lodash/throttle'
 
 import type { Children } from 'react'
 import type { Connector } from 'react-redux'
+// raise "Named import from module `unist`. This module has no named export called `Node`."
+// $FlowFixMe
+import type { Position } from 'unist'
 
 import { isExportingAsPdf } from 'store/selectors/exportAsPdf'
 import { getBodyAst, getBaseFontSize } from 'store/selectors/processor'
@@ -16,6 +19,8 @@ import type { RootState } from 'store/modules'
 type RequiredProps = {
   className: string,
   children?: Children,
+  beginAt: string,
+  endAt: string,
 }
 
 type InjectedProps = {
@@ -28,6 +33,8 @@ type Props = RequiredProps & InjectedProps
 
 type State = {
   width: number,
+  beginAt: ?Position,
+  endAt: ?Position,
 }
 
 /* eslint-disable react/no-unused-prop-types */
@@ -52,13 +59,24 @@ const connector: Connector<RequiredProps, Props> = connect(
 class SlideContainer extends PureComponent<void, Props, State> {
   constructor (props: Props) {
     super(props)
+    // eslint-disable-next-line react/prop-types
+    const { beginAt, endAt } = props
     this.state = {
       width: 0,
+      beginAt: JSON.parse(beginAt),
+      endAt: JSON.parse(endAt),
     }
   }
 
   props: Props
   state: State
+
+  componentWillReceiveProps ({ beginAt, endAt }: Props) {
+    this.setState({
+      beginAt: JSON.parse(beginAt),
+      endAt: JSON.parse(endAt),
+    })
+  }
 
   onMeasure = throttle(
     ({ width }: Dimension) => {
