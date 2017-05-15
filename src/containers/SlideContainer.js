@@ -12,6 +12,7 @@ import type { Connector } from 'react-redux'
 import Page from 'entities/Page'
 import * as Actions from 'store/modules/entities/pages'
 import { isExportingAsPdf } from 'store/selectors/exportAsPdf'
+import { getCursorPosition } from 'store/selectors/editorState'
 import { getBodyAst, getBaseFontSize } from 'store/selectors/processor'
 import { Page as PageComponent } from 'components/preview'
 
@@ -56,6 +57,7 @@ const connector: Connector<RequiredProps, Props> = connect(
   (state: RootState) => ({
     baseFontSize: getBaseFontSize(state) || 36,
     exportingAsPdf: isExportingAsPdf(state),
+    cursorPosition: getCursorPosition(state),
     userStyles: getBodyAst(state).styles,
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
