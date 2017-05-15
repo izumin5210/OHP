@@ -11,13 +11,15 @@ import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
 
-import * as Actions from 'store/modules/entities/document'
+import * as DocumentActions from 'store/modules/entities/document'
+import * as EditorActions from 'store/modules/editorState'
 import { getBody } from 'store/selectors/entities/document'
 import { getOutlineAst } from 'store/selectors/processor'
 import Panes from 'components/common/Panes'
 import { Outline } from 'components/editor'
 
 import type { RootState } from 'store/modules'
+import type { Position } from 'store/modules/editorState'
 
 type RequiredProps = {
 }
@@ -26,6 +28,7 @@ type InjectedProps = {
   body: string,
   outlineElement: React$Element<*>,
   setBody: (body: string) => any,
+  moveCursor: (pos: Position) => any,
 }
 
 type Props = RequiredProps & InjectedProps
@@ -35,14 +38,31 @@ const connector: Connector< RequiredProps, Props> = connect(
     body: getBody(state),
     outlineElement: getOutlineAst(state).contents,
   }),
-  (dispatch: Dispatch<Action<*, *>>) => ({
-    setBody: debounce((body: string) => dispatch(Actions.setBody(body)), 100, { maxWait: 500 }),
+  (dispatch: Dispatch<Action<any, any>>) => ({
+    setBody: debounce(
+      (body: string) => dispatch(DocumentActions.setBody(body)),
+      100,
+      { maxWait: 500 },
+    ),
+    moveCursor: debounce(
+      (pos: Position) => dispatch(EditorActions.moveCursor(pos)),
+      100,
+      { maxWait: 500 },
+    ),
   }),
 )
 
 class EditorContainer extends PureComponent<void, Props, void> {
   // for lint
   props: Props
+  editorComponent: AceEditor
+
+  componentDidMount () {
+    const session = this.editorComponent.editor.getSession()
+    session.getSelection().on('changeCursor', (_e: any, selection: any) => {
+      this.props.moveCursor(selection.getCursor())
+    })
+  }
 
   get insertNewpageDirectiveCommand () {
     return {
@@ -86,6 +106,7 @@ class EditorContainer extends PureComponent<void, Props, void> {
           value={body}
           onChange={setBody}
           commands={this.commands}
+          ref={(c) => { this.editorComponent = c }}
         />
       </Panes>
     )
