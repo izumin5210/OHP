@@ -1,5 +1,4 @@
 declare module 'redux-actions' {
-
   declare type Action<P, M> =
     {
       type: string,
@@ -14,17 +13,62 @@ declare module 'redux-actions' {
       error: true,
     };
 
-  declare class ActionCreator<-PI, +PO, +M> {
-    (payload: PI): Action<PO, M>;
-    toString(): string;
-  }
+  declare type ActionCreator = {
+    <+Payload, +Meta, -Arg1, -Arg2, -Arg3>(
+      type: string | Symbol,
+      payloadCreator?: (arg1: Arg1, arg2: Arg2, arg3: Arg3) => Payload,
+      metaCreator?: (arg1: Arg1, arg2: Arg2, arg3: Arg3) => Meta,
+    ): (arg1: Arg1, arg2: Arg2, arg3: Arg3) => Action<Payload, Meta>;
 
-  declare function createAction<-PI, +PO, +M>(
-    type: string | Symbol,
-    payloadCreator?: (payload: PI) => PO,
-    metaCreator?: (payload: PI) => M,
-  ): ActionCreator<PI, PO, M>;
+    <+Payload, +Meta, -Arg1, -Arg2>(
+      type: string | Symbol,
+      payloadCreator?: (arg1: Arg1, arg2: Arg2) => Payload,
+      metaCreator?: (arg1: Arg1, arg2: Arg2) => Meta,
+    ): (arg1: Arg1, arg2: Arg2) => Action<Payload, Meta>;
 
-  declare function handleAction(type: string, reducer: Object | Function): Function;
-  declare function handleActions(reducerMap: Object, defaultState?: Object | string): Function;
-}
+    <+Payload, +Meta, -Arg1>(
+      type: string | Symbol,
+      payloadCreator?: (arg1: Arg1) => Payload,
+      metaCreator?: (arg1: Arg1) => Meta,
+    ): (arg1: Arg1) => Action<Payload, Meta>;
+
+    <+Payload, +Meta>(
+      type: string | Symbol,
+      payloadCreator?: () => Payload,
+      metaCreator?: () => Meta,
+    ): () => Action<Payload, Meta>;
+  };
+
+  declare type ActionHandler<State, Payload, Meta> = {
+    (state: State, a: Action<Payload, Meta>): State;
+    next?: (state: State, a: Action<Payload, Meta>) => State;
+    throw?: (state: State, a: Action<Payload, Meta>) => State;
+  };
+
+  declare type ActionHandlerCreator = {
+    <State, Payload, Meta>(
+      type: string,
+      reducer: ActionHandler<State, Payload, Meta>,
+      defaultState: State,
+    ): (state: State, action: Action<Payload, Meta>) => State;
+  };
+
+  declare type ReducerMap<State> = {
+    [key: string]: (state: State, action: Action<any, any>) => State,
+  };
+
+  declare type ActionsHandlerCreator = {
+    <State>(
+      reducerMap: ReducerMap<State>,
+      defaultState: State,
+    ): (state: State, action: Action<any, any>) => State;
+  };
+
+  declare type ReduxActions = {
+    createAction: ActionCreator;
+    handleAction: ActionHandlerCreator;
+    handleActions: ActionsHandlerCreator;
+  };
+
+  declare var exports: ReduxActions;
+};

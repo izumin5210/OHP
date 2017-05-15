@@ -2,23 +2,23 @@
 import { createSelector } from 'reselect'
 
 import type { RootState } from 'store/modules'
-import type { DocumentState, DocumentStateConfig } from 'store/modules/entities/document'
-import type Document, { DocumentConfig } from 'entities/Document'
+import type { DocumentState } from 'store/modules/entities/document'
+import type Document from 'entities/Document'
 
 export const getDocumentState = ({ entities }: RootState) => entities.document
 export const getDocument = createSelector(
   getDocumentState,
-  ({ entity }: DocumentState & DocumentStateConfig) => entity,
+  ({ entity }: DocumentState) => entity,
 )
 export const getUrl = createSelector(
   getDocument,
-  ({ url }: Document & DocumentConfig) => url,
+  ({ url }: Document) => url,
 )
 export const getBody = createSelector(
   getDocument,
-  ({ body }: Document & DocumentConfig) => body,
+  ({ body }: Document) => body,
 )
 export const isSaved = createSelector(
   getDocumentState,
-  ({ saved }: DocumentState & DocumentStateConfig) => saved,
+  ({ saved }: DocumentState) => saved,
 )

@@ -7,9 +7,12 @@ import type { Location } from 'react-router'
 import entities from './entities'
 import exportAsPdf from './exportAsPdf'
 
+import type { EntitiesState } from './entities'
+import type { ExportAsPdfState } from './exportAsPdf'
+
 export type RootState = {
-  entities: typeof entities,
-  exportAsPdf: typeof exportAsPdf,
+  entities: EntitiesState,
+  exportAsPdf: ExportAsPdfState,
   router: ?Location,
 }
 
