@@ -8,6 +8,7 @@ import type { Children } from 'react'
 import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
+import type { Dimension } from 'react-measure'
 
 import Page from 'entities/Page'
 import * as Actions from 'store/modules/entities/pages'
@@ -42,17 +43,6 @@ type State = {
   width: number,
 }
 
-/* eslint-disable react/no-unused-prop-types */
-type Dimension = {
-  width: number,
-  height: number,
-  top: number,
-  right: number,
-  bottom: number,
-  left: number,
-}
-/* eslint-enable */
-
 const connector: Connector<RequiredProps, Props> = connect(
   (state: RootState) => ({
     baseFontSize: getBaseFontSize(state) || 36,
@@ -82,20 +72,17 @@ class SlideContainer extends PureComponent<void, Props, State> {
   state: State
 
   componentDidMount () {
-    // eslint-disable-next-line react/prop-types
     const { beginAt, endAt } = this.props
     this.setPositions(beginAt, endAt)
   }
 
   componentWillReceiveProps ({ beginAt, endAt }: Props) {
-    // eslint-disable-next-line react/prop-types
     if (beginAt !== this.props.beginAt || endAt !== this.props.endAt) {
       this.setPositions(beginAt, endAt)
     }
   }
 
   componentWillUnmount () {
-    // eslint-disable-next-line react/prop-types
     this.props.remove(this.state.uid)
   }
 
@@ -106,7 +93,6 @@ class SlideContainer extends PureComponent<void, Props, State> {
     assert(endAt == null || ('row' in endAt && 'column' in endAt))
     delete (beginAt || {}).offset
     delete (endAt || {}).offset
-    // eslint-disable-next-line react/prop-types
     this.props.setPositions(this.state.uid, { beginAt, endAt })
   }
 
@@ -120,7 +106,6 @@ class SlideContainer extends PureComponent<void, Props, State> {
   )
 
   render () {
-    // eslint-disable-next-line react/prop-types
     const { className, children, baseFontSize, exportingAsPdf, userStyles } = this.props
     const { width } = this.state
     const fontSize = baseFontSize
