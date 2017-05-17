@@ -27,6 +27,7 @@ const sanitize = mergeWith(
     ],
     attributes: {
       '*': ['className'],
+      'page': ['beginAt', 'endAt'],
     }
   },
   (obj, src) => {
@@ -48,7 +49,7 @@ const outlineProcessor = remark().use(remarkOutline).use(remarkRenderer)
 
 const bodyProcessor = remark()
   .use(remarkYamlMeta)
-  .use(remarkNewpageDirective, { tagName: 'page' })
+  .use(remarkNewpageDirective, { tagName: 'page', withPosition: true })
   .use(remarkPagePropsDirective)
   .use(remarkExtractStyles)
   .use(remarkRenderer, rendererOptions)

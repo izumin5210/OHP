@@ -4,6 +4,7 @@ export type Options = {
   typeName?: string,
   tagName?: string,
   className?: string,
+  withPosition: boolean,
 }
 
 export interface Page extends Parent {

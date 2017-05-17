@@ -1134,6 +1134,10 @@ camelcase@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
 
+camelize@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
+
 caniuse-api@^1.5.2:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-1.6.1.tgz#b534e7c734c4f81ec5fbe8aca2ad24354b962c6c"
@@ -5963,10 +5967,11 @@ remark-parse@^3.0.0:
     vfile-location "^2.0.0"
     xtend "^4.0.1"
 
-remark-react@^4.0.0:
+"remark-react@https://github.com/izumin5210/remark-react.git#9e53bc8":
   version "4.0.0"
-  resolved "https://registry.yarnpkg.com/remark-react/-/remark-react-4.0.0.tgz#2faeaf7e5ec3315a7be3b2d04b3668b98f58e015"
+  resolved "https://github.com/izumin5210/remark-react.git#9e53bc8"
   dependencies:
+    camelize "^1.0.0"
     hast-to-hyperscript "^2.0.1"
     hast-util-sanitize "^1.0.0"
     mdast-util-to-hast "^2.0.0"

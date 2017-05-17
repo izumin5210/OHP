@@ -17,20 +17,23 @@ export default class NewpageDirectiveVisitor {
     typeName: 'page',
     tagName: 'div',
     className: 'page',
+    withPosition: false,
   }
 
-  constructor (vfile: VFile, { typeName, tagName, className }: Options = {}) {
+  constructor (vfile: VFile, { typeName, tagName, className, withPosition }: Options = {}) {
     this.vfile = vfile
     const { defaultOptions } = NewpageDirectiveVisitor
     this.typeName = typeName || defaultOptions.typeName
     this.tagName = tagName || defaultOptions.tagName
     this.className = className || defaultOptions.className
+    this.withPosition = withPosition != null ? withPosition : defaultOptions.withPosition
   }
 
   vfile: VFile
   typeName: string
   tagName: string
   className: string
+  withPosition: boolean
 
   prev: {
     marker: Marker,
@@ -44,12 +47,12 @@ export default class NewpageDirectiveVisitor {
   afterVisiting (parent: Parent) {
     if (this.prev != null) {
       parent.children = [].concat(
-        [this.buildPage(parent.children.slice(0, this.prev.index))],
+        [this.buildPage(null, parent.children.slice(0, this.prev.index))],
         parent.children.slice(this.prev.index),
       )
     } else {
       parent.children = [].concat(
-        [this.buildPage(parent.children)],
+        [this.buildPage(null, parent.children)],
       )
     }
   }
@@ -62,23 +65,33 @@ export default class NewpageDirectiveVisitor {
     if (this.prev != null) {
       parent.children = [].concat(
         parent.children.slice(0, index + 1),
-        [this.buildPage(parent.children.slice(index + 1, this.prev.index))],
+        [this.buildPage(marker, parent.children.slice(index + 1, this.prev.index))],
         parent.children.slice(this.prev.index),
       )
     } else {
       parent.children = [].concat(
         parent.children.slice(0, index + 1),
-        [this.buildPage(parent.children.slice(index + 1))],
+        [this.buildPage(marker, parent.children.slice(index + 1))],
       )
     }
 
     this.prev = { marker, index }
   }
 
-  buildPage (children: Array<Node>): Page {
+  buildPage (marker: ?Marker, children: Array<Node>): Page {
+    const beginAt = marker && marker.node.position.start
+    const endAt = this.prev && this.prev.marker.node.position.start
+    const position = {
+      beginAt: JSON.stringify(beginAt || null),
+      endAt: JSON.stringify(endAt || null),
+    }
     const data = {
       hName: this.tagName,
-      hProperties: { className: this.className },
+      hProperties: Object.assign(
+        {},
+        { className: this.className },
+        this.withPosition ? position : {},
+      ),
       hChildren: children.map(toHast).filter(n => n != null),
     }
     return u(this.typeName, { data }, children)
