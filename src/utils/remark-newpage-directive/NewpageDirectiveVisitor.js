@@ -17,20 +17,23 @@ export default class NewpageDirectiveVisitor {
     typeName: 'page',
     tagName: 'div',
     className: 'page',
+    withPosition: false,
   }
 
-  constructor (vfile: VFile, { typeName, tagName, className }: Options = {}) {
+  constructor (vfile: VFile, { typeName, tagName, className, withPosition }: Options = {}) {
     this.vfile = vfile
     const { defaultOptions } = NewpageDirectiveVisitor
     this.typeName = typeName || defaultOptions.typeName
     this.tagName = tagName || defaultOptions.tagName
     this.className = className || defaultOptions.className
+    this.withPosition = withPosition != null ? withPosition : defaultOptions.withPosition
   }
 
   vfile: VFile
   typeName: string
   tagName: string
   className: string
+  withPosition: boolean
 
   prev: {
     marker: Marker,
@@ -78,13 +81,17 @@ export default class NewpageDirectiveVisitor {
   buildPage (marker: ?Marker, children: Array<Node>): Page {
     const beginAt = marker && marker.node.position.start
     const endAt = this.prev && this.prev.marker.node.position.start
+    const position = {
+      beginAt: JSON.stringify(beginAt || null),
+      endAt: JSON.stringify(endAt || null),
+    }
     const data = {
       hName: this.tagName,
-      hProperties: {
-        className: this.className,
-        beginAt: JSON.stringify(beginAt || null),
-        endAt: JSON.stringify(endAt || null),
-      },
+      hProperties: Object.assign(
+        {},
+        { className: this.className },
+        this.withPosition ? position : {},
+      ),
       hChildren: children.map(toHast).filter(n => n != null),
     }
     return u(this.typeName, { data }, children)
