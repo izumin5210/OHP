@@ -60,7 +60,10 @@ class EditorContainer extends PureComponent<void, Props, void> {
   componentDidMount () {
     const session = this.editorComponent.editor.getSession()
     session.getSelection().on('changeCursor', (_e: any, selection: any) => {
-      this.props.moveCursor(selection.getCursor())
+      const cursor = selection.getCursor()
+      cursor.row += 1
+      cursor.column += 1
+      this.props.moveCursor(cursor)
     })
   }
 

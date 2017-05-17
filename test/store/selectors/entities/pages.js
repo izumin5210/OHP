@@ -21,10 +21,10 @@ describe('selectors for entities/pages', () => {
 
     beforeEach(() => {
       const pageValues = [
-        { uid: 'a', startAt: null, endAt: { row: 2, column: 0 } },
-        { uid: 'b', startAt: { row: 2, column: 0 }, endAt: { row: 4, column: 4 } },
-        { uid: 'c', startAt: { row: 4, column: 4 }, endAt: { row: 4, column: 8 } },
-        { uid: 'd', startAt: { row: 4, column: 8 }, endAt: null },
+        { uid: 'a', beginAt: null, endAt: { row: 2, column: 0 } },
+        { uid: 'b', beginAt: { row: 2, column: 0 }, endAt: { row: 4, column: 4 } },
+        { uid: 'c', beginAt: { row: 4, column: 4 }, endAt: { row: 4, column: 8 } },
+        { uid: 'd', beginAt: { row: 4, column: 8 }, endAt: null },
       ]
       const pageByUid = Map(pageValues.map(v => ([v.uid, new Page(v)])))
       store = createStore({ pageByUid, topByUid: Map() })
