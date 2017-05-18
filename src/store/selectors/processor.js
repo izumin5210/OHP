@@ -27,7 +27,7 @@ const sanitize = mergeWith(
     ],
     attributes: {
       '*': ['className'],
-      'page': ['beginAt', 'endAt'],
+      'page': ['beginAt', 'endAt', 'number'],
     }
   },
   (obj, src) => {
