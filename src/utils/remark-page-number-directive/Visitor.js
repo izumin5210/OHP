@@ -1,4 +1,7 @@
 // @flow
+import u from 'unist-builder'
+import toHast from 'mdast-util-to-hast'
+
 import type { Parent } from 'unist'
 import type { Marker } from 'mdast-comment-marker'
 
@@ -44,7 +47,9 @@ export default class Visitor {
       } else if (!parent.data.hProperties) {
         parent.data.hProperties = {}
       }
-      parent.data.hProperties.pageNumber = JSON.stringify(this.buildPageNumberObject())
+      const pageNumber = this.buildPageNumber()
+      parent.children.push(pageNumber)
+      parent.data.hChildren.push(toHast(pageNumber))
       this.number += 1
     }
   }
@@ -63,7 +68,17 @@ export default class Visitor {
     }
   }
 
-  buildPageNumberObject (): PageNumber {
-    return Object.assign({}, this.props, { number: this.number })
+  buildPageNumber (): PageNumber {
+    const data = {
+      hName: 'pageNumber',
+      hProperties: Object.assign(
+        {},
+        this.props,
+      ),
+    }
+    const children = [
+      u('text', { value: this.number })
+    ]
+    return u('pageNumber', { data }, children)
   }
 }

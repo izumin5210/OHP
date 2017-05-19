@@ -1,7 +1,6 @@
 // @flow
+import type { Text } from 'unist'
 
-export type PageNumber = {
-  number: number,
-  enable: boolean,
-  className: string,
+export interface PageNumber extends Text {
+  type: 'pageNumber',
 }
