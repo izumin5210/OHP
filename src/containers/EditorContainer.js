@@ -12,7 +12,7 @@ import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
 
 import * as DocumentActions from 'store/modules/entities/document'
-import * as EditorActions from 'store/modules/editorState'
+import * as EditorActions from 'store/modules/editor'
 import { getBody } from 'store/selectors/entities/document'
 import { getOutlineAst } from 'store/selectors/processor'
 import Panes from 'components/common/Panes'

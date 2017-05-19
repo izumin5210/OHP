@@ -13,7 +13,7 @@ import type { Dimension } from 'react-measure'
 import Page from 'entities/Page'
 import * as Actions from 'store/modules/entities/pages'
 import { isExportingAsPdf } from 'store/selectors/exportAsPdf'
-import { getCursorPosition } from 'store/selectors/editorState'
+import { getCursorPosition } from 'store/selectors/editor'
 import { getBodyAst, getBaseFontSize } from 'store/selectors/processor'
 import { Page as PageComponent } from 'components/preview'
 

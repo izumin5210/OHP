@@ -5,9 +5,9 @@ import type { RootState } from 'store/modules'
 import type {
   EditorState,
   EditorStateConfig,
-} from 'store/modules/editorState'
+} from 'store/modules/editor'
 
-export const getEditorState = ({ editorState }: RootState) => editorState
+export const getEditorState = ({ editor }: RootState) => editor
 export const getCursorPosition = createSelector(
   getEditorState,
   ({ cursorPosition }: EditorState & EditorStateConfig) => cursorPosition,
