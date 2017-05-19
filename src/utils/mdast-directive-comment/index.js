@@ -1,6 +1,6 @@
 // @flow
 import commentMarker from 'mdast-comment-marker'
-import visit from 'unist-util-visit'
+import visitNode from 'unist-util-visit'
 
 import type { Parent } from 'unist'
 import type { HTML } from 'mdast'
@@ -8,11 +8,12 @@ import type { Marker } from 'mdast-comment-marker'
 import type { VFile } from 'vfile'
 
 export interface DirectiveCommentVisitor<Options> {
+  static typePath?: Array<string>,
   static directiveName: string,
   static reverse: boolean,
   constructor(vfile: VFile, options: Options): DirectiveCommentVisitor<Options>,
-  beforeVisiting(parent: Parent): void,
-  afterVisiting(parent: Parent): void,
+  beforeVisiting(parent: Parent, depth: number): void,
+  afterVisiting(parent: Parent, depth: number): void,
   visit(marker: Marker, index: number, parent: ?Parent): ?boolean,
 }
 
@@ -21,6 +22,9 @@ function isComment ({ value }: HTML): boolean {
 }
 
 export default function createPlugin<O: Object> (Visitor: Class<DirectiveCommentVisitor<O>>) {
+  const reverse = Visitor.reverse || false
+  const typePath = Visitor.typePath || []
+
   return plugin
 
   function plugin (options: O) {
@@ -30,12 +34,26 @@ export default function createPlugin<O: Object> (Visitor: Class<DirectiveComment
 
     function transformer (tree: Parent, vfile: VFile) {
       visitorInstance = new Visitor(vfile, options)
-      visitorInstance.beforeVisiting(tree)
-      visit(tree, 'html', visitor, Visitor.reverse || false)
-      visitorInstance.afterVisiting(tree)
+      visit(tree, 0)
     }
 
-    function visitor (node: HTML, index: number, parent: ?Parent): ?boolean {
+    function visit (tree: Parent, depth: number) {
+      visitorInstance.beforeVisiting(tree, depth)
+
+      if (depth < typePath.length) {
+        visitNode(tree, typePath[depth], wrapperVisitor.bind(null, depth + 1), reverse)
+      } else {
+        visitNode(tree, 'html', commentVisitor, reverse)
+      }
+
+      visitorInstance.afterVisiting(tree, depth)
+    }
+
+    function wrapperVisitor (depth: number, node: HTML) {
+      visit(node, depth)
+    }
+
+    function commentVisitor (node: HTML, index: number, parent: ?Parent): ?boolean {
       if (!isComment(node)) {
         return
       }
