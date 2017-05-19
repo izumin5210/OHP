@@ -11,10 +11,11 @@ import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
 
+import { defaultBody } from 'settings/constants'
 import * as DocumentActions from 'store/modules/entities/document'
 import * as EditorActions from 'store/modules/editor'
 import { getBody } from 'store/selectors/entities/document'
-import { getOutlineAst } from 'store/selectors/processor'
+import { getOutline } from 'store/selectors/preview'
 import Panes from 'components/common/Panes'
 import { Outline } from 'components/editor'
 
@@ -26,7 +27,7 @@ type RequiredProps = {
 
 type InjectedProps = {
   body: string,
-  outlineElement: React$Element<*>,
+  outlineElement: any,
   setBody: (body: string) => any,
   moveCursor: (pos: Position) => any,
 }
@@ -36,7 +37,7 @@ type Props = RequiredProps & InjectedProps
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
     body: getBody(state),
-    outlineElement: getOutlineAst(state).contents,
+    outlineElement: (getOutline(state) || { contents: null }).contents,
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
     setBody: debounce(

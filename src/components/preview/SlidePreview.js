@@ -20,11 +20,17 @@ export default class SlidePreview extends PureComponent<void, Props, void> {
   }
 
   render () {
+    const { bodyElement } = this.props
+
+    const el = (bodyElement != null) ? (
+      <Measure onMeasure={this.onMeasure}>
+        { bodyElement }
+      </Measure>
+    ) : null
+
     return (
       <div className={styles.pages} >
-        <Measure onMeasure={this.onMeasure}>
-          { this.props.bodyElement }
-        </Measure>
+        { el }
       </div>
     )
   }

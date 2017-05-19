@@ -8,7 +8,7 @@ import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
 
 import { setWidth } from 'store/modules/preview'
-import { getBodyAst } from 'store/selectors/processor'
+import { getBody } from 'store/selectors/preview'
 import { SlidePreview } from 'components/preview'
 
 import type { RootState } from 'store/modules'
@@ -17,7 +17,7 @@ type RequiredProps = {
 }
 
 type InjectedProps = {
-  bodyElement: React$Element<*>,
+  bodyElement: any,
   setWidth: (width: number) => any,
 }
 
@@ -25,7 +25,7 @@ type Props = RequiredProps & InjectedProps
 
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
-    bodyElement: getBodyAst(state).contents,
+    bodyElement: (getBody(state) || { contents: null }).contents,
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
     setWidth: debounce(
