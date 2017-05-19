@@ -7,7 +7,7 @@ import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
 
-import { setWidth } from 'store/modules/previewState'
+import { setWidth } from 'store/modules/preview'
 import { getBodyAst } from 'store/selectors/processor'
 import { SlidePreview } from 'components/preview'
 
