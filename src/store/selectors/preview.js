@@ -15,3 +15,18 @@ export const getOutline = createSelector(
   getPreviewState,
   ({ outline }: PreviewState) => outline,
 )
+
+export const getMeta = createSelector(
+  getBody,
+  ({ meta }: any) => meta,
+)
+
+export const getBaseFontSize = createSelector(
+  getMeta,
+  (meta: any) => meta && meta.fontSize,
+)
+
+export const getStyles = createSelector(
+  getBody,
+  ({ styles }: any) => styles,
+)
