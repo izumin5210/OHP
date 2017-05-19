@@ -1,10 +1,15 @@
 // @flow
-import { call, fork, select, takeEvery } from 'redux-saga/effects'
-import type { CallEffect, IOEffect, SelectEffect } from 'redux-saga/effects'
+import { call, fork, put, select, takeEvery } from 'redux-saga/effects'
+import type { CallEffect, IOEffect, PutEffect, SelectEffect } from 'redux-saga/effects'
 
 import * as ipc from 'services/ipc'
 import * as Actions from 'store/modules/entities/document'
+import * as PreviewActions from 'store/modules/preview'
 import { getDocument } from 'store/selectors/entities/document'
+
+function * handleSetBody (): Generator<PutEffect, *, *> {
+  yield put(PreviewActions.process())
+}
 
 function * handleSave (
   action: Actions.Save,
@@ -19,12 +24,17 @@ function * handleSave (
   yield call(ipc.save, doc, payload)
 }
 
+function * watchSetBody (): Generator<*, *, *> {
+  yield takeEvery(Actions.setBody, handleSetBody)
+}
+
 function * watchSave (): Generator<*, *, *> {
   yield takeEvery(Actions.save, handleSave)
 }
 
 export default function * (): Generator<IOEffect, *, *> {
   yield [
+    fork(watchSetBody),
     fork(watchSave),
   ]
 }
