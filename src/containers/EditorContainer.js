@@ -66,6 +66,10 @@ class EditorContainer extends PureComponent<void, Props, void> {
       cursor.column += 1
       this.props.moveCursor(cursor)
     })
+    if (this.props.body.length === 0) {
+      this.editorComponent.editor.setValue(defaultBody)
+      this.editorComponent.editor.clearSelection()
+    }
   }
 
   get insertNewpageDirectiveCommand () {
