@@ -9,6 +9,7 @@ import remarkNewpageDirective, {
   handlers as newpageDirectiveHandlers
 } from 'utils/remark-newpage-directive'
 import remarkPagePropsDirective from 'utils/remark-page-props-directive'
+import remarkPageNumberDirective from 'utils/remark-page-number-directive'
 import githubSanitize from 'hast-util-sanitize/lib/github'
 import mergeWith from 'lodash/mergeWith'
 import isArray from 'lodash/isArray'
@@ -51,6 +52,7 @@ const bodyProcessor = remark()
   .use(remarkYamlMeta)
   .use(remarkNewpageDirective, { tagName: 'page', withPosition: true })
   .use(remarkPagePropsDirective)
+  .use(remarkPageNumberDirective)
   .use(remarkExtractStyles)
   .use(remarkRenderer, rendererOptions)
 
