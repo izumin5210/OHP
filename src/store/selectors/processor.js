@@ -9,13 +9,15 @@ import remarkNewpageDirective, {
   handlers as newpageDirectiveHandlers
 } from 'utils/remark-newpage-directive'
 import remarkPagePropsDirective from 'utils/remark-page-props-directive'
-import remarkPageNumberDirective from 'utils/remark-page-number-directive'
+import remarkPageNumberDirective, {
+  handlers as pageNumberDirectiveHandlers
+} from 'utils/remark-page-number-directive'
 import githubSanitize from 'hast-util-sanitize/lib/github'
 import mergeWith from 'lodash/mergeWith'
 import isArray from 'lodash/isArray'
 
 import SlideContainer from 'containers/SlideContainer'
-import { CodeBlock } from 'components/preview'
+import { PageNumber, CodeBlock } from 'components/preview'
 
 import { getBody as getRawBody } from './entities/document'
 
@@ -25,10 +27,12 @@ const sanitize = mergeWith(
   {
     tagNames: [
       'page',
+      'pageNumber',
     ],
     attributes: {
       '*': ['className'],
       'page': ['beginAt', 'endAt', 'pageNumber'],
+      'pageNumber': ['enable'],
     }
   },
   (obj, src) => {
@@ -38,10 +42,15 @@ const sanitize = mergeWith(
   }
 )
 
-const handlers = Object.assign({}, newpageDirectiveHandlers)
+const handlers = Object.assign(
+  {},
+  newpageDirectiveHandlers,
+  pageNumberDirectiveHandlers,
+)
 const toHast = { handlers }
 const remarkReactComponents = {
   page: SlideContainer,
+  pageNumber: PageNumber,
   pre: CodeBlock,
 }
 const rendererOptions = { sanitize, toHast, remarkReactComponents }
