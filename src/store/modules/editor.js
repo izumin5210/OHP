@@ -33,7 +33,7 @@ const initialState = new EditorState()
 
 /* ======= Actions ======= */
 
-const MOVE_CURSOR = 'editorState:cursorPosition:move'
+const MOVE_CURSOR = 'editor:cursorPosition:move'
 type MoveCursor = Action<Position, void>
 export const moveCursor = createAction(
   MOVE_CURSOR,

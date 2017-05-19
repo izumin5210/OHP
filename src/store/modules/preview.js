@@ -32,7 +32,7 @@ const initialState = new PreviewState()
 
 /* ======= Actions ======= */
 
-const SET_WIDTH = 'previewState:width:set'
+const SET_WIDTH = 'preview:width:set'
 type SetWidth = Action<number, void>
 export const setWidth = createAction(
   SET_WIDTH,
