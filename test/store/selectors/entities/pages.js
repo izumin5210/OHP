@@ -1,7 +1,11 @@
 // @flow
 import { Map } from 'immutable'
 
-import { createGetPageByCursorPosition } from 'store/selectors/entities/pages'
+import {
+  getOrderedUids,
+  createGetOrderByUid,
+  createGetPageByCursorPosition,
+} from 'store/selectors/entities/pages'
 import { PagesState } from 'store/modules/entities/pages'
 import Page from 'entities/Page'
 
@@ -45,6 +49,56 @@ describe('selectors for entities/pages', () => {
       it(`returns page ${uid}`, () => {
         assert(getPageByCursorPosition(cursor).uid === uid)
       })
+    })
+  })
+
+  describe('getOrderedUids', () => {
+    beforeEach(() => {
+      const pageValues = [
+        { uid: 'a', beginAt: { row: 4, column: 8 }, endAt: null },
+        { uid: 'b', beginAt: { row: 4, column: 4 }, endAt: { row: 4, column: 8 } },
+        { uid: 'c', beginAt: null, endAt: { row: 2, column: 0 } },
+        { uid: 'd', beginAt: { row: 2, column: 0 }, endAt: { row: 4, column: 4 } },
+      ]
+      const pageByUid = Map(pageValues.map(v => ([v.uid, new Page(v)])))
+      store = createStore({ pageByUid, topByUid: Map() })
+    })
+
+    it('returns ordered page uids', () => {
+      assert.deepStrictEqual(getOrderedUids(store).toArray(), ['c', 'd', 'b', 'a'])
+    })
+  })
+
+  describe('createGetOrderByUid', () => {
+    let getOrderByUid
+
+    beforeEach(() => {
+      const pageValues = [
+        { uid: 'a', beginAt: { row: 4, column: 8 }, endAt: null },
+        { uid: 'b', beginAt: { row: 4, column: 4 }, endAt: { row: 4, column: 8 } },
+        { uid: 'c', beginAt: null, endAt: { row: 2, column: 0 } },
+        { uid: 'd', beginAt: { row: 2, column: 0 }, endAt: { row: 4, column: 4 } },
+      ]
+      const pageByUid = Map(pageValues.map(v => ([v.uid, new Page(v)])))
+      store = createStore({ pageByUid, topByUid: Map() })
+      getOrderByUid = createGetOrderByUid(store)
+    })
+
+    const data = [
+      { uid: 'a', order: 3 },
+      { uid: 'b', order: 2 },
+      { uid: 'c', order: 0 },
+      { uid: 'd', order: 1 },
+    ]
+
+    data.forEach(({ uid, order }) => {
+      it(`returns ${order} by ${uid}`, () => {
+        assert(getOrderByUid(uid) === order)
+      })
+    })
+
+    it('throws error when it passed unused uid', () => {
+      assert.throws(() => { getOrderByUid('e') })
     })
   })
 })

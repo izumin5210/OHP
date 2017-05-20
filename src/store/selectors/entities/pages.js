@@ -2,7 +2,7 @@
 import { createSelector } from 'reselect'
 import memoize from 'lodash/memoize'
 
-import type { Map } from 'immutable'
+import type { IndexedSeq, Map } from 'immutable'
 import type Page from 'entities/Page'
 import type { Position } from 'types'
 import type { RootState } from 'store/modules'
@@ -32,9 +32,51 @@ function isCursorInsidePage ({ cursor, page }: { cursor: Position, page: Page })
   return false
 }
 
+function pageOrderComparator (p1: Page, p2: Page) {
+  if (p1.beginAt == null) {
+    return -1
+  }
+  if (p2.beginAt == null) {
+    return 1
+  }
+  switch (true) {
+    case p1.beginAt.row < p2.beginAt.row:
+      return -1
+    case p1.beginAt.row > p2.beginAt.row:
+      return 1
+    default:
+      return p1.beginAt.column <= p2.beginAt.column ? -1 : 1
+  }
+}
+
 export const createGetPageByCursorPosition = createSelector(
   getPageByUid,
   (pageByUid: Map<string, Page>) => memoize(
     (cursor: Position) => pageByUid.find((page: Page) => isCursorInsidePage({ cursor, page }))
+  )
+)
+
+export const getOrderedUids = createSelector(
+  getPageByUid,
+  (pageByUid: Map<string, Page>) => (
+    pageByUid
+      .sortBy(
+        page => page,
+        pageOrderComparator,
+      )
+      .keySeq()
+  )
+)
+
+export const createGetOrderByUid = createSelector(
+  getOrderedUids,
+  (uids: IndexedSeq<string>) => memoize(
+    (uid: string) => {
+      const order = uids.indexOf(uid)
+      if (order !== -1) {
+        return order
+      }
+      throw new Error()
+    }
   )
 )
