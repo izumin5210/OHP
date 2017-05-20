@@ -8,7 +8,8 @@ import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
 
 import { setWidth } from 'store/modules/preview'
-import { getBody } from 'store/selectors/preview'
+import { getBody, getWidth } from 'store/selectors/preview'
+import { getCurrentPageOrder } from 'store/selectors/pages'
 import { SlidePreview } from 'components/preview'
 
 import type { RootState } from 'store/modules'
@@ -18,6 +19,8 @@ type RequiredProps = {
 
 type InjectedProps = {
   bodyElement: any,
+  width: number,
+  currentPageOrder: number,
   setWidth: (width: number) => any,
 }
 
@@ -26,6 +29,8 @@ type Props = RequiredProps & InjectedProps
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
     bodyElement: (getBody(state) || { contents: null }).contents,
+    width: getWidth(state),
+    currentPageOrder: getCurrentPageOrder(state),
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
     setWidth: debounce(
@@ -41,9 +46,9 @@ class PreviewContainer extends PureComponent<void, Props, void> {
   props: Props
 
   render () {
-    const { bodyElement, setWidth } = this.props
+    const { bodyElement, width, currentPageOrder, setWidth } = this.props
     return (
-      <SlidePreview {...{ bodyElement, setWidth }} />
+      <SlidePreview {...{ bodyElement, width, currentPageOrder, setWidth }} />
     )
   }
 }

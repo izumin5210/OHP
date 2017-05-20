@@ -6,6 +6,11 @@ import type { PreviewState } from 'store/modules/preview'
 
 export const getPreviewState = ({ preview }: RootState) => preview
 
+export const getWidth = createSelector(
+  getPreviewState,
+  ({ width }: PreviewState) => width,
+)
+
 export const getBody = createSelector(
   getPreviewState,
   ({ body }: PreviewState) => body,
