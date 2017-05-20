@@ -9,16 +9,21 @@ import 'brace/keybinding/vim'
 import { defaultBody } from 'settings/constants'
 
 import type { Position } from 'types'
+import type Page from 'entities/Page'
+
+import styles from './Editor.css'
 
 type Props = {
   url: string,
   body: string,
+  currentPage: ?Page,
   setBody: (body: string) => void,
   setCursor: (pos: Position) => void,
 }
 
 type State = {
   body: string,
+  currentPageMarkerId: ?number,
 }
 
 export default class Editor extends PureComponent<void, Props, State> {
@@ -26,6 +31,7 @@ export default class Editor extends PureComponent<void, Props, State> {
     super(props)
     this.state = {
       body: props.body,
+      currentPageMarkerId: null,
     }
   }
 
@@ -43,9 +49,26 @@ export default class Editor extends PureComponent<void, Props, State> {
     }
   }
 
-  componentWillReceiveProps ({ url, body }: Props) {
+  componentWillReceiveProps ({ url, body, currentPage }: Props) {
     if (url !== this.props.url) {
       this.handleChange(body)
+    }
+    if (currentPage != null && currentPage !== this.props.currentPage) {
+      const session = this.editorComponent.editor.getSession()
+      const { row: beginRow } = currentPage.beginAt || { row: 1 }
+      const endAt = currentPage.endAt || this.endOfFile
+      const endRow = endAt.column === 1 ? endAt.row - 1 : endAt.row
+      const { id: currentPageMarkerId } = session.highlightLines(
+        beginRow - 1,
+        endRow - 1,
+        `ace_active-line ${styles.currentPageRange}`,
+      )
+      const { currentPageMarkerId: prevPageMarkerId } = this.state
+      this.setState({ currentPageMarkerId }, () => {
+        if (prevPageMarkerId != null) {
+          session.removeMarker(prevPageMarkerId)
+        }
+      })
     }
   }
 
