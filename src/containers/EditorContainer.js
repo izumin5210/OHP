@@ -14,7 +14,7 @@ import type { Connector } from 'react-redux'
 import { defaultBody } from 'settings/constants'
 import * as DocumentActions from 'store/modules/entities/document'
 import * as EditorActions from 'store/modules/editor'
-import { getBody } from 'store/selectors/entities/document'
+import { getUrl, getBody } from 'store/selectors/entities/document'
 import { getOutline } from 'store/selectors/preview'
 import Panes from 'components/common/Panes'
 import { Outline } from 'components/editor'
@@ -26,6 +26,7 @@ type RequiredProps = {
 }
 
 type InjectedProps = {
+  url: string,
   body: string,
   outlineElement: any,
   setBody: (body: string) => any,
@@ -34,41 +35,47 @@ type InjectedProps = {
 
 type Props = RequiredProps & InjectedProps
 
+type State = {
+  body: string,
+}
+
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
+    url: getUrl(state),
     body: getBody(state),
     outlineElement: (getOutline(state) || { contents: null }).contents,
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
-    setBody: debounce(
-      (body: string) => dispatch(DocumentActions.setBody(body)),
-      100,
-      { maxWait: 500 },
-    ),
-    moveCursor: debounce(
-      (pos: Position) => dispatch(EditorActions.moveCursor(pos)),
-      100,
-      { maxWait: 500 },
-    ),
+    setBody: (body: string) => dispatch(DocumentActions.setBody(body)),
+    moveCursor: (pos: Position) => dispatch(EditorActions.moveCursor(pos)),
   }),
 )
 
-class EditorContainer extends PureComponent<void, Props, void> {
+class EditorContainer extends PureComponent<void, Props, State> {
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      body: props.body,
+    }
+  }
+
   // for lint
   props: Props
+  state: State
   editorComponent: AceEditor
 
   componentDidMount () {
-    const session = this.editorComponent.editor.getSession()
-    session.getSelection().on('changeCursor', (_e: any, selection: any) => {
-      const cursor = selection.getCursor()
-      cursor.row += 1
-      cursor.column += 1
-      this.props.moveCursor(cursor)
-    })
+    const { editor } = this.editorComponent
+    editor.getSession().getSelection().on('changeCursor', this.handleCursorChange)
     if (this.props.body.length === 0) {
-      this.editorComponent.editor.setValue(defaultBody)
-      this.editorComponent.editor.clearSelection()
+      editor.setValue(defaultBody)
+      editor.clearSelection()
+    }
+  }
+
+  componentWillReceiveProps ({ url, body }: Props) {
+    if (url !== this.props.url) {
+      this.handleChange(body)
     }
   }
 
@@ -95,8 +102,27 @@ class EditorContainer extends PureComponent<void, Props, void> {
     ]
   }
 
+  handleChange = (body: string) => {
+    this.setState({ body }, () => this.setBody(this.state.body))
+  }
+
+  setBody = debounce(
+    (body: string) => this.props.setBody(body),
+    500,
+  )
+
+  handleCursorChange = debounce(
+    (_e: any, selection: any) => {
+      const cursor = selection.getCursor()
+      cursor.row += 1
+      cursor.column += 1
+      this.props.moveCursor(cursor)
+    },
+    500,
+  )
+
   render () {
-    const { body, outlineElement, setBody } = this.props
+    const { outlineElement } = this.props
     return (
       <Panes
         split='vertical'
@@ -111,8 +137,8 @@ class EditorContainer extends PureComponent<void, Props, void> {
           keyboardHandler='vim'
           width='100%'
           height='100%'
-          value={body}
-          onChange={setBody}
+          value={this.state.body}
+          onChange={this.handleChange}
           commands={this.commands}
           ref={(c) => { this.editorComponent = c }}
         />
