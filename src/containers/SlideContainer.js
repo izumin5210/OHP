@@ -14,7 +14,7 @@ import Page from 'entities/Page'
 import * as Actions from 'store/modules/entities/pages'
 import { isExportingAsPdf } from 'store/selectors/exportAsPdf'
 import { getCursorPosition } from 'store/selectors/editor'
-import { getBodyAst, getBaseFontSize } from 'store/selectors/processor'
+import { getBaseFontSize, getStyles } from 'store/selectors/preview'
 import { Page as PageComponent } from 'components/preview'
 
 import type { RootState } from 'store/modules'
@@ -48,7 +48,7 @@ const connector: Connector<RequiredProps, Props> = connect(
     baseFontSize: getBaseFontSize(state) || 36,
     exportingAsPdf: isExportingAsPdf(state),
     cursorPosition: getCursorPosition(state),
-    userStyles: getBodyAst(state).styles,
+    userStyles: getStyles(state),
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
     setPositions: (
