@@ -2,6 +2,7 @@
 import { PureComponent } from 'react'
 import Measure from 'react-measure'
 import scrollParent from 'scrollparent'
+import SweetScroll from 'sweet-scroll'
 
 import type { Dimension } from 'react-measure'
 
@@ -15,16 +16,25 @@ type Props = {
 }
 
 export default class SlidePreview extends PureComponent<void, Props, void> {
+  static scrollOptions = {
+    duration: 500,
+    // easing: 'easeOutExpo',
+    easing: 'easeOutQuint',
+    verticalScroll: true,
+    horizontalScroll: false,
+    // quickMode: true,
+  }
+
   // for lint
   props: Props
-  el: HTMLElement
+  scroller: SweetScroll
 
   componentDidUpdate ({ currentPageOrder: prevCurrentPageOrder }: Props) {
     const { currentPageOrder, width } = this.props
     if (currentPageOrder !== prevCurrentPageOrder) {
       // NOTE: 16px: spacing between pages
       // FIXME: adjust size params automatically
-      this.el.scrollTop = currentPageOrder * (768 * (width / 1024) + 16)
+      this.scroller.toTop(currentPageOrder * (768 * (width / 1024) + 16))
     }
   }
 
@@ -42,7 +52,12 @@ export default class SlidePreview extends PureComponent<void, Props, void> {
     ) : null
 
     return (
-      <div className={styles.pages} ref={(el) => { this.el = scrollParent(el) }}>
+      <div
+        className={styles.pages}
+        ref={(el) => {
+          this.scroller = new SweetScroll(SlidePreview.scrollOptions, scrollParent(el))
+        }}
+      >
         { el }
       </div>
     )
