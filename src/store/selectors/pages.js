@@ -5,7 +5,7 @@ import type Page from 'entities/Page'
 import type { Position } from 'types'
 
 import { getCursorPosition } from './editor'
-import { createGetPageByCursorPosition } from './entities/pages'
+import { createGetPageByCursorPosition, createGetOrderByUid } from './entities/pages'
 
 export const getCurrentPage = createSelector(
   getCursorPosition,
@@ -14,4 +14,13 @@ export const getCurrentPage = createSelector(
     cursorPosition: Position,
     getPageByCursorPosition: (pos: Position) => Page,
   ) => getPageByCursorPosition(cursorPosition),
+)
+
+export const getCurrentPageOrder = createSelector(
+  getCurrentPage,
+  createGetOrderByUid,
+  (
+    page: ?Page,
+    getOrderByUid: (uid: string) => number,
+  ) => page != null ? getOrderByUid(page.uid) : 0,
 )
