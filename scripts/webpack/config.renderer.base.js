@@ -41,6 +41,10 @@ const config = {
     ],
   },
 
+  output: {
+    filename: '[name]-[hash].js',
+  },
+
   plugins: [
     new webpack.NamedModulesPlugin(),
 
@@ -49,14 +53,6 @@ const config = {
       filename: 'index.html',
       template: path.resolve(src, 'index.html'),
       chunks: ['app'],
-      inject: true
-    }),
-
-    new HtmlWebpackPlugin({
-      title: pkg.name,
-      filename: 'print.html',
-      template: path.resolve(src, 'index.html'),
-      chunks: ['print'],
       inject: true
     }),
 

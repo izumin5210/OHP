@@ -1,9 +1,9 @@
 // @flow
+import { BrowserWindow } from 'electron'
+
 import type { BrowserWindowOptions } from 'electron'
 
-const { BrowserWindow } = require('electron')
-
-class Window {
+export default class Window {
   win: ?BrowserWindow
 
   constructor (opts: BrowserWindowOptions) {
@@ -46,5 +46,3 @@ class Window {
     }
   }
 }
-
-module.exports = Window

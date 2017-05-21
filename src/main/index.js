@@ -1,17 +1,17 @@
 // @flow
+import { app, BrowserWindow, Menu, ipcMain } from 'electron'
+
 import type { DocumentConfig } from 'entities/Document'
 
-const { app, BrowserWindow, Menu, ipcMain } = require('electron')
+import { MainWindow } from './windows'
+import MainMenu from './MainMenu'
+import { events } from './constants'
+import DocumentOpener from './services/DocumentOpener'
+import DocumentWriter from './services/DocumentWriter'
+import PdfWriter from './services/PdfWriter'
+import * as dialog from './services/dialog'
 
-const { MainWindow } = require('./windows')
-const MainMenu = require('./MainMenu')
-const { events } = require('./constants')
-const DocumentOpener = require('./services/DocumentOpener')
-const DocumentWriter = require('./services/DocumentWriter')
-const PdfWriter = require('./services/PdfWriter')
-const dialog = require('./services/dialog')
-
-const channels = require('../settings/ipc')
+import * as channels from '../settings/ipc'
 
 if (process.env.NODE_ENV !== 'production') {
   global.assert = require('power-assert')

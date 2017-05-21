@@ -1,9 +1,9 @@
 // @flow
+import fs from 'fs'
+
 import type { WebContents } from 'electron'
 
-const fs = require('fs')
-
-class PdfWriter {
+export default class PdfWriter {
   static async execute (contents: WebContents, filename: string): Promise<PdfWriter> {
     const writer = new PdfWriter(contents)
     await writer.execute(filename)
@@ -56,5 +56,3 @@ class PdfWriter {
     })
   }
 }
-
-module.exports = PdfWriter

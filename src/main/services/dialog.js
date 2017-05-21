@@ -1,6 +1,7 @@
 // @flow
+import { dialog } from 'electron'
+
 import type { BrowserWindow, DialogOpenOptions } from 'electron'
-const { dialog } = require('electron')
 
 type Options = {
   window?: ?BrowserWindow,

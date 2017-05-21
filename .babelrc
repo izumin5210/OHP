@@ -10,11 +10,12 @@
       "env",
       {
         "targets": {
-          "node": true,
+          "node": 6,
           "electron": 1.6,
           "uglify": true
         },
-        "modules": false
+        "modules": false,
+        "useBuiltIns": true
       }
     ],
     "react"

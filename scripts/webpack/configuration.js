@@ -9,7 +9,7 @@ const src = resolve(root, 'src')
 const dist = resolve(root, 'dist')
 
 const entries = resolve(src, 'entries')
-const publicPath = env !== 'production' ? `http://${host}:${port}/` : '/'
+const publicPath = env !== 'production' ? `http://${host}:${port}/` : ''
 const outputPath = dist
 
 module.exports = {

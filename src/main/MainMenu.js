@@ -1,12 +1,13 @@
 // @flow
+import EventEmitter from 'events'
+
 import type { BrowserWindow, MenuItem, MenuItemOptions } from 'electron'
 
-const EventEmitter = require('events')
-const { events } = require('./constants')
+import { events } from './constants'
 
 const isDarwin = process.platform === 'darwin'
 
-class MainMenu extends EventEmitter {
+export default class MainMenu extends EventEmitter {
   static SEPARATOR = { type: 'separator' }
 
   constructor (appName: string) {
@@ -136,7 +137,7 @@ class MainMenu extends EventEmitter {
       {
         label: 'Toggle Developer Tools',
         accelerator: isDarwin ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-        enabled: process.env.NODE_ENV !== 'production',
+        // enabled: process.env.NODE_ENV !== 'production',
         click: (item: MenuItem, focusedWindow: BrowserWindow) => {
           if (focusedWindow) {
             focusedWindow.webContents.toggleDevTools()
@@ -216,5 +217,3 @@ class MainMenu extends EventEmitter {
     return () => { this.emit(event) }
   }
 }
-
-module.exports = MainMenu
