@@ -12,13 +12,14 @@ import { defaultBody } from 'settings/constants'
 import type { KeyboardHandler, Position } from 'types'
 import type Page from 'entities/Page'
 
-import styles from './Editor.css'
+import Wrapper from './Wrapper'
 
 type Props = {
   url: string,
   body: string,
   keyboardHandler: KeyboardHandler,
   currentPage: ?Page,
+  currentPageRangeClassName: string,
   setBody: (body: string) => void,
   setCursor: (pos: Position) => void,
 }
@@ -28,7 +29,13 @@ type State = {
   currentPageMarkerId: ?number,
 }
 
-export default class Editor extends PureComponent<void, Props, State> {
+const defaultProps = {
+  currentPageRangeClassName: 'currentPageRange',
+}
+
+export default class Editor extends PureComponent<typeof defaultProps, Props, State> {
+  static defaultProps = defaultProps
+
   constructor (props: Props) {
     super(props)
     this.state = {
@@ -51,7 +58,7 @@ export default class Editor extends PureComponent<void, Props, State> {
     }
   }
 
-  componentWillReceiveProps ({ url, body, currentPage }: Props) {
+  componentWillReceiveProps ({ url, body, currentPage, currentPageRangeClassName }: Props) {
     if (url !== this.props.url) {
       this.handleChange(body)
     }
@@ -63,7 +70,7 @@ export default class Editor extends PureComponent<void, Props, State> {
       const { id: currentPageMarkerId } = session.highlightLines(
         beginRow - 1,
         endRow - 1,
-        `ace_active-line ${styles.currentPageRange}`,
+        `ace_active-line ${currentPageRangeClassName}`,
       )
       const { currentPageMarkerId: prevPageMarkerId } = this.state
       this.setState({ currentPageMarkerId }, () => {
@@ -117,17 +124,21 @@ export default class Editor extends PureComponent<void, Props, State> {
 
   render () {
     return (
-      <AceEditor
-        mode='markdown'
-        theme='tomorrow'
-        keyboardHandler={this.props.keyboardHandler}
-        width='100%'
-        height='100%'
-        value={this.state.body}
-        onChange={this.handleChange}
-        commands={this.commands}
-        ref={(c) => { this.editorComponent = c }}
-      />
+      <Wrapper
+        currentPageRangeClassName={this.props.currentPageRangeClassName}
+       >
+        <AceEditor
+          mode='markdown'
+          theme='tomorrow'
+          keyboardHandler={this.props.keyboardHandler}
+          width='100%'
+          height='100%'
+          value={this.state.body}
+          onChange={this.handleChange}
+          commands={this.commands}
+          ref={(c) => { this.editorComponent = c }}
+        />
+      </Wrapper>
     )
   }
 }
