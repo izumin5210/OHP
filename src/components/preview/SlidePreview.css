@@ -1,7 +1,0 @@
-@import '../../settings';
-
-.pages {
-  background-color: var(--black-foreground800);
-  min-height: calc(100% - 4 * var(--spacing));
-  padding: calc(2 * var(--spacing));
-}

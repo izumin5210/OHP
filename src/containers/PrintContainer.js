@@ -8,7 +8,7 @@ import type { Connector } from 'react-redux'
 
 import { getBody } from 'store/selectors/preview'
 import * as Actions from 'store/modules/exportAsPdf'
-import { Target } from 'components/print'
+import { Wrapper } from 'components/print'
 
 import type { RootState } from 'store/modules'
 
@@ -42,9 +42,9 @@ class PrintContainer extends PureComponent<void, Props, void> {
   render () {
     const { bodyElement } = this.props
     return (
-      <Target>
+      <Wrapper>
         { bodyElement }
-      </Target>
+      </Wrapper>
     )
   }
 }

@@ -6,7 +6,7 @@ import SweetScroll from 'sweet-scroll'
 
 import type { Dimension } from 'react-measure'
 
-import styles from './SlidePreview.css'
+import SlideWrapper from './SlideWrapper'
 
 type Props = {
   bodyElement: React$Element<*>,
@@ -52,14 +52,13 @@ export default class SlidePreview extends PureComponent<void, Props, void> {
     ) : null
 
     return (
-      <div
-        className={styles.pages}
-        ref={(el) => {
+      <SlideWrapper
+        innerRef={(el) => {
           this.scroller = new SweetScroll(SlidePreview.scrollOptions, scrollParent(el))
         }}
       >
         { el }
-      </div>
+      </SlideWrapper>
     )
   }
 }
