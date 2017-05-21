@@ -5,9 +5,11 @@ import type { BrowserWindowOptions } from 'electron'
 
 export default class Window {
   win: ?BrowserWindow
+  forceQuit: boolean
 
   constructor (opts: BrowserWindowOptions) {
     this.win = new BrowserWindow(opts)
+    this.forceQuit = false
   }
 
   get url (): string {
@@ -18,6 +20,12 @@ export default class Window {
     const { win } = this
     if (win != null) {
       win.loadURL(this.url)
+      win.on('close', (e) => {
+        if (!this.forceQuit) {
+          e.preventDefault()
+          win.hide()
+        }
+      })
       win.on('closed', this.destroy.bind(this))
     }
     this.didWindowCreate()
@@ -43,6 +51,12 @@ export default class Window {
     assert(webContents != null)
     if (webContents != null) {
       webContents.send(channel, ...args)
+    }
+  }
+
+  show () {
+    if (this.win != null) {
+      this.win.show()
     }
   }
 }
