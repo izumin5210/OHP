@@ -1,6 +1,6 @@
 // @flow
-const { join } = require('path')
-const { format } = require('url')
+import { join } from 'path'
+import { format } from 'url'
 
 const getWindowUrl = (filename: string) => format(
   process.env.NODE_ENV !== 'production'
@@ -11,7 +11,7 @@ const getWindowUrl = (filename: string) => format(
     protocol: 'http',
     slashes: true,
   } : {
-    pathname: join(__dirname, '..', filename),
+    pathname: join(__dirname, filename),
     protocol: 'file',
     slashes: true,
   }

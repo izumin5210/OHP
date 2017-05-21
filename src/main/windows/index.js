@@ -1,3 +1,3 @@
 // @flow
-export const Window = require('./Window')
-export const MainWindow = require('./MainWindow')
+export { default as Window } from './Window'
+export { default as MainWindow } from './MainWindow'

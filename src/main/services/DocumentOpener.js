@@ -1,9 +1,9 @@
 // @flow
-const fs = require('fs')
+import fs from 'fs'
 
-const dialog = require('./dialog')
+import * as dialog from './dialog'
 
-class DocumentOpener {
+export default class DocumentOpener {
   static async execute (): Promise<DocumentOpener> {
     const opener = new DocumentOpener()
     await opener.execute()
@@ -44,5 +44,3 @@ class DocumentOpener {
     })
   }
 }
-
-module.exports = DocumentOpener

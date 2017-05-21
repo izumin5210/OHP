@@ -1,15 +1,16 @@
 // @flow
+import fs from 'fs'
+
 import type { BrowserWindow } from 'electron'
 import type { DocumentConfig } from 'entities/Document'
 
-const fs = require('fs')
-const dialog = require('./dialog')
+import * as dialog from './dialog'
 
 type Options = {
   new: boolean,
 }
 
-class DocumentWriter {
+export default class DocumentWriter {
   static async execute (
     win: BrowserWindow,
     doc: DocumentConfig,
@@ -60,5 +61,3 @@ class DocumentWriter {
     })
   }
 }
-
-module.exports = DocumentWriter

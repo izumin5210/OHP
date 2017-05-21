@@ -1,8 +1,8 @@
 // @flow
-const Window = require('./Window')
-const { mainWindowUrl } = require('../constants')
+import Window from './Window'
+import { mainWindowUrl } from '../constants'
 
-class MainWindow extends Window {
+export default class MainWindow extends Window {
   static url = mainWindowUrl
 
   static create (): MainWindow {
@@ -15,5 +15,3 @@ class MainWindow extends Window {
     return MainWindow.url
   }
 }
-
-module.exports = MainWindow
