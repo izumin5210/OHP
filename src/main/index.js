@@ -1,6 +1,7 @@
 // @flow
 import { app, BrowserWindow, Menu, ipcMain } from 'electron'
 
+import type { KeyboardHandler } from 'types'
 import type { DocumentConfig } from 'entities/Document'
 
 import { MainWindow } from './windows'
@@ -32,11 +33,15 @@ function getFocusedWindow (): BrowserWindow {
   throw new Error()
 }
 
+function setMainMenu (mainMenu: MainMenu) {
+  const menu = Menu.buildFromTemplate(mainMenu.template)
+  Menu.setApplicationMenu(menu)
+}
+
 app.on('ready', () => {
   createWindow()
   mainMenu = new MainMenu(app.getName())
-  const menu = Menu.buildFromTemplate(mainMenu.template)
-  Menu.setApplicationMenu(menu)
+  setMainMenu(mainMenu)
 
   mainMenu.on(events.openNewFile, () => {
     console.log('open new file')
@@ -62,6 +67,10 @@ app.on('ready', () => {
 
   mainMenu.on(events.exportPdf, () => {
     getFocusedWindow().webContents.send(channels.exportAsPdf.prepare)
+  })
+
+  mainMenu.on(events.setKeyboardHandler, (handler: KeyboardHandler) => {
+    getFocusedWindow().webContents.send(channels.editor.setKeyboardHandler, { handler })
   })
 })
 
@@ -104,4 +113,9 @@ ipcMain.on(channels.exportAsPdf.start, async (event, args) => {
     console.log(e)
   }
   event.sender.send(channels.exportAsPdf.complete)
+})
+
+ipcMain.on(channels.editor.setKeyboardHandler, (_e, handler: KeyboardHandler) => {
+  mainMenu.keyboardHandler = handler
+  setMainMenu(mainMenu)
 })

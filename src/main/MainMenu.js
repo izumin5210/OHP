@@ -2,6 +2,7 @@
 import EventEmitter from 'events'
 
 import type { BrowserWindow, MenuItem, MenuItemOptions } from 'electron'
+import type { KeyboardHandler } from 'types'
 
 import { events } from './constants'
 
@@ -16,6 +17,7 @@ export default class MainMenu extends EventEmitter {
   }
 
   appName: string
+  keyboardHandler: KeyboardHandler
 
   get template (): Array<MenuItemOptions> {
     return [
@@ -115,6 +117,30 @@ export default class MainMenu extends EventEmitter {
         accelerator: 'CmdOrCtrl+A',
         role: 'selectall',
       },
+      MainMenu.SEPARATOR,
+      {
+        label: 'Keymap',
+        submenu: [
+          {
+            label: 'default',
+            type: 'radio',
+            checked: this.keyboardHandler === '',
+            click: this.clickHandler(events.setKeyboardHandler, ''),
+          },
+          {
+            label: 'vim',
+            type: 'radio',
+            checked: this.keyboardHandler === 'vim',
+            click: this.clickHandler(events.setKeyboardHandler, 'vim'),
+          },
+          {
+            label: 'emacs',
+            type: 'radio',
+            checked: this.keyboardHandler === 'emacs',
+            click: this.clickHandler(events.setKeyboardHandler, 'emacs'),
+          },
+        ],
+      },
     ]
   }
 
@@ -213,7 +239,7 @@ export default class MainMenu extends EventEmitter {
     ]
   }
 
-  clickHandler (event: string): () => void {
-    return () => { this.emit(event) }
+  clickHandler (event: string, ...args: any): () => void {
+    return () => { this.emit(event, ...args) }
   }
 }
