@@ -234,7 +234,7 @@ export default class MainMenu extends EventEmitter {
       {
         label: 'Quit',
         accelerator: 'Command+Q',
-        click: this.clickHandler(events.quit),
+        role: 'quit',
       },
     ]
   }

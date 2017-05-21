@@ -51,7 +51,9 @@ app.on('ready', () => {
     try {
       const opener = await DocumentOpener.execute()
       const { filePath, body } = opener
-      win.send(channels.entities.document.open, { url: filePath, body })
+      if (win != null) {
+        win.send(channels.entities.document.open, { url: filePath, body })
+      }
     } catch (e) {
       console.log(e)
     }
@@ -80,15 +82,27 @@ app.on('window-all-closed', () => {
   }
 })
 
+app.on('before-quit', () => {
+  if (win != null) {
+    win.forceQuit = true
+  }
+})
+
+app.on('will-quit', function () {
+  win = null
+})
+
 app.on('activate', () => {
   if (win === null) {
     createWindow()
+  } else {
+    win.show()
   }
 })
 
 ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig, opts: { new: boolean }) => {
-  assert(win.win != null)
-  if (win.win == null) {
+  assert(win != null && win.win != null)
+  if (win == null || win.win == null) {
     return
   }
   try {
