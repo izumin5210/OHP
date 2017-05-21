@@ -7,7 +7,10 @@ import type { CallEffect, IOEffect, PutEffect, TakeEffect } from 'redux-saga/eff
 
 import * as DocumentActions from 'store/modules/entities/document'
 import * as ExportActions from 'store/modules/exportAsPdf'
+import * as EditorActions from 'store/modules/editor'
 import * as channels from 'settings/ipc'
+
+import type { KeyboardHandler } from 'types'
 
 function * subscribe () {
   return eventChannel((emit) => {
@@ -29,6 +32,10 @@ function * subscribe () {
 
     ipc.on(channels.exportAsPdf.complete, () => {
       emit(ExportActions.complete())
+    })
+
+    ipc.on(channels.editor.setKeyboardHandler, (_e: any, params: { handler: KeyboardHandler }) => {
+      emit(EditorActions.setKeyboardHandler(params.handler))
     })
 
     return () => {}
