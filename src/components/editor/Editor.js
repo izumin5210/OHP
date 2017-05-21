@@ -4,11 +4,12 @@ import AceEditor from 'react-ace'
 import 'brace/mode/markdown'
 import 'brace/theme/tomorrow'
 import 'brace/keybinding/vim'
+import 'brace/keybinding/emacs'
 
 // FIXME
 import { defaultBody } from 'settings/constants'
 
-import type { Position } from 'types'
+import type { KeyboardHandler, Position } from 'types'
 import type Page from 'entities/Page'
 
 import styles from './Editor.css'
@@ -16,6 +17,7 @@ import styles from './Editor.css'
 type Props = {
   url: string,
   body: string,
+  keyboardHandler: KeyboardHandler,
   currentPage: ?Page,
   setBody: (body: string) => void,
   setCursor: (pos: Position) => void,
@@ -118,7 +120,7 @@ export default class Editor extends PureComponent<void, Props, State> {
       <AceEditor
         mode='markdown'
         theme='tomorrow'
-        keyboardHandler='vim'
+        keyboardHandler={this.props.keyboardHandler}
         width='100%'
         height='100%'
         value={this.state.body}
