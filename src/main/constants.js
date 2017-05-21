@@ -29,4 +29,5 @@ export const events = {
   toggleFullScreen: 'toggleFullScreen',
   openLearnMore: 'openLearnMore',
   quit: 'quit',
+  setKeyboardHandler: 'setKeyboardHandler',
 }

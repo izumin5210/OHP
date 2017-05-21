@@ -12,3 +12,7 @@ export const getCursorPosition = createSelector(
   getEditorState,
   ({ cursorPosition }: EditorState & EditorStateConfig) => cursorPosition,
 )
+export const getKeyboardHandler = createSelector(
+  getEditorState,
+  ({ keyboardHandler }: EditorState) => keyboardHandler,
+)

@@ -10,13 +10,14 @@ import type { Connector } from 'react-redux'
 import * as DocumentActions from 'store/modules/entities/document'
 import * as EditorActions from 'store/modules/editor'
 import { getUrl, getBody } from 'store/selectors/entities/document'
+import { getKeyboardHandler } from 'store/selectors/editor'
 import { getOutline } from 'store/selectors/preview'
 import { getCurrentPage } from 'store/selectors/pages'
 import Panes from 'components/common/Panes'
 import { Editor, Outline } from 'components/editor'
 
 import type { RootState } from 'store/modules'
-import type { Position } from 'types'
+import type { KeyboardHandler, Position } from 'types'
 import type Page from 'entities/Page'
 
 type RequiredProps = {
@@ -25,10 +26,12 @@ type RequiredProps = {
 type InjectedProps = {
   url: string,
   body: string,
+  keyboardHandler: KeyboardHandler,
   outlineElement: any,
   currentPage: ?Page,
   setBody: (body: string) => any,
   moveCursor: (pos: Position) => any,
+  loadKeyboardHandler: () => any,
 }
 
 type Props = RequiredProps & InjectedProps
@@ -37,18 +40,24 @@ const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
     url: getUrl(state),
     body: getBody(state),
+    keyboardHandler: getKeyboardHandler(state),
     currentPage: getCurrentPage(state),
     outlineElement: (getOutline(state) || { contents: null }).contents,
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
     setBody: (body: string) => dispatch(DocumentActions.setBody(body)),
     moveCursor: (pos: Position) => dispatch(EditorActions.moveCursor(pos)),
+    loadKeyboardHandler: () => dispatch(EditorActions.getKeyboardHandler()),
   }),
 )
 
 class EditorContainer extends PureComponent<void, Props, void> {
   // for lint
   props: Props
+
+  componentDidMount () {
+    this.props.loadKeyboardHandler()
+  }
 
   handleChange = debounce(
     (body: string) => this.props.setBody(body),
@@ -61,7 +70,7 @@ class EditorContainer extends PureComponent<void, Props, void> {
   )
 
   render () {
-    const { url, body, currentPage, outlineElement } = this.props
+    const { url, body, keyboardHandler, currentPage, outlineElement } = this.props
     return (
       <Panes
         split='vertical'
@@ -71,7 +80,7 @@ class EditorContainer extends PureComponent<void, Props, void> {
       >
         <Outline {...{ outlineElement }} />
         <Editor
-          {...{ url, body, currentPage }}
+          {...{ url, body, keyboardHandler, currentPage }}
           setBody={this.handleChange}
           setCursor={this.handleCursorChange}
         />

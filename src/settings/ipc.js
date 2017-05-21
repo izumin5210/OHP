@@ -5,6 +5,10 @@ export const exportAsPdf = {
   complete: 'exportAsPdf:complete',
 }
 
+export const editor = {
+  setKeyboardHandler: 'editor:keyboardHandler:set'
+}
+
 export const entities = {
   document: {
     open: 'entities:document:open',
