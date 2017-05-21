@@ -41,6 +41,10 @@ const config = {
     ],
   },
 
+  output: {
+    filename: '[name]-[hash].js',
+  },
+
   plugins: [
     new webpack.NamedModulesPlugin(),
 
