@@ -36,6 +36,7 @@
     "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774",
     "reselect": "^3.0.0",
     "scrollparent": "^2.0.1",
+    "styled-components": "^1.4.6",
     "sweet-scroll": "^2.2.1",
     "unist-builder": "^1.0.2",
     "unist-util-visit": "^1.1.1"
@@ -116,7 +117,6 @@
     "postinstall": "flow-typed install",
     "prebuild": "yarn run clean",
     "prepackage": "yarn build",
-    "postinstall": "flow-typed install",
     "pretest": "run-p lint typecheck",
     "start": "electron .",
     "start:dev": "run-p start:dev:*",
