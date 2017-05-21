@@ -52,14 +52,6 @@ const config = {
       inject: true
     }),
 
-    new HtmlWebpackPlugin({
-      title: pkg.name,
-      filename: 'print.html',
-      template: path.resolve(src, 'index.html'),
-      chunks: ['print'],
-      inject: true
-    }),
-
     new ExtractTextPlugin('[name]-[hash].css'),
   ],
 
