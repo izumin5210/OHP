@@ -12,13 +12,16 @@ import * as EditorActions from 'store/modules/editor'
 import { getUrl, getBody } from 'store/selectors/entities/document'
 import { getKeyboardHandler } from 'store/selectors/editor'
 import { getCurrentPage } from 'store/selectors/pages'
-import { Editor } from 'components/editor'
 
 import type { RootState } from 'store/modules'
 import type { KeyboardHandler, Position } from 'types'
 import type Page from 'entities/Page'
 
+import Editor from './Editor'
+import Wrapper from './Wrapper'
+
 type RequiredProps = {
+  currentPageRangeClassName?: string,
 }
 
 type InjectedProps = {
@@ -33,7 +36,7 @@ type InjectedProps = {
 
 type Props = RequiredProps & InjectedProps
 
-const connector: Connector< RequiredProps, Props> = connect(
+const connector: Connector<RequiredProps, Props> = connect(
   (state: RootState) => ({
     url: getUrl(state),
     body: getBody(state),
@@ -47,7 +50,13 @@ const connector: Connector< RequiredProps, Props> = connect(
   }),
 )
 
-class EditorContainer extends PureComponent<void, Props, void> {
+const defaultProps = {
+  currentPageRangeClassName: 'currentPageRange',
+}
+
+class Container extends PureComponent<typeof defaultProps, Props, void> {
+  static defaultProps = defaultProps
+
   // for lint
   props: Props
 
@@ -66,15 +75,26 @@ class EditorContainer extends PureComponent<void, Props, void> {
   )
 
   render () {
-    const { url, body, keyboardHandler, currentPage } = this.props
+    const {
+      url, body, keyboardHandler,
+      currentPage, currentPageRangeClassName,
+    } = this.props
     return (
-      <Editor
-        {...{ url, body, keyboardHandler, currentPage }}
-        setBody={this.handleChange}
-        setCursor={this.handleCursorChange}
-      />
+      <Wrapper {...{ currentPageRangeClassName }}>
+        <Editor
+          {...{
+            url,
+            body,
+            keyboardHandler,
+            currentPage,
+            currentPageRangeClassName,
+          }}
+          setBody={this.handleChange}
+          setCursor={this.handleCursorChange}
+        />
+      </Wrapper>
     )
   }
 }
 
-export default connector(EditorContainer)
+export default connector(Container)

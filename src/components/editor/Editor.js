@@ -12,8 +12,6 @@ import { defaultBody } from 'settings/constants'
 import type { KeyboardHandler, Position } from 'types'
 import type Page from 'entities/Page'
 
-import Wrapper from './Wrapper'
-
 type Props = {
   url: string,
   body: string,
@@ -29,13 +27,7 @@ type State = {
   currentPageMarkerId: ?number,
 }
 
-const defaultProps = {
-  currentPageRangeClassName: 'currentPageRange',
-}
-
-export default class Editor extends PureComponent<typeof defaultProps, Props, State> {
-  static defaultProps = defaultProps
-
+export default class Editor extends PureComponent<void, Props, State> {
   constructor (props: Props) {
     super(props)
     this.state = {
@@ -124,21 +116,17 @@ export default class Editor extends PureComponent<typeof defaultProps, Props, St
 
   render () {
     return (
-      <Wrapper
-        currentPageRangeClassName={this.props.currentPageRangeClassName}
-       >
-        <AceEditor
-          mode='markdown'
-          theme='tomorrow'
-          keyboardHandler={this.props.keyboardHandler}
-          width='100%'
-          height='100%'
-          value={this.state.body}
-          onChange={this.handleChange}
-          commands={this.commands}
-          ref={(c) => { this.editorComponent = c }}
-        />
-      </Wrapper>
+      <AceEditor
+        mode='markdown'
+        theme='tomorrow'
+        keyboardHandler={this.props.keyboardHandler}
+        width='100%'
+        height='100%'
+        value={this.state.body}
+        onChange={this.handleChange}
+        commands={this.commands}
+        ref={(c) => { this.editorComponent = c }}
+      />
     )
   }
 }

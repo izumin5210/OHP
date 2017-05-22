@@ -4,7 +4,7 @@ import { PureComponent } from 'react'
 import Panes from 'components/common/Panes'
 
 import Layout from './Layout'
-import EditorContainer from './EditorContainer'
+import Editor from 'components/editor'
 import Outline from 'components/outline'
 import PreviewContainer from './PreviewContainer'
 
@@ -27,7 +27,7 @@ export default class CreatorContainer extends PureComponent<void, Props, void> {
             defaultSize='70%'
           >
             <Outline />
-            <EditorContainer />
+            <Editor />
           </Panes>
           <PreviewContainer />
         </Panes>
