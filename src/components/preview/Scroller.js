@@ -25,24 +25,21 @@ export default class Scroller extends PureComponent<void, Props, void> {
 
   // for lint
   props: Props
-  scroller: SweetScroll
+  el: HTMLElement
 
   componentDidUpdate ({ currentPageOrder: prevCurrentPageOrder }: Props) {
     const { currentPageOrder, width } = this.props
     if (currentPageOrder !== prevCurrentPageOrder) {
       // NOTE: 16px: spacing between pages
       // FIXME: adjust size params automatically
-      this.scroller.toTop(currentPageOrder * (768 * (width / 1024) + 16))
+      const scroller = new SweetScroll(Scroller.scrollOptions, scrollParent(this.el))
+      scroller.toTop(currentPageOrder * (768 * (width / 1024) + 16))
     }
   }
 
   render () {
     return (
-      <Wrapper
-        innerRef={(el) => {
-          this.scroller = new SweetScroll(Scroller.scrollOptions, scrollParent(el))
-        }}
-      >
+      <Wrapper innerRef={(el) => { this.el = el }}>
         { this.props.children }
       </Wrapper>
     )
