@@ -8,9 +8,10 @@ import type { Connector } from 'react-redux'
 
 import { getBody } from 'store/selectors/preview'
 import * as Actions from 'store/modules/exportAsPdf'
-import { Wrapper } from 'components/print'
 
 import type { RootState } from 'store/modules'
+
+import Wrapper from './Wrapper'
 
 type RequiredProps = {
 }
@@ -31,7 +32,7 @@ const connector: Connector< RequiredProps, Props> = connect(
   }),
 )
 
-class PrintContainer extends PureComponent<void, Props, void> {
+class Container extends PureComponent<void, Props, void> {
   // for lint
   props: Props
 
@@ -49,4 +50,4 @@ class PrintContainer extends PureComponent<void, Props, void> {
   }
 }
 
-export default connector(PrintContainer)
+export default connector(Container)

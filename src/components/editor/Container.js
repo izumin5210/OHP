@@ -11,23 +11,23 @@ import * as DocumentActions from 'store/modules/entities/document'
 import * as EditorActions from 'store/modules/editor'
 import { getUrl, getBody } from 'store/selectors/entities/document'
 import { getKeyboardHandler } from 'store/selectors/editor'
-import { getOutline } from 'store/selectors/preview'
 import { getCurrentPage } from 'store/selectors/pages'
-import Panes from 'components/common/Panes'
-import { Editor, Outline } from 'components/editor'
 
 import type { RootState } from 'store/modules'
 import type { KeyboardHandler, Position } from 'types'
 import type Page from 'entities/Page'
 
+import Editor from './Editor'
+import Wrapper from './Wrapper'
+
 type RequiredProps = {
+  currentPageRangeClassName?: string,
 }
 
 type InjectedProps = {
   url: string,
   body: string,
   keyboardHandler: KeyboardHandler,
-  outlineElement: any,
   currentPage: ?Page,
   setBody: (body: string) => any,
   moveCursor: (pos: Position) => any,
@@ -36,13 +36,12 @@ type InjectedProps = {
 
 type Props = RequiredProps & InjectedProps
 
-const connector: Connector< RequiredProps, Props> = connect(
+const connector: Connector<RequiredProps, Props> = connect(
   (state: RootState) => ({
     url: getUrl(state),
     body: getBody(state),
     keyboardHandler: getKeyboardHandler(state),
     currentPage: getCurrentPage(state),
-    outlineElement: (getOutline(state) || { contents: null }).contents,
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
     setBody: (body: string) => dispatch(DocumentActions.setBody(body)),
@@ -51,7 +50,13 @@ const connector: Connector< RequiredProps, Props> = connect(
   }),
 )
 
-class EditorContainer extends PureComponent<void, Props, void> {
+const defaultProps = {
+  currentPageRangeClassName: 'currentPageRange',
+}
+
+class Container extends PureComponent<typeof defaultProps, Props, void> {
+  static defaultProps = defaultProps
+
   // for lint
   props: Props
 
@@ -70,23 +75,26 @@ class EditorContainer extends PureComponent<void, Props, void> {
   )
 
   render () {
-    const { url, body, keyboardHandler, currentPage, outlineElement } = this.props
+    const {
+      url, body, keyboardHandler,
+      currentPage, currentPageRangeClassName,
+    } = this.props
     return (
-      <Panes
-        split='vertical'
-        primary='second'
-        minSize={30}
-        defaultSize='70%'
-      >
-        <Outline {...{ outlineElement }} />
+      <Wrapper {...{ currentPageRangeClassName }}>
         <Editor
-          {...{ url, body, keyboardHandler, currentPage }}
+          {...{
+            url,
+            body,
+            keyboardHandler,
+            currentPage,
+            currentPageRangeClassName,
+          }}
           setBody={this.handleChange}
           setCursor={this.handleCursorChange}
         />
-      </Panes>
+      </Wrapper>
     )
   }
 }
 
-export default connector(EditorContainer)
+export default connector(Container)

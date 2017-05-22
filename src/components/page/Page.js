@@ -15,10 +15,13 @@ import * as Actions from 'store/modules/entities/pages'
 import { isExportingAsPdf } from 'store/selectors/exportAsPdf'
 import { getCursorPosition } from 'store/selectors/editor'
 import { getBaseFontSize, getStyles } from 'store/selectors/preview'
-import { Page as PageComponent } from 'components/preview'
 
 import type { RootState } from 'store/modules'
 import type { Position } from 'types'
+
+import Content from './Content'
+import StyleScoper from './StyleScoper'
+import Wrapper from './Wrapper'
 
 type RequiredProps = {
   className: string,
@@ -59,7 +62,7 @@ const connector: Connector<RequiredProps, Props> = connect(
   }),
 )
 
-class SlideContainer extends PureComponent<void, Props, State> {
+class PageContainer extends PureComponent<void, Props, State> {
   constructor (props: Props) {
     super(props)
     this.state = {
@@ -108,15 +111,22 @@ class SlideContainer extends PureComponent<void, Props, State> {
   render () {
     const { className, children, baseFontSize, exportingAsPdf, userStyles } = this.props
     const { width } = this.state
-    const fontSize = baseFontSize
     return (
       <Measure onMeasure={this.onMeasure}>
-        <PageComponent {...{ className, fontSize, width, exportingAsPdf, userStyles }} >
-          { children }
-        </PageComponent>
+        <Wrapper
+          {...{ baseFontSize }}
+          screenWidth={width}
+          exporting={exportingAsPdf}
+        >
+          <StyleScoper>
+            <Content {...{ className, userStyles }}>
+              { children }
+            </Content>
+          </StyleScoper>
+        </Wrapper>
       </Measure>
     )
   }
 }
 
-export default connector(SlideContainer)
+export default connector(PageContainer)

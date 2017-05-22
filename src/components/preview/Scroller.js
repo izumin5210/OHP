@@ -1,21 +1,19 @@
 // @flow
 import { PureComponent } from 'react'
-import Measure from 'react-measure'
 import scrollParent from 'scrollparent'
 import SweetScroll from 'sweet-scroll'
 
-import type { Dimension } from 'react-measure'
+import type { Children } from 'react'
 
-import SlideWrapper from './SlideWrapper'
+import Wrapper from './Wrapper'
 
 type Props = {
-  bodyElement: React$Element<*>,
   width: number,
   currentPageOrder: number,
-  setWidth: (width: number) => any,
+  children?: ?Children,
 }
 
-export default class SlidePreview extends PureComponent<void, Props, void> {
+export default class Scroller extends PureComponent<void, Props, void> {
   static scrollOptions = {
     duration: 500,
     // easing: 'easeOutExpo',
@@ -38,27 +36,15 @@ export default class SlidePreview extends PureComponent<void, Props, void> {
     }
   }
 
-  onMeasure = ({ width }: Dimension) => {
-    this.props.setWidth(width)
-  }
-
   render () {
-    const { bodyElement } = this.props
-
-    const el = (bodyElement != null) ? (
-      <Measure onMeasure={this.onMeasure}>
-        { bodyElement }
-      </Measure>
-    ) : null
-
     return (
-      <SlideWrapper
+      <Wrapper
         innerRef={(el) => {
-          this.scroller = new SweetScroll(SlidePreview.scrollOptions, scrollParent(el))
+          this.scroller = new SweetScroll(Scroller.scrollOptions, scrollParent(el))
         }}
       >
-        { el }
-      </SlideWrapper>
+        { this.props.children }
+      </Wrapper>
     )
   }
 }
