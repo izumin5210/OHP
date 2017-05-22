@@ -8,8 +8,8 @@ sudo: false
 matrix:
   fast_finish: true
   include:
-  - os: osx
-    osx_image: xcode8.2
+  # - os: osx
+  #   osx_image: xcode8.2
   - os: linux
     dist: trusty
 
