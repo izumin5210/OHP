@@ -1,18 +1,21 @@
 // @flow
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import Measure from 'react-measure'
 import debounce from 'lodash/debounce'
 
 import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
+import type { Dimension } from 'react-measure'
 
 import { setWidth } from 'store/modules/preview'
 import { getBody, getWidth } from 'store/selectors/preview'
 import { getCurrentPageOrder } from 'store/selectors/pages'
-import { SlidePreview } from 'components/preview'
 
 import type { RootState } from 'store/modules'
+
+import Scroller from './Scroller'
 
 type RequiredProps = {
 }
@@ -41,16 +44,36 @@ const connector: Connector< RequiredProps, Props> = connect(
   }),
 )
 
-class PreviewContainer extends PureComponent<void, Props, void> {
+class Container extends PureComponent<void, Props, void> {
   // for lint
   props: Props
 
-  render () {
-    const { bodyElement, width, currentPageOrder, setWidth } = this.props
+  onMeasure = ({ width }: Dimension) => {
+    this.props.setWidth(width)
+  }
+
+  renderContent () {
+    const { bodyElement } = this.props
+
+    if (bodyElement == null) {
+      return null
+    }
+
     return (
-      <SlidePreview {...{ bodyElement, width, currentPageOrder, setWidth }} />
+      <Measure onMeasure={this.onMeasure}>
+        { bodyElement }
+      </Measure>
+    )
+  }
+
+  render () {
+    const { width, currentPageOrder } = this.props
+    return (
+      <Scroller {...{ width, currentPageOrder }}>
+        { this.renderContent() }
+      </Scroller>
     )
   }
 }
 
-export default connector(PreviewContainer)
+export default connector(Container)

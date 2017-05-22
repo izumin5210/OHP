@@ -1,2 +1,2 @@
 // @flow
-export { default as SlidePreview } from './SlidePreview'
+export { default } from './Container'

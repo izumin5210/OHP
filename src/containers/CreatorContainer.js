@@ -6,7 +6,7 @@ import Panes from 'components/common/Panes'
 import Layout from './Layout'
 import Editor from 'components/editor'
 import Outline from 'components/outline'
-import PreviewContainer from './PreviewContainer'
+import Preview from 'components/preview'
 
 type Props = {
 }
@@ -29,7 +29,7 @@ export default class CreatorContainer extends PureComponent<void, Props, void> {
             <Outline />
             <Editor />
           </Panes>
-          <PreviewContainer />
+          <Preview />
         </Panes>
       </Layout>
     )

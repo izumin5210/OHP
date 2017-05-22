@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { blackForeground800 } from 'settings/colors'
 import { spacing } from 'settings/styles'
 
-const SlideWrapper = styled.article`
+const Wrapper = styled.article`
   background-color: ${blackForeground800};
   min-height: calc(100% - ${4 * spacing}px);
   padding: ${2 * spacing}px;
@@ -14,4 +14,4 @@ const SlideWrapper = styled.article`
   }
 `
 
-export default SlideWrapper
+export default Wrapper
