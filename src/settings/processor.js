@@ -6,8 +6,7 @@ import isArray from 'lodash/isArray'
 import { handlers as pageHandlers } from 'utils/remark-newpage-directive'
 import { handlers as pageNumberHandlers } from 'utils/remark-page-number-directive'
 
-import SlideContainer from 'containers/SlideContainer'
-import { PageNumber, CodeBlock } from 'components/preview'
+import Page, { PageNumber, CodeBlock } from 'components/page'
 
 export const sanitize = mergeWith(
   {},
@@ -37,7 +36,7 @@ export const handlers = Object.assign(
 )
 
 export const components = {
-  page: SlideContainer,
+  page: Page,
   pageNumber: PageNumber,
   pre: CodeBlock,
 }

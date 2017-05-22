@@ -9,7 +9,7 @@ type Props = {
   exporting: boolean,
 }
 
-const PageWrapper = styled.section`
+const Wrapper = styled.section`
   background-color: ${white};
   overflow: hidden;
   page-break-after: always;
@@ -38,4 +38,4 @@ const PageWrapper = styled.section`
   }}
 `
 
-export default PageWrapper
+export default Wrapper
