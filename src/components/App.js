@@ -1,9 +1,9 @@
 // @flow
 import { PureComponent } from 'react'
 
+import Layout from 'components/common/Layout'
 import Panes from 'components/common/Panes'
 
-import Layout from './Layout'
 import Editor from 'components/editor'
 import Outline from 'components/outline'
 import Preview from 'components/preview'
@@ -11,7 +11,7 @@ import Preview from 'components/preview'
 type Props = {
 }
 
-export default class CreatorContainer extends PureComponent<void, Props, void> {
+export default class App extends PureComponent<void, Props, void> {
   render () {
     return (
       <Layout>

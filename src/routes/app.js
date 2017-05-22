@@ -1,8 +1,8 @@
 /* @flow */
 import { Route, Switch } from 'react-router'
 
-import CreatorContainer from 'containers/CreatorContainer'
-import PrintContainer from 'containers/PrintContainer'
+import App from 'components/App'
+import Print from 'components/print'
 
 type RouteDefinition = {
   component: ReactClass<*>,
@@ -11,13 +11,13 @@ type RouteDefinition = {
 }
 
 const defs: { [string]: RouteDefinition } = {
-  'document#edit': {
-    component: CreatorContainer,
+  'app#index': {
+    component: App,
     path: '/',
     exact: true,
   },
   'document#show': {
-    component: PrintContainer,
+    component: Print,
     path: '/print',
   },
 }
