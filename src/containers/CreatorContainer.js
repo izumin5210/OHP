@@ -5,6 +5,7 @@ import Panes from 'components/common/Panes'
 
 import Layout from './Layout'
 import EditorContainer from './EditorContainer'
+import Outline from 'components/outline'
 import PreviewContainer from './PreviewContainer'
 
 type Props = {
@@ -19,7 +20,15 @@ export default class CreatorContainer extends PureComponent<void, Props, void> {
           defaultSize='60%'
           pane2Style={{ overflowY: 'scroll' }}
         >
-          <EditorContainer />
+          <Panes
+            split='vertical'
+            primary='second'
+            minSize={30}
+            defaultSize='70%'
+          >
+            <Outline />
+            <EditorContainer />
+          </Panes>
           <PreviewContainer />
         </Panes>
       </Layout>
