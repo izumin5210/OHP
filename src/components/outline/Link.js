@@ -31,6 +31,7 @@ const Link = styled.a`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  pointer-events: none;
 
   ${fn}
 
