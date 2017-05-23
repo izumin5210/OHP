@@ -7,6 +7,7 @@ import { handlers as pageHandlers } from 'utils/remark-newpage-directive'
 import { handlers as pageNumberHandlers } from 'utils/remark-page-number-directive'
 
 import Page, { PageNumber, CodeBlock } from 'components/page'
+import { Link, List, ListItem } from 'components/outline'
 
 export const sanitize = mergeWith(
   {},
@@ -20,6 +21,7 @@ export const sanitize = mergeWith(
       '*': ['className'],
       'page': ['beginAt', 'endAt', 'pageNumber'],
       'pageNumber': ['enable'],
+      'a': ['depth'],
     }
   },
   (obj, src) => {
@@ -44,4 +46,10 @@ export const components = {
 export const newpage = {
   tagName: 'page',
   withPosition: true,
+}
+
+export const outlineComponents = {
+  a: Link,
+  ul: List,
+  li: ListItem,
 }

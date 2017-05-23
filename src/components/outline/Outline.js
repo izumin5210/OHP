@@ -8,6 +8,8 @@ import { getOutline } from 'store/selectors/preview'
 
 import type { RootState } from 'store/modules'
 
+import Wrapper from './Wrapper'
+
 type RequiredProps = {
 }
 
@@ -30,9 +32,9 @@ class Outline extends PureComponent<void, Props, void> {
   render () {
     const { outlineElement } = this.props
     return (
-      <div>
+      <Wrapper>
         { outlineElement }
-      </div>
+      </Wrapper>
     )
   }
 }

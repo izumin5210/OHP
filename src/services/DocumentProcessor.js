@@ -3,6 +3,7 @@ import remark from 'remark'
 import remarkRenderer from 'remark-react'
 import remarkYamlMeta from 'remark-yaml-meta'
 import remarkOutline from 'utils/remark-outline'
+import remarkListDepth from 'utils/remark-list-depth'
 import remarkExtractStyles from 'utils/remark-extract-styles'
 import remarkNewpageDirective from 'utils/remark-newpage-directive'
 import remarkPagePropsDirective from 'utils/remark-page-props-directive'
@@ -17,7 +18,10 @@ import type { Options as NewpageOptions } from 'utils/remark-newpage-directive'
 type Options = {
   sanitize: Object,
   handlers: { [key: string]: Function },
-  components: { [key:string]: any },
+  components: {
+    body: { [key:string]: any },
+    outline: { [key:string]: any }
+  },
   newpage: NewpageOptions,
 }
 
@@ -27,7 +31,10 @@ export default class DocumentProcessor {
     options: Options = {
       sanitize: Settings.sanitize,
       handlers: Settings.handlers,
-      components: Settings.components,
+      components: {
+        body: Settings.components,
+        outline: Settings.outlineComponents,
+      },
       newpage: Settings.newpage,
     },
   ): Promise<DocumentProcessor> {
@@ -72,7 +79,8 @@ export default class DocumentProcessor {
   buildOutlineProcessor () {
     return remark()
       .use(remarkOutline)
-      .use(remarkRenderer, this.rendererOptions)
+      .use(remarkListDepth)
+      .use(remarkRenderer, this.outlineRendererOptions)
   }
 
   get rendererOptions (): Object {
@@ -82,7 +90,18 @@ export default class DocumentProcessor {
       toHast: {
         handlers,
       },
-      remarkReactComponents: components,
+      remarkReactComponents: components.body,
+    }
+  }
+
+  get outlineRendererOptions (): Object {
+    const { sanitize, handlers, components } = this.options
+    return {
+      sanitize,
+      toHast: {
+        handlers,
+      },
+      remarkReactComponents: components.outline,
     }
   }
 }
