@@ -50,6 +50,11 @@ export default class Editor extends PureComponent<void, Props, State> {
     }
   }
 
+  componentWillUnmount () {
+    const { editor } = this.editorComponent
+    editor.getSession().getSelection().removeAllListeners('changeCursor')
+  }
+
   componentWillReceiveProps ({ url, body, currentPage, currentPageRangeClassName }: Props) {
     if (url !== this.props.url) {
       this.handleChange(body)
