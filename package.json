@@ -39,7 +39,8 @@
     "styled-components": "^1.4.6",
     "sweet-scroll": "^2.2.1",
     "unist-builder": "^1.0.2",
-    "unist-util-visit": "^1.1.1"
+    "unist-util-visit": "^1.1.1",
+    "unist-util-visit-children": "^1.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
