@@ -131,7 +131,7 @@ type electron$appEvents =
 
 type electron$appListener = (
   event: electron$appEvents,
-  callback: (event: Object, ...args: Array<any>) => void,
+  callback: (event: Object, ...args: Array<any>) => void | Promise<void>,
 ) => electron$app;
 
 type electron$app = {
