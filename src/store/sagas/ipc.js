@@ -1,5 +1,5 @@
 // @flow
-import { call, fork, put, take } from 'redux-saga/effects'
+import { all, call, fork, put, take } from 'redux-saga/effects'
 import { eventChannel } from 'redux-saga'
 import { ipcRenderer as ipc } from 'electron'
 
@@ -51,7 +51,7 @@ function * watch (): Generator<CallEffect | TakeEffect | PutEffect, *, *> {
 }
 
 export default function * (): Generator<IOEffect, *, *> {
-  yield [
+  yield all([
     fork(watch),
-  ]
+  ])
 }

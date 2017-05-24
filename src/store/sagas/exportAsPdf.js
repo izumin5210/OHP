@@ -1,5 +1,5 @@
 // @flow
-import { call, fork, put, takeEvery } from 'redux-saga/effects'
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
 import type { IOEffect, PutEffect } from 'redux-saga/effects'
 import { push as pushLocation } from 'react-router-redux'
 
@@ -32,9 +32,9 @@ function * watchComplete (): Generator<*, *, *> {
 }
 
 export default function * (): Generator<IOEffect, *, *> {
-  yield [
+  yield all([
     fork(watchPrepare),
     fork(watchStart),
     fork(watchComplete),
-  ]
+  ])
 }

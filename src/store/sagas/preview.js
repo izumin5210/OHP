@@ -1,6 +1,6 @@
 // @flow
-import { call, fork, put, select } from 'redux-saga/effects'
-import { delay, takeLatest } from 'redux-saga'
+import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 
 import type { CallEffect, IOEffect, PutEffect, SelectEffect, TakeEffect } from 'redux-saga/effects'
 
@@ -23,7 +23,7 @@ function * watchProcess (): Generator<TakeEffect, *, *> {
 }
 
 export default function * (): Generator<IOEffect, *, *> {
-  yield [
+  yield all([
     fork(watchProcess),
-  ]
+  ])
 }
