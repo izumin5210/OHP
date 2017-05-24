@@ -97,8 +97,8 @@ describe('selectors for entities/pages', () => {
       })
     })
 
-    it('throws error when it passed unused uid', () => {
-      assert.throws(() => { getOrderByUid('e') })
+    it('returns 0 when it passed unused uid', () => {
+      assert(getOrderByUid('e') === 0)
     })
   })
 })

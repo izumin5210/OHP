@@ -10,7 +10,6 @@ import type { Connector } from 'react-redux'
 import Page from 'entities/Page'
 import * as Actions from 'store/modules/entities/pages'
 import { isExportingAsPdf } from 'store/selectors/exportAsPdf'
-import { getCursorPosition } from 'store/selectors/editor'
 import { getWidth, getBaseFontSize, getStyles } from 'store/selectors/preview'
 
 import type { RootState } from 'store/modules'
@@ -31,7 +30,6 @@ type InjectedProps = {
   width: number,
   baseFontSize: number,
   exportingAsPdf: boolean,
-  cursorPosition: Position,
   userStyles: Array<string>,
   setPositions: (uid: string, startAt: ?Position, endAt: ?Position) => any,
   remove: (uid: string) => any,
@@ -48,7 +46,6 @@ const connector: Connector<RequiredProps, Props> = connect(
     width: getWidth(state),
     baseFontSize: getBaseFontSize(state) || 36,
     exportingAsPdf: isExportingAsPdf(state),
-    cursorPosition: getCursorPosition(state),
     userStyles: getStyles(state),
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({

@@ -10,8 +10,7 @@ import type { Connector } from 'react-redux'
 import type { Dimension } from 'react-measure'
 
 import { setWidth } from 'store/modules/preview'
-import { getBody, getWidth } from 'store/selectors/preview'
-import { getCurrentPageOrder } from 'store/selectors/pages'
+import { getBody, getWidth, getCurrentPageOrder } from 'store/selectors/preview'
 
 import type { RootState } from 'store/modules'
 
