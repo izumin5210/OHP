@@ -6,7 +6,6 @@ import 'brace/theme/tomorrow'
 import 'brace/keybinding/vim'
 import 'brace/keybinding/emacs'
 
-// FIXME
 import { defaultBody } from 'settings/constants'
 
 import type { KeyboardHandler, Position } from 'types'
@@ -25,6 +24,7 @@ type Props = {
 type State = {
   body: string,
   currentPageMarkerId: ?number,
+  needsClearHistory: boolean,
 }
 
 export default class Editor extends PureComponent<void, Props, State> {
@@ -33,6 +33,7 @@ export default class Editor extends PureComponent<void, Props, State> {
     this.state = {
       body: props.body,
       currentPageMarkerId: null,
+      needsClearHistory: false,
     }
   }
 
@@ -42,29 +43,26 @@ export default class Editor extends PureComponent<void, Props, State> {
   editorComponent: AceEditor
 
   componentDidMount () {
-    const { editor } = this.editorComponent
-    editor.getSession().getSelection().on('changeCursor', this.handleCursorChange)
+    this.selection.on('changeCursor', this.handleCursorChange)
     if (this.state.body.length === 0) {
-      editor.setValue(defaultBody)
-      editor.clearSelection()
+      this.handleChange(defaultBody, { needsClearHistory: true })
+      this.editor.clearSelection()
     }
   }
 
   componentWillUnmount () {
-    const { editor } = this.editorComponent
-    editor.getSession().getSelection().removeAllListeners('changeCursor')
+    this.selection.removeAllListeners('changeCursor')
   }
 
   componentWillReceiveProps ({ url, body, currentPage, currentPageRangeClassName }: Props) {
     if (url !== this.props.url) {
-      this.handleChange(body)
+      this.handleChange(body, { needsClearHistory: true })
     }
     if (currentPage != null && currentPage !== this.props.currentPage) {
-      const session = this.editorComponent.editor.getSession()
       const { row: beginRow } = currentPage.beginAt || { row: 1 }
       const endAt = currentPage.endAt || this.endOfFile
       const endRow = endAt.column === 1 ? endAt.row - 1 : endAt.row
-      const { id: currentPageMarkerId } = session.highlightLines(
+      const { id: currentPageMarkerId } = this.editSession.highlightLines(
         beginRow - 1,
         endRow - 1,
         `ace_active-line ${currentPageRangeClassName}`,
@@ -72,16 +70,36 @@ export default class Editor extends PureComponent<void, Props, State> {
       const { currentPageMarkerId: prevPageMarkerId } = this.state
       this.setState({ currentPageMarkerId }, () => {
         if (prevPageMarkerId != null) {
-          session.removeMarker(prevPageMarkerId)
+          this.editSession.removeMarker(prevPageMarkerId)
         }
       })
     }
   }
 
+  componentDidUpdate ({ body }: Props) {
+    if (this.state.needsClearHistory && this.props.body !== body) {
+      setTimeout(() => {
+        this.editSession.getUndoManager().reset()
+        this.setState({ needsClearHistory: false })
+      }, 700)
+    }
+  }
+
+  get editor (): any {
+    return this.editorComponent.editor
+  }
+
+  get editSession (): any {
+    return this.editor.getSession()
+  }
+
+  get selection (): any {
+    return this.editSession.getSelection()
+  }
+
   get endOfFile (): Position {
-    const session = this.editorComponent.editor.getSession()
-    const row = session.getLength()
-    const column = session.getLine(row).length
+    const row = this.editSession.getLength()
+    const column = this.editSession.getLine(row).length
     return { row, column }
   }
 
@@ -108,8 +126,10 @@ export default class Editor extends PureComponent<void, Props, State> {
     ]
   }
 
-  handleChange = (body: string) => {
-    this.setState({ body }, () => this.props.setBody(this.state.body))
+  handleChange = (body: string, { needsClearHistory = false }: { needsClearHistory: boolean } = {}) => {
+    this.setState({ body, needsClearHistory }, () => {
+      this.props.setBody(this.state.body)
+    })
   }
 
   handleCursorChange = (_e: any, selection: any) => {
