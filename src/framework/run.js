@@ -6,6 +6,7 @@ import type { Element } from 'react'
 import type { Store } from 'redux'
 
 import Root from './Root'
+import ErrorReporter from './ErrorReporter'
 
 export default function run (
   element: Element<*>,
@@ -20,7 +21,7 @@ export default function run (
   } else {
     const { AppContainer } = require('react-hot-loader')
     render(
-      <AppContainer>
+      <AppContainer errorReporter={ErrorReporter}>
         <Root {...{ element, store }} />
       </AppContainer>,
       container,
