@@ -5,18 +5,22 @@ import { Record } from 'immutable'
 import type { Action } from 'redux-actions'
 import type { VFile } from 'vfile'
 
+import Page from 'entities/Page'
+
 /* ======= Types ======= */
 
 export type PreviewStateConfig = {
   width: number,
   body: ?VFile,
   outline: ?VFile,
+  currentPageUid: string,
 }
 
 const defaultValue: PreviewStateConfig = {
   width: 0,
   body: null,
   outline: null,
+  currentPageUid: new Page().uid,
 }
 
 export class PreviewState extends Record(defaultValue) {
@@ -30,6 +34,7 @@ export class PreviewState extends Record(defaultValue) {
   width: number
   body: ?VFile
   outline: ?VFile
+  currentPageUid: string
 
   // HACK: for typecheck
   set: <K: $Keys<PreviewStateConfig>>(key: K, value: any) => PreviewState;
@@ -60,6 +65,13 @@ type SetOutline = Action<VFile, void>
 export const setOutline = createAction(
   SET_OUTLINE,
   (body: VFile) => body
+)
+
+const SET_CURRENT_PAGE_UID = 'preview:currentPageUid:set'
+type SetCurrentPageUid = Action<string, void>
+export const setCurrentPageUid = createAction(
+  SET_CURRENT_PAGE_UID,
+  (uid: string) => uid,
 )
 
 /* ======= Reducer ======= */
@@ -94,4 +106,13 @@ export default handleActions({
     }
     return state.set('outline', action.payload)
   },
+
+  // [setCurrentPageUid]: (state: PreviewState, action: SetCurrentPageUid) => {
+  [SET_CURRENT_PAGE_UID]: (state: PreviewState, action: SetCurrentPageUid) => {
+    assert(!action.error)
+    if (action.error) {
+      return state
+    }
+    return state.set('currentPageUid', action.payload)
+  }
 }, initialState)

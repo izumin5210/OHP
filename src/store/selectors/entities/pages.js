@@ -73,10 +73,7 @@ export const createGetOrderByUid = createSelector(
   (uids: IndexedSeq<string>) => memoize(
     (uid: string) => {
       const order = uids.indexOf(uid)
-      if (order !== -1) {
-        return order
-      }
-      throw new Error()
+      return order === -1 ? 0 : order
     }
   )
 )
