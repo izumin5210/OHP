@@ -1,5 +1,5 @@
 // @flow
-import { call, fork, put, takeEvery } from 'redux-saga/effects'
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
 
 import type { CallEffect, IOEffect, PutEffect, TakeEffect } from 'redux-saga/effects'
 
@@ -31,8 +31,8 @@ function * watchSetKeyboardHandler (): Generator<TakeEffect, *, *> {
 }
 
 export default function * (): Generator<IOEffect | PutEffect, *, *> {
-  yield [
+  yield all([
     fork(watchGetKeyboardHandler),
     fork(watchSetKeyboardHandler),
-  ]
+  ])
 }

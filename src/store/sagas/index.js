@@ -1,5 +1,5 @@
 // @flow
-import { fork } from 'redux-saga/effects'
+import { all, fork } from 'redux-saga/effects'
 import type { IOEffect } from 'redux-saga/effects'
 
 import documentSaga from './entities/document'
@@ -9,11 +9,11 @@ import exportAsPdfSaga from './exportAsPdf'
 import ipcSaga from './ipc'
 
 export default function * (): Generator<IOEffect, *, *> {
-  yield [
+  yield all([
     fork(documentSaga),
     fork(editorSaga),
     fork(previewSaga),
     fork(exportAsPdfSaga),
     fork(ipcSaga),
-  ]
+  ])
 }

@@ -1,5 +1,5 @@
 // @flow
-import { call, fork, put, select, takeEvery } from 'redux-saga/effects'
+import { all, call, fork, put, select, takeEvery } from 'redux-saga/effects'
 import type { CallEffect, IOEffect, PutEffect, SelectEffect } from 'redux-saga/effects'
 
 import * as ipc from 'services/ipc'
@@ -33,8 +33,8 @@ function * watchSave (): Generator<*, *, *> {
 }
 
 export default function * (): Generator<IOEffect, *, *> {
-  yield [
+  yield all([
     fork(watchSetBody),
     fork(watchSave),
-  ]
+  ])
 }
