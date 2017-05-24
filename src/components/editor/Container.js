@@ -9,9 +9,11 @@ import type { Connector } from 'react-redux'
 
 import * as DocumentActions from 'store/modules/entities/document'
 import * as EditorActions from 'store/modules/editor'
+import * as PreviewActions from 'store/modules/preview'
 import { getUrl, getBody } from 'store/selectors/entities/document'
 import { getKeyboardHandler } from 'store/selectors/editor'
-import { getCurrentPage } from 'store/selectors/pages'
+import { getCurrentPage } from 'store/selectors/preview'
+import { createGetPageByCursorPosition } from 'store/selectors/entities/pages'
 
 import type { RootState } from 'store/modules'
 import type { KeyboardHandler, Position } from 'types'
@@ -28,10 +30,11 @@ type InjectedProps = {
   url: string,
   body: string,
   keyboardHandler: KeyboardHandler,
-  currentPage: ?Page,
+  currentPage: Page,
   setBody: (body: string) => any,
-  moveCursor: (pos: Position) => any,
+  setCurrentPageUid: (uid: string) => any,
   loadKeyboardHandler: () => any,
+  getPageByCursorPosition: (cursor: Position) => Page,
 }
 
 type Props = RequiredProps & InjectedProps
@@ -42,10 +45,11 @@ const connector: Connector<RequiredProps, Props> = connect(
     body: getBody(state),
     keyboardHandler: getKeyboardHandler(state),
     currentPage: getCurrentPage(state),
+    getPageByCursorPosition: createGetPageByCursorPosition(state),
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
     setBody: (body: string) => dispatch(DocumentActions.setBody(body)),
-    moveCursor: (pos: Position) => dispatch(EditorActions.moveCursor(pos)),
+    setCurrentPageUid: (uid: string) => dispatch(PreviewActions.setCurrentPageUid(uid)),
     loadKeyboardHandler: () => dispatch(EditorActions.getKeyboardHandler()),
   }),
 )
@@ -70,8 +74,13 @@ class Container extends PureComponent<typeof defaultProps, Props, void> {
   )
 
   handleCursorChange = debounce(
-    (pos: Position) => this.props.moveCursor(pos),
-    500,
+    (pos: Position) => {
+      const { uid } = this.props.getPageByCursorPosition(pos)
+      if (uid !== this.props.currentPage.uid) {
+        this.props.setCurrentPageUid(uid)
+      }
+    },
+    50,
   )
 
   render () {
