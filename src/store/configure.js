@@ -16,16 +16,14 @@ export default function configure (
     storeEnhancer = applyMiddleware(...middlewares, sagaMiddleware)
   } else {
     const createLogger = require('redux-logger').createLogger
-    const DevTools = require('framework/DevTools').default
-    const hasExt = typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
-    storeEnhancer = compose(
-      applyMiddleware(
-        ...middlewares,
-        sagaMiddleware,
-        createLogger(),
-      ),
-      hasExt ? window.devToolsExtension() : DevTools.instrument(),
+    const middleware = applyMiddleware(
+      ...middlewares,
+      sagaMiddleware,
+      createLogger(),
     )
+    const hasExt = typeof window === 'object' && !!window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    const composeEnhancers = hasExt ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
+    storeEnhancer = composeEnhancers(middleware)
   }
 
   const store = createStore(
