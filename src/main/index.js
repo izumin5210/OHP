@@ -38,7 +38,23 @@ function setMainMenu (mainMenu: MainMenu) {
   Menu.setApplicationMenu(menu)
 }
 
-app.on('ready', () => {
+app.on('ready', async () => {
+  if (process.env.NODE_ENV !== 'development') {
+    const install = () => {
+      const {
+        default: installer,
+        REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS, REACT_PERF,
+      } = require('electron-devtools-installer')
+      const extensions = [
+        REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS, REACT_PERF,
+      ]
+
+      return Promise.all(extensions.map(ext => installer(ext, true)))
+        .catch(console.log)
+    }
+    await install()
+  }
+
   createWindow()
   mainMenu = new MainMenu(app.getName())
   setMainMenu(mainMenu)

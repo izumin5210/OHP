@@ -60,6 +60,7 @@
     "css-loader": "^0.28.1",
     "electron": "^1.6.6",
     "electron-builder": "^17.9.0",
+    "electron-devtools-installer": "^2.2.0",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-izumin5210": "^0.2.5",
