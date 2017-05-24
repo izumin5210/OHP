@@ -65,6 +65,13 @@ pageNumber:
 # Table of Contents
 ```
 
+### Keyboard Shortcuts
+
+| Windows/Linux | Mac | Action |
+| --- | --- | --- |
+| <kbd>Ctrl</kbd>+<kbd>Enter</kbd> | <kbd>Cmd</kbd>+<kbd>Enter</kbd> | Insert `<!-- newpage -->` |
+
+
 ## Sample
 
 - [[source](https://gist.github.com/izumin5210/b4a61ed5003b1666dfe8ecd5baf683f1)] [Performance of rendering over 10k items using React // Speaker Deck](https://speakerdeck.com/izumin5210/performance-of-rendering-over-10k-items-using-react)
