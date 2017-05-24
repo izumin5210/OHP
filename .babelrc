@@ -37,6 +37,9 @@
       ]
     },
     "production": {
+      "presets": [
+        "react-optimize"
+      ],
       "plugins": [
         "unassert"
       ]
