@@ -1063,12 +1063,6 @@ brace@^0.10.0:
   dependencies:
     w3c-blob "0.0.1"
 
-brace@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/brace/-/brace-0.9.1.tgz#19dcbae2faec9a9920a0452ec64d8d84df45e7b6"
-  dependencies:
-    w3c-blob "0.0.1"
-
 braces@^1.8.2:
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/braces/-/braces-1.8.5.tgz#ba77962e12dff969d6b76711e914b737857bf6a7"
@@ -1736,11 +1730,12 @@ create-hmac@^1.1.0, create-hmac@^1.1.2:
     create-hash "^1.1.0"
     inherits "^2.0.1"
 
-create-react-class@^15.5.1:
-  version "15.5.2"
-  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.5.2.tgz#6a8758348df660b88326a0e764d569f274aad681"
+create-react-class@^15.5.3:
+  version "15.5.3"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.5.3.tgz#fb0f7cae79339e9a179e194ef466efa3923820fe"
   dependencies:
     fbjs "^0.8.9"
+    loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
 cross-spawn-async@^2.1.1:
@@ -5968,6 +5963,13 @@ prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, 
   dependencies:
     fbjs "^0.8.9"
 
+prop-types@^15.5.10:
+  version "15.5.10"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+
 property-information@^3.0.0, property-information@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/property-information/-/property-information-3.1.0.tgz#1581bf8a445dfbfef759775a86700e8dda18b4a1"
@@ -6092,11 +6094,11 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7, rc@^1.2.1:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-ace@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/react-ace/-/react-ace-4.2.1.tgz#dbc91e19d1ef9ae6333eb153675249761926699b"
+react-ace@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/react-ace/-/react-ace-4.3.0.tgz#915818da019dbb762d034f52b1e0e173671b1292"
   dependencies:
-    brace "^0.9.1"
+    brace "^0.10.0"
     lodash.isequal "^4.1.1"
     prop-types "^15.5.8"
 
@@ -6136,9 +6138,9 @@ react-dock@^0.2.4:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
-react-helmet@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.0.3.tgz#c6da63ee96e83aa7c8fe6d041f28dd288b1b006d"
+react-helmet@^5.1.3:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.1.3.tgz#cd40626593a29eecf684b6d38d711f44c48188af"
   dependencies:
     deep-equal "^1.0.1"
     object-assign "^4.1.1"
@@ -6190,17 +6192,17 @@ react-pure-render@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-pure-render/-/react-pure-render-1.0.2.tgz#9d8a928c7f2c37513c2d064e57b3e3c356e9fabb"
 
-react-redux@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.4.tgz#1563babadcfb2672f57f9ceaa439fb16bf85d55b"
+react-redux@^5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.5.tgz#f8e8c7b239422576e52d6b7db06439469be9846a"
   dependencies:
-    create-react-class "^15.5.1"
+    create-react-class "^15.5.3"
     hoist-non-react-statics "^1.0.3"
     invariant "^2.0.0"
     lodash "^4.2.0"
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
-    prop-types "^15.0.0"
+    prop-types "^15.5.10"
 
 react-router-dom@^4.1.1:
   version "4.1.1"
@@ -6403,9 +6405,9 @@ reduce-reducers@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/reduce-reducers/-/reduce-reducers-0.1.2.tgz#fa1b4718bc5292a71ddd1e5d839c9bea9770f14b"
 
-redux-actions@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/redux-actions/-/redux-actions-2.0.2.tgz#49b2d9511c240a96cb2c0ca27cb15d016faecec0"
+redux-actions@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/redux-actions/-/redux-actions-2.0.3.tgz#1550aba9def179166ccd234d07672104a736d889"
   dependencies:
     invariant "^2.2.1"
     lodash "^4.13.1"
@@ -6694,9 +6696,9 @@ requires-port@1.0.x, requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
-reselect@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.0.tgz#b2e35977f03048700028eaee3a8c0639e40e8f35"
+reselect@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
 
 resize-observer-polyfill@^1.4.1:
   version "1.4.2"
