@@ -1,20 +1,17 @@
 // @flow
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import Measure from 'react-measure'
-import throttle from 'lodash/throttle'
 
 import type { Children } from 'react'
 import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
-import type { Dimension } from 'react-measure'
 
 import Page from 'entities/Page'
 import * as Actions from 'store/modules/entities/pages'
 import { isExportingAsPdf } from 'store/selectors/exportAsPdf'
 import { getCursorPosition } from 'store/selectors/editor'
-import { getBaseFontSize, getStyles } from 'store/selectors/preview'
+import { getWidth, getBaseFontSize, getStyles } from 'store/selectors/preview'
 
 import type { RootState } from 'store/modules'
 import type { Position } from 'types'
@@ -31,6 +28,7 @@ type RequiredProps = {
 }
 
 type InjectedProps = {
+  width: number,
   baseFontSize: number,
   exportingAsPdf: boolean,
   cursorPosition: Position,
@@ -43,11 +41,11 @@ type Props = RequiredProps & InjectedProps
 
 type State = {
   uid: string,
-  width: number,
 }
 
 const connector: Connector<RequiredProps, Props> = connect(
   (state: RootState) => ({
+    width: getWidth(state),
     baseFontSize: getBaseFontSize(state) || 36,
     exportingAsPdf: isExportingAsPdf(state),
     cursorPosition: getCursorPosition(state),
@@ -67,7 +65,6 @@ class PageContainer extends PureComponent<void, Props, State> {
     super(props)
     this.state = {
       uid: Page.generateUid(),
-      width: 0,
     }
   }
 
@@ -99,32 +96,20 @@ class PageContainer extends PureComponent<void, Props, State> {
     this.props.setPositions(this.state.uid, { beginAt, endAt })
   }
 
-  onMeasure = throttle(
-    ({ width }: Dimension) => {
-      if (this.state.width !== width) {
-        this.setState({ width })
-      }
-    },
-    500,
-  )
-
   render () {
-    const { className, children, baseFontSize, exportingAsPdf, userStyles } = this.props
-    const { width } = this.state
+    const { width, className, children, baseFontSize, exportingAsPdf, userStyles } = this.props
     return (
-      <Measure onMeasure={this.onMeasure}>
-        <Wrapper
-          {...{ baseFontSize }}
-          screenWidth={width}
-          exporting={exportingAsPdf}
-        >
-          <StyleScoper>
-            <Content {...{ className, userStyles }}>
-              { children }
-            </Content>
-          </StyleScoper>
-        </Wrapper>
-      </Measure>
+      <Wrapper
+        {...{ baseFontSize }}
+        screenWidth={width}
+        exporting={exportingAsPdf}
+      >
+        <StyleScoper>
+          <Content {...{ className, userStyles }}>
+            { children }
+          </Content>
+        </StyleScoper>
+      </Wrapper>
     )
   }
 }
