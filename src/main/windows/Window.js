@@ -16,6 +16,10 @@ export default class Window {
     throw new Error('Should override url getter')
   }
 
+  get id (): number {
+    return this.win.id
+  }
+
   create () {
     const { win } = this
     if (win != null) {
@@ -58,5 +62,9 @@ export default class Window {
     if (this.win != null) {
       this.win.show()
     }
+  }
+
+  on (event: string, callback: Function) {
+    this.win.on(event, callback)
   }
 }
