@@ -15,7 +15,7 @@ export type Meta = {
 }
 
 export type VFile = {
-  meta: Meta,
+  meta?: Meta,
 } & VFileOrigin
 
 export interface Page extends Parent {

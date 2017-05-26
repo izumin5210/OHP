@@ -20,7 +20,7 @@ export default class NewpageDirectiveVisitor {
 
   constructor (vfile: VFile, { typeName, tagName, withPosition }: Options = {}) {
     this.vfile = vfile
-    this.meta = vfile.meta
+    this.meta = vfile.meta || {}
     const { defaultOptions } = NewpageDirectiveVisitor
     this.typeName = typeName || defaultOptions.typeName
     this.tagName = tagName || defaultOptions.tagName
@@ -88,7 +88,7 @@ export default class NewpageDirectiveVisitor {
       hName: this.tagName,
       hProperties: Object.assign(
         {},
-        { className: this.className },
+        this.className ? { className: this.className } : {},
         this.withPosition ? position : {},
       ),
       hChildren: children.map(toHast).filter(n => n != null),
@@ -96,7 +96,7 @@ export default class NewpageDirectiveVisitor {
     return u(this.typeName, { data }, children)
   }
 
-  get className (): string {
-    return (this.meta.page && this.meta.page.className) || ''
+  get className (): ?string {
+    return this.meta.page && this.meta.page.className
   }
 }
