@@ -7,6 +7,8 @@ OHP is handy presentation tool
 ## Usage
 ### Frontmatter
 - `fontSize` (`number?`) - Font size (default: `36`)
+- `page` - Default configuration for each pages
+    - `className` (`string?`) - Default class(es)
 - `pageNumber` - Default configuration for page numbers
     - `enable` (`boolean?`) - Whether to render the page numbers (default: `false`)
     - `className` (`string?`) - Class(es) of page number elements (default: `pageNumber`)
@@ -16,6 +18,8 @@ OHP is handy presentation tool
 ```markdown
 ---
 fontSize: 32
+page:
+  className: page
 pageNumber:
   enable: true
 ---

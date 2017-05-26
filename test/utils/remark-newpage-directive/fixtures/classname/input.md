@@ -1,3 +1,8 @@
+---
+page:
+  className: test-page
+---
+
 # heading 1-1
 
 <!-- newpage -->

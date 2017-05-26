@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "brace": "^0.10.0",
+    "classnames": "^2.2.5",
     "immutable": "https://github.com/oreqizer/immutable-js.git#1f66a82",
     "lodash": "^4.17.4",
     "mdast-comment-marker": "https://github.com/izumin5210/mdast-comment-marker.git#3c5966c",
