@@ -5,10 +5,9 @@ import toHast from 'mdast-util-to-hast'
 // raise "Named import from module `unist`. This module has no named export called `Node`."
 // $FlowFixMe
 import type { Parent, Node } from 'unist'
-import type { VFile } from 'vfile'
 import type { Marker } from 'mdast-comment-marker'
 
-import type { Options, Page } from './types'
+import type { Options, VFile, Meta, Page } from './types'
 
 export default class NewpageDirectiveVisitor {
   static directiveName = 'newpage'
@@ -16,20 +15,20 @@ export default class NewpageDirectiveVisitor {
   static defaultOptions = {
     typeName: 'page',
     tagName: 'div',
-    className: 'page',
     withPosition: false,
   }
 
-  constructor (vfile: VFile, { typeName, tagName, className, withPosition }: Options = {}) {
+  constructor (vfile: VFile, { typeName, tagName, withPosition }: Options = {}) {
     this.vfile = vfile
+    this.meta = vfile.meta
     const { defaultOptions } = NewpageDirectiveVisitor
     this.typeName = typeName || defaultOptions.typeName
     this.tagName = tagName || defaultOptions.tagName
-    this.className = className || defaultOptions.className
     this.withPosition = withPosition != null ? withPosition : defaultOptions.withPosition
   }
 
   vfile: VFile
+  meta: Meta
   typeName: string
   tagName: string
   className: string
@@ -95,5 +94,9 @@ export default class NewpageDirectiveVisitor {
       hChildren: children.map(toHast).filter(n => n != null),
     }
     return u(this.typeName, { data }, children)
+  }
+
+  get className (): string {
+    return (this.meta.page && this.meta.page.className) || ''
   }
 }
