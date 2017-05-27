@@ -1,5 +1,6 @@
 // @flow
 import { BrowserWindow } from 'electron'
+import type { WebContents } from 'electron'
 
 import Window from './Window'
 import MainWindow from './MainWindow'
@@ -24,26 +25,38 @@ export default class WindowManager {
     })
 
     this.windows.set(id, w)
-    return w;
+    return w
+  }
+
+  get (id: string): ?Window {
+    return this.windows.get(id)
   }
 
   getFocusedWindow (): Window {
     const focusedWindow = BrowserWindow.getFocusedWindow()
+    let win
 
     if (focusedWindow != null) {
-      return this.windows.get(focusedWindow.id)
+      win = this.windows.get(focusedWindow.id)
+      assert(win != null)
     } else if (this.lastFocusedWindowId != null) {
-      return this.windows.get(this.lastFocusedWindowId)
+      win = this.windows.get(this.lastFocusedWindowId)
+      assert(win != null)
     }
 
-    return this.createMainWindow()
+    return win != null ? win : this.createMainWindow()
   }
 
-  onBeforeQuit () {
-    this.windows.forEach((w) => { w.forceQuit = true })
+  forceQuit () {
+    this.windows.forEach((w) => { w.forceQuit() })
   }
 
   onQuit () {
     this.windows.clear()
+  }
+
+  fromWebContents (webContents: WebContents): ?Window {
+    const bw = BrowserWindow.fromWebContents(webContents)
+    return bw != null ? this.get(bw.id) : null
   }
 }

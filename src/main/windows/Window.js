@@ -1,70 +1,54 @@
 // @flow
 import { BrowserWindow } from 'electron'
 
-import type { BrowserWindowOptions } from 'electron'
+import type { BrowserWindowOptions, BrowserWindowEvents, WebContentsEvents } from 'electron'
 
 export default class Window {
-  win: ?BrowserWindow
-  forceQuit: boolean
-
   constructor (opts: BrowserWindowOptions) {
-    this.win = new BrowserWindow(opts)
-    this.forceQuit = false
+    this.window = new BrowserWindow(opts)
+    this.window.on('close', this.onClose)
+    this.willForceQuit = false
+  }
+
+  willForceQuit: boolean
+  window: BrowserWindow
+
+  onClose = (e: any) => {
+    if (!this.willForceQuit) {
+      e.preventDefault()
+      this.window.hide()
+    }
+  }
+
+  get id (): string {
+    return this.window.id
   }
 
   get url (): string {
     throw new Error('Should override url getter')
   }
 
-  get id (): number {
-    return this.win.id
+  forceQuit () {
+    this.willForceQuit = true
   }
 
   create () {
-    const { win } = this
-    if (win != null) {
-      win.loadURL(this.url)
-      win.on('close', (e) => {
-        if (!this.forceQuit) {
-          e.preventDefault()
-          win.hide()
-        }
-      })
-      win.on('closed', this.destroy.bind(this))
-    }
-    this.didWindowCreate()
-  }
-
-  didWindowCreate () {
-    // do nothing
-  }
-
-  didWindowDestroy () {
-    // do nothing
-  }
-
-  destroy () {
-    if (this.win != null && this.win.isDestroyed()) {
-      this.win = null
-    }
-    this.didWindowDestroy()
-  }
-
-  send (channel: string, ...args: Array<any>) {
-    const webContents = this.win && this.win.webContents
-    assert(webContents != null)
-    if (webContents != null) {
-      webContents.send(channel, ...args)
-    }
+    this.window.loadURL(this.url)
   }
 
   show () {
-    if (this.win != null) {
-      this.win.show()
-    }
+    this.window.show()
   }
 
-  on (event: string, callback: Function) {
-    this.win.on(event, callback)
+  on (channel: BrowserWindowEvents, callback: Function) {
+    this.window.on(channel, callback)
+  }
+
+  onWebContents (channel: WebContentsEvents, callback: Function) {
+    this.window.webContents.on(channel, callback)
+  }
+
+  send (channel: string, ...args: Array<any>) {
+    this.window.webContents.send(channel, ...args)
   }
 }

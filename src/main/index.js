@@ -1,5 +1,5 @@
 // @flow
-import { app, BrowserWindow, Menu, ipcMain } from 'electron'
+import { app, Menu, ipcMain } from 'electron'
 
 import type { KeyboardHandler } from 'types'
 import type { DocumentConfig } from 'entities/Document'
@@ -86,7 +86,7 @@ app.on('window-all-closed', () => {
 })
 
 app.on('before-quit', () => {
-  windowManager.onBeforeQuit()
+  windowManager.forceQuit()
 })
 
 app.on('will-quit', function () {
@@ -100,7 +100,7 @@ app.on('activate', () => {
 ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig, opts: { new: boolean }) => {
   const win = windowManager.getFocusedWindow()
   try {
-    const { url } = await DocumentWriter.execute(win.win, doc, opts)
+    const { url } = await DocumentWriter.execute(win, doc, opts)
     win.send(channels.entities.document.beSaved, { url })
   } catch (e) {
     console.log(e)
@@ -110,7 +110,7 @@ ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig, opts
 ipcMain.on(channels.exportAsPdf.start, async (event, args) => {
   try {
     const srcContents = event.sender
-    const srcWin = BrowserWindow.fromWebContents(srcContents)
+    const srcWin = windowManager.fromWebContents(srcContents)
     const options = {
       title: 'Export to PDF...',
       filters: [{ name: 'PDF file', extensions: ['pdf'] }],

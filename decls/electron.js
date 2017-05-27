@@ -53,6 +53,9 @@ declare module 'electron' {
   // declare type NativeImage = electron$NativeImage;
   // declare type Screen = electron$Screen;
   declare type WebContents = electron$WebContents;
+
+  declare type BrowserWindowEvents = electron$BrowserWindowEvents
+  declare type WebContentsEvents = electron$WebContentsEvents
 }
 
 // very common struct
