@@ -13,19 +13,17 @@ export default class WindowManager {
   windows: Map<string, Window>
   lastFocusedWindowId: string
 
-  createMainWindow (): Window {
-    const w = MainWindow.create()
-    const id = w.id
+  set (window: Window): void {
+    const id = window.id
 
-    w.on('focus', () => {
+    window.on('focus', () => {
       this.lastFocusedWindowId = id
     })
-    w.on('closed', () => {
+    window.on('closed', () => {
       this.windows.delete(id)
     })
 
-    this.windows.set(id, w)
-    return w
+    this.windows.set(id, window)
   }
 
   get (id: string): ?Window {
@@ -44,7 +42,12 @@ export default class WindowManager {
       assert(win != null)
     }
 
-    return win != null ? win : this.createMainWindow()
+    if (win == null) {
+      win = MainWindow.create()
+      this.set(win)
+    }
+
+    return win
   }
 
   forceQuit () {

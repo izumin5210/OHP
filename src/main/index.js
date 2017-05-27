@@ -1,10 +1,12 @@
 // @flow
+import 'main/setup'
+
 import { app, Menu, ipcMain } from 'electron'
 
 import type { KeyboardHandler } from 'types'
 import type { DocumentConfig } from 'entities/Document'
 
-import { WindowManager } from './windows'
+import { WindowManager, MainWindow } from './windows'
 import MainMenu from './MainMenu'
 import { events } from './constants'
 import DocumentOpener from './services/DocumentOpener'
@@ -13,10 +15,6 @@ import PdfWriter from './services/PdfWriter'
 import * as dialog from './services/dialog'
 
 import * as channels from '../settings/ipc'
-
-if (process.env.NODE_ENV !== 'production') {
-  global.assert = require('power-assert')
-}
 
 const windowManager = new WindowManager()
 let mainMenu
@@ -43,7 +41,7 @@ app.on('ready', async () => {
     await install()
   }
 
-  windowManager.createMainWindow()
+  windowManager.set(MainWindow.create())
   mainMenu = new MainMenu(app.getName())
   setMainMenu(mainMenu)
 
@@ -55,8 +53,7 @@ app.on('ready', async () => {
     try {
       const opener = await DocumentOpener.execute()
       const { filePath, body } = opener
-      const win = windowManager.createMainWindow()
-      win.send(channels.entities.document.open, { url: filePath, body })
+      windowManager.set(MainWindow.createWithDocument({ url: filePath, body }))
     } catch (e) {
       console.log(e)
     }

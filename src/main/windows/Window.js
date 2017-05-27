@@ -32,8 +32,13 @@ export default class Window {
     this.willForceQuit = true
   }
 
-  create () {
+  create (initialState?: Object) {
     this.window.loadURL(this.url)
+    if (initialState != null) {
+      this.window.webContents.on('did-finish-load', () => {
+        this.send('initialState', initialState)
+      })
+    }
   }
 
   show () {
