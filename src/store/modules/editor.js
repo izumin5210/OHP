@@ -5,6 +5,8 @@ import { Record } from 'immutable'
 import type { Action } from 'redux-actions'
 import type { KeyboardHandler, Position } from 'types'
 
+import wrapStateWith from 'utils/wrapStateWith'
+
 /* ======= Types ======= */
 
 export type EditorStateConfig = {
@@ -55,7 +57,7 @@ export const setKeyboardHandler = createAction(
 
 /* ======= Reducer ======= */
 
-export default handleActions({
+const reducer = handleActions({
   // HACK: for typecheck
   // [moveCursor.toString()]: (state: EditorState, action: MoveCursor) => {
   [MOVE_CURSOR]: (state: EditorState, action: MoveCursor) => {
@@ -79,3 +81,5 @@ export default handleActions({
     return state.set('keyboardHandler', action.payload)
   },
 }, initialState)
+
+export default wrapStateWith(EditorState, reducer, initialState)

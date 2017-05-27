@@ -5,6 +5,7 @@ import { Map, Record } from 'immutable'
 import type { Action } from 'redux-actions'
 
 import Page from 'entities/Page'
+import wrapStateWith from 'utils/wrapStateWith'
 
 import type { Position } from 'types'
 
@@ -67,7 +68,7 @@ export const remove = createAction(
 
 /* ======= Reducer ======= */
 
-export default handleActions({
+const reducer = handleActions({
   // HACK: for typecheck
   // [setPositions]: (state: PagesState, action: SetPositions) => {
   [SET_POSITIONS]: (state: PagesState, action: SetPositions) => {
@@ -111,3 +112,5 @@ export default handleActions({
       .set('topByUid', state.topByUid.remove(uid))
   }
 }, initialState)
+
+export default wrapStateWith(PagesState, reducer, initialState)

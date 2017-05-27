@@ -3,6 +3,7 @@ import { createAction, handleActions } from 'redux-actions'
 import { Record } from 'immutable'
 
 import Document from 'entities/Document'
+import wrapStateWith from 'utils/wrapStateWith'
 
 import type { Action } from 'redux-actions'
 
@@ -76,7 +77,7 @@ export const beSaved = createAction(
 
 /* ======== Reducer ======= */
 
-export default handleActions({
+const reducer = handleActions({
   // HACK: for typecheck
   // [open]: (state: DocumentState, action: Open) => {
   [OPEN]: (state: DocumentState, action: Open) => {
@@ -114,3 +115,5 @@ export default handleActions({
     return state
   },
 }, initialState)
+
+export default wrapStateWith(DocumentState, reducer, initialState)
