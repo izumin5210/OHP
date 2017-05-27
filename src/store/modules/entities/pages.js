@@ -24,7 +24,7 @@ const defaultValue: PagesStateConfig = {
 export class PagesState extends Record(defaultValue) {
   constructor (values: $Shape<PagesStateConfig> = defaultValue) {
     const { pageByUid, topByUid } = values
-    if (pageByUid instanceof Map) {
+    if (!(pageByUid instanceof Map)) {
       values.pageByUid = Map(pageByUid).map(v => v instanceof Page ? v : new Page(v))
     }
     if (!(topByUid instanceof Map)) {
