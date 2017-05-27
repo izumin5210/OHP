@@ -75,9 +75,9 @@ class Container extends PureComponent<typeof defaultProps, Props, void> {
 
   handleCursorChange = debounce(
     (pos: Position) => {
-      const { uid } = this.props.getPageByCursorPosition(pos)
-      if (uid !== this.props.currentPage.uid) {
-        this.props.setCurrentPageUid(uid)
+      const page = this.props.getPageByCursorPosition(pos)
+      if (page != null && page.uid !== this.props.currentPage.uid) {
+        this.props.setCurrentPageUid(page.uid)
       }
     },
     50,
