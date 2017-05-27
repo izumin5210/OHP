@@ -22,10 +22,18 @@ const defaultValue: PagesStateConfig = {
 }
 
 export class PagesState extends Record(defaultValue) {
-  // HACK: for typecheck
-  // eslint-disable-next-line no-useless-constructor
-  constructor (values: $Shape<PagesStateConfig>) {
+  constructor (values: $Shape<PagesStateConfig> = defaultValue) {
+    const { pageByUid, topByUid } = values
+    if (pageByUid instanceof Map) {
+      values.pageByUid = Map(pageByUid).map(v => v instanceof Page ? v : new Page(v))
+    }
+    if (!(topByUid instanceof Map)) {
+      values.topByUid = Map(topByUid)
+    }
     super(values)
+    assert(this.pageByUid instanceof Map)
+    assert(this.pageByUid.every(p => p instanceof Page))
+    assert(this.topByUid instanceof Map)
   }
 
   // HACK: for typecheck

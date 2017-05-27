@@ -22,12 +22,13 @@ const defaultValue: $Shape<DocumentStateConfig> = {
 }
 
 export class DocumentState extends Record(defaultValue) {
-  // To suppress a following error:
-  //   constructor call. Type is incompatible with (unclassified use type: ObjTestT) any member of intersection type
-  // HACK: for typecheck
-  // eslint-disable-next-line no-useless-constructor
-  constructor (values: $Shape<DocumentStateConfig>) {
+  constructor (values: $Shape<DocumentStateConfig> = defaultValue) {
+    const { entity } = values
+    if (!(entity instanceof Document)) {
+      values.entity = new Document(entity)
+    }
     super(values)
+    assert(this.entity instanceof Document)
   }
 
   // HACK: for typecheck
