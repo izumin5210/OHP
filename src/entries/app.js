@@ -11,6 +11,7 @@ import run from 'framework/run'
 import configureStore from 'store/configure'
 import reducer, { RootState } from 'store/modules'
 import sagas from 'store/sagas'
+import * as PreviewActions from 'store/modules/preview'
 
 import { app as routes } from 'routes'
 
@@ -21,6 +22,7 @@ function init (initialState: RootState) {
 
   // $FlowFixMe
   store.runSaga(sagas)
+  store.dispatch(PreviewActions.process())
 
   const containerElement = document.getElementById('container')
   const createComponent = (el: any) => (

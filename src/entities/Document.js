@@ -1,6 +1,8 @@
 // @flow
 import { Record } from 'immutable'
 
+import { defaultBody } from 'settings/constants'
+
 export type Mode = 'markdown'
 
 export type DocumentConfig = {
@@ -11,7 +13,7 @@ export type DocumentConfig = {
 
 const defaultValue: $Shape<DocumentConfig> = {
   url: '',
-  body: '',
+  body: defaultBody,
   mode: 'markdown',
 }
 

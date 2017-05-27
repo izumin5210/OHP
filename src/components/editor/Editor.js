@@ -6,8 +6,6 @@ import 'brace/theme/tomorrow'
 import 'brace/keybinding/vim'
 import 'brace/keybinding/emacs'
 
-import { defaultBody } from 'settings/constants'
-
 import type { KeyboardHandler, Position } from 'types'
 import type Page from 'entities/Page'
 
@@ -44,10 +42,6 @@ export default class Editor extends PureComponent<void, Props, State> {
 
   componentDidMount () {
     this.selection.on('changeCursor', this.handleCursorChange)
-    if (this.state.body.length === 0) {
-      this.handleChange(defaultBody, { needsClearHistory: true })
-      this.editor.clearSelection()
-    }
   }
 
   componentWillUnmount () {
