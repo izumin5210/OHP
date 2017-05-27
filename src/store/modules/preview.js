@@ -6,6 +6,7 @@ import type { Action } from 'redux-actions'
 import type { VFile } from 'vfile'
 
 import Page from 'entities/Page'
+import wrapStateWith from 'utils/wrapStateWith'
 
 /* ======= Types ======= */
 
@@ -76,7 +77,7 @@ export const setCurrentPageUid = createAction(
 
 /* ======= Reducer ======= */
 
-export default handleActions({
+const reducer = handleActions({
   // HACK: for typecheck
   // [setWidth]: (state: PreviewState, action: SetWidth) => {
   [SET_WIDTH]: (state: PreviewState, action: SetWidth) => {
@@ -116,3 +117,5 @@ export default handleActions({
     return state.set('currentPageUid', action.payload)
   }
 }, initialState)
+
+export default wrapStateWith(PreviewState, reducer, initialState)

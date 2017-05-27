@@ -2,6 +2,8 @@
 import { createAction, handleActions } from 'redux-actions'
 import { Record } from 'immutable'
 
+import wrapStateWith from 'utils/wrapStateWith'
+
 /* ======= Types ======= */
 
 export type FetchStatus = 'none' | 'loading' | 'loaded' | 'failed'
@@ -42,7 +44,7 @@ export const complete = createAction(COMPLETE)
 
 /* ======= Reducer ======= */
 
-export default handleActions({
+const reducer= handleActions({
   // HACK: for typecheck
   // [prepare.toString()]: (state: ExportAsPdfState) => {
   [PREPARE]: (state: ExportAsPdfState) => {
@@ -55,3 +57,5 @@ export default handleActions({
     return state.set('fetchStatus', 'loaded')
   },
 }, initialState)
+
+export default wrapStateWith(ExportAsPdfState, reducer, initialState)

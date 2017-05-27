@@ -5,6 +5,7 @@ import { Map, Record } from 'immutable'
 import type { Action } from 'redux-actions'
 
 import Page from 'entities/Page'
+import wrapStateWith from 'utils/wrapStateWith'
 
 import type { Position } from 'types'
 
@@ -21,10 +22,18 @@ const defaultValue: PagesStateConfig = {
 }
 
 export class PagesState extends Record(defaultValue) {
-  // HACK: for typecheck
-  // eslint-disable-next-line no-useless-constructor
-  constructor (values: $Shape<PagesStateConfig>) {
+  constructor (values: $Shape<PagesStateConfig> = defaultValue) {
+    const { pageByUid, topByUid } = values
+    if (pageByUid instanceof Map) {
+      values.pageByUid = Map(pageByUid).map(v => v instanceof Page ? v : new Page(v))
+    }
+    if (!(topByUid instanceof Map)) {
+      values.topByUid = Map(topByUid)
+    }
     super(values)
+    assert(this.pageByUid instanceof Map)
+    assert(this.pageByUid.every(p => p instanceof Page))
+    assert(this.topByUid instanceof Map)
   }
 
   // HACK: for typecheck
@@ -67,7 +76,7 @@ export const remove = createAction(
 
 /* ======= Reducer ======= */
 
-export default handleActions({
+const reducer = handleActions({
   // HACK: for typecheck
   // [setPositions]: (state: PagesState, action: SetPositions) => {
   [SET_POSITIONS]: (state: PagesState, action: SetPositions) => {
@@ -111,3 +120,5 @@ export default handleActions({
       .set('topByUid', state.topByUid.remove(uid))
   }
 }, initialState)
+
+export default wrapStateWith(PagesState, reducer, initialState)
