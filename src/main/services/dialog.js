@@ -1,10 +1,11 @@
 // @flow
 import { dialog } from 'electron'
 
-import type { BrowserWindow, DialogOpenOptions } from 'electron'
+import type { DialogOpenOptions } from 'electron'
+import type { Window } from '../windows'
 
 type Options = {
-  window?: ?BrowserWindow,
+  window?: ?Window,
   options: DialogOpenOptions,
 }
 
@@ -27,11 +28,11 @@ function showDialog<T> (proc: (cb: (result: T) => any) => any): Promise<T> {
 export function showOpenDialog (
   { window, options = {} }: Options = defaultOptions,
 ): Promise<Array<string>> {
-  return showDialog(cb => dialog.showOpenDialog(window || undefined, options, cb))
+  return showDialog(cb => dialog.showOpenDialog(window ? window.window : undefined, options, cb))
 }
 
 export function showSaveDialog (
   { window, options = {} }: Options = defaultOptions,
 ): Promise<string> {
-  return showDialog(cb => dialog.showSaveDialog(window || undefined, options, cb))
+  return showDialog(cb => dialog.showSaveDialog(window ? window.window : undefined, options, cb))
 }

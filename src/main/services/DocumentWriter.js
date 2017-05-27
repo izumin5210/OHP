@@ -1,10 +1,10 @@
 // @flow
 import fs from 'fs'
-
-import type { BrowserWindow } from 'electron'
 import type { DocumentConfig } from 'entities/Document'
 
 import * as dialog from './dialog'
+
+import type { Window } from '../windows'
 
 type Options = {
   new: boolean,
@@ -12,7 +12,7 @@ type Options = {
 
 export default class DocumentWriter {
   static async execute (
-    win: BrowserWindow,
+    win: Window,
     doc: DocumentConfig,
     opts: Options,
   ): Promise<DocumentWriter> {
@@ -29,11 +29,11 @@ export default class DocumentWriter {
     await this.write(this.url, doc.body)
   }
 
-  constructor (win: BrowserWindow) {
+  constructor (win: Window) {
     this.win = win
   }
 
-  win: BrowserWindow
+  win: Window
   url: string
 
   async getFilenameFromDialog (): Promise<string> {

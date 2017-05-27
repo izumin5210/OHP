@@ -1,10 +1,12 @@
 // @flow
-import { app, BrowserWindow, Menu, ipcMain } from 'electron'
+import 'main/setup'
+
+import { app, Menu, ipcMain } from 'electron'
 
 import type { KeyboardHandler } from 'types'
 import type { DocumentConfig } from 'entities/Document'
 
-import { MainWindow } from './windows'
+import { WindowManager, MainWindow } from './windows'
 import MainMenu from './MainMenu'
 import { events } from './constants'
 import DocumentOpener from './services/DocumentOpener'
@@ -14,24 +16,8 @@ import * as dialog from './services/dialog'
 
 import * as channels from '../settings/ipc'
 
-if (process.env.NODE_ENV !== 'production') {
-  global.assert = require('power-assert')
-}
-
-let win
+const windowManager = new WindowManager()
 let mainMenu
-
-function createWindow () {
-  win = MainWindow.create()
-}
-
-function getFocusedWindow (): BrowserWindow {
-  const focusedWindow = BrowserWindow.getFocusedWindow()
-  if (focusedWindow != null) {
-    return focusedWindow
-  }
-  throw new Error()
-}
 
 function setMainMenu (mainMenu: MainMenu) {
   const menu = Menu.buildFromTemplate(mainMenu.template)
@@ -55,7 +41,7 @@ app.on('ready', async () => {
     await install()
   }
 
-  createWindow()
+  windowManager.set(MainWindow.create())
   mainMenu = new MainMenu(app.getName())
   setMainMenu(mainMenu)
 
@@ -67,28 +53,26 @@ app.on('ready', async () => {
     try {
       const opener = await DocumentOpener.execute()
       const { filePath, body } = opener
-      if (win != null) {
-        win.send(channels.entities.document.open, { url: filePath, body })
-      }
+      windowManager.set(MainWindow.createWithDocument({ url: filePath, body }))
     } catch (e) {
       console.log(e)
     }
   })
 
   mainMenu.on(events.saveFile, () => {
-    getFocusedWindow().webContents.send(channels.entities.document.save, { new: false })
+    windowManager.getFocusedWindow().send(channels.entities.document.save, { new: false })
   })
 
   mainMenu.on(events.saveAs, () => {
-    getFocusedWindow().webContents.send(channels.entities.document.save, { new: true })
+    windowManager.getFocusedWindow().send(channels.entities.document.save, { new: true })
   })
 
   mainMenu.on(events.exportPdf, () => {
-    getFocusedWindow().webContents.send(channels.exportAsPdf.prepare)
+    windowManager.getFocusedWindow().send(channels.exportAsPdf.prepare)
   })
 
   mainMenu.on(events.setKeyboardHandler, (handler: KeyboardHandler) => {
-    getFocusedWindow().webContents.send(channels.editor.setKeyboardHandler, { handler })
+    windowManager.getFocusedWindow().send(channels.editor.setKeyboardHandler, { handler })
   })
 })
 
@@ -99,31 +83,22 @@ app.on('window-all-closed', () => {
 })
 
 app.on('before-quit', () => {
-  if (win != null) {
-    win.forceQuit = true
-  }
+  windowManager.forceQuit()
 })
 
 app.on('will-quit', function () {
-  win = null
+  windowManager.onQuit()
 })
 
 app.on('activate', () => {
-  if (win === null) {
-    createWindow()
-  } else {
-    win.show()
-  }
+  windowManager.getFocusedWindow().show()
 })
 
 ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig, opts: { new: boolean }) => {
-  assert(win != null && win.win != null)
-  if (win == null || win.win == null) {
-    return
-  }
+  const win = windowManager.getFocusedWindow()
   try {
-    const { url } = await DocumentWriter.execute(win.win, doc, opts)
-    getFocusedWindow().webContents.send(channels.entities.document.beSaved, { url })
+    const { url } = await DocumentWriter.execute(win, doc, opts)
+    win.send(channels.entities.document.beSaved, { url })
   } catch (e) {
     console.log(e)
   }
@@ -132,7 +107,7 @@ ipcMain.on(channels.entities.document.save, async (_e, doc: DocumentConfig, opts
 ipcMain.on(channels.exportAsPdf.start, async (event, args) => {
   try {
     const srcContents = event.sender
-    const srcWin = BrowserWindow.fromWebContents(srcContents)
+    const srcWin = windowManager.fromWebContents(srcContents)
     const options = {
       title: 'Export to PDF...',
       filters: [{ name: 'PDF file', extensions: ['pdf'] }],

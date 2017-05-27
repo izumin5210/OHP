@@ -53,6 +53,9 @@ declare module 'electron' {
   // declare type NativeImage = electron$NativeImage;
   // declare type Screen = electron$Screen;
   declare type WebContents = electron$WebContents;
+
+  declare type BrowserWindowEvents = electron$BrowserWindowEvents
+  declare type WebContentsEvents = electron$WebContentsEvents
 }
 
 // very common struct
@@ -590,7 +593,49 @@ type electron$InputEventModifiers =
         'isKeypad' | 'isAutoRepeat' | 'leftButtonDown' | 'middleButtonDown' |
         'rightButtonDown' | 'capsLock' | 'numLock' | 'left' | 'right'>;
 
-declare class electron$WebContents extends events$EventEmitter {
+type electron$WebContentsEvents =
+  | 'did-finish-load'
+  | 'did-fail-load'
+  | 'did-frame-finish-load'
+  | 'did-start-loading'
+  | 'did-stop-loading'
+  | 'did-get-response-details'
+  | 'did-get-redirect-request'
+  | 'dom-ready'
+  | 'page-favicon-updated'
+  | 'new-window'
+  | 'will-navigate'
+  | 'did-navigate'
+  | 'did-navigate-in-page'
+  | 'crashed'
+  | 'plugin-crashed'
+  | 'destroyed'
+  | 'before-input-event'
+  | 'devtools-opened'
+  | 'devtools-closed'
+  | 'devtools-focused'
+  | 'certificate-error'
+  | 'select-client-certificate'
+  | 'login'
+  | 'found-in-page'
+  | 'media-started-playing'
+  | 'media-paused'
+  | 'did-change-theme-color'
+  | 'update-target-url'
+  | 'cursor-changed'
+  | 'select-bluetooth-device'
+  | 'paint'
+  | 'devtools-reload-page'
+  | 'will-attach-webview';
+
+type electron$WebContentsListener = (
+  event: electron$WebContentsEvents,
+  callback: (event: Object, ...args: Array<any>) => void,
+) => electron$WebContents;
+
+declare class electron$WebContents {
+  on: electron$WebContentsListener,
+  once: electron$WebContentsListener,
   loadURL(
     url: string,
     options?: {httpReferrer?: string, userAgent?: string, extraHeaders?: string},
