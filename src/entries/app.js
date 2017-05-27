@@ -8,14 +8,14 @@ import createHistory from 'history/createHashHistory'
 import run from 'framework/run'
 
 import configureStore from 'store/configure'
-import reducer from 'store/modules'
+import reducer, { RootState } from 'store/modules'
 import sagas from 'store/sagas'
 
 import { app as routes } from 'routes'
 
 const history = createHistory()
 const routerMiddleware = createRouterMiddleware(history)
-const store = configureStore(reducer, {}, routerMiddleware)
+const store = configureStore(reducer, new RootState(), routerMiddleware)
 
 // $FlowFixMe
 store.runSaga(sagas)
