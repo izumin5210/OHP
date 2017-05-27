@@ -633,7 +633,7 @@ type electron$WebContentsListener = (
   callback: (event: Object, ...args: Array<any>) => void,
 ) => electron$WebContents;
 
-declare class electron$WebContents extends events$EventEmitter {
+declare class electron$WebContents {
   on: electron$WebContentsListener,
   once: electron$WebContentsListener,
   loadURL(
