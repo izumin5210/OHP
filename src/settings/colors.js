@@ -7,3 +7,8 @@ export const white = 'rgba(255, 255, 255, 1)'
 export const transparent = 'transparent'
 
 export const whiteForeground300 = 'rgba(255, 255, 255, 0.3)'
+
+export const accent = {
+  pink: '#ff80ab',
+  purple: '#b388ff',
+}

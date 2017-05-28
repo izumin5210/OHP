@@ -10,10 +10,11 @@ import type { Connector } from 'react-redux'
 import type { Dimension } from 'react-measure'
 
 import { setWidth } from 'store/modules/preview'
-import { getBody, getWidth, getCurrentPageOrder } from 'store/selectors/preview'
+import { getBody, getWidth, getCurrentPageOrder, isLoading } from 'store/selectors/preview'
 
 import type { RootState } from 'store/modules'
 
+import CirclesLoader from 'components/common/CirclesLoader'
 import Scroller from './Scroller'
 
 type RequiredProps = {
@@ -23,6 +24,7 @@ type InjectedProps = {
   bodyElement: any,
   width: number,
   currentPageOrder: number,
+  loading: boolean,
   setWidth: (width: number) => any,
 }
 
@@ -33,6 +35,7 @@ const connector: Connector< RequiredProps, Props> = connect(
     bodyElement: (getBody(state) || { contents: null }).contents,
     width: getWidth(state),
     currentPageOrder: getCurrentPageOrder(state),
+    loading: isLoading(state),
   }),
   (dispatch: Dispatch<Action<any, any>>) => ({
     setWidth: debounce(
@@ -52,10 +55,12 @@ class Container extends PureComponent<void, Props, void> {
   }
 
   renderContent () {
-    const { bodyElement } = this.props
+    const { bodyElement, loading } = this.props
 
-    if (bodyElement == null) {
-      return null
+    if (loading || bodyElement == null) {
+      return (
+        <CirclesLoader />
+      )
     }
 
     return (

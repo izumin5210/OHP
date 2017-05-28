@@ -8,6 +8,8 @@ import type { VFile } from 'vfile'
 import Page from 'entities/Page'
 import wrapStateWith from 'utils/wrapStateWith'
 
+import type { FetchStatus } from 'types'
+
 /* ======= Types ======= */
 
 export type PreviewStateConfig = {
@@ -15,6 +17,7 @@ export type PreviewStateConfig = {
   body: ?VFile,
   outline: ?VFile,
   currentPageUid: string,
+  fetchStatus: FetchStatus,
 }
 
 const defaultValue: PreviewStateConfig = {
@@ -22,6 +25,7 @@ const defaultValue: PreviewStateConfig = {
   body: null,
   outline: null,
   currentPageUid: new Page().uid,
+  fetchStatus: 'none',
 }
 
 export class PreviewState extends Record(defaultValue) {
@@ -36,6 +40,7 @@ export class PreviewState extends Record(defaultValue) {
   body: ?VFile
   outline: ?VFile
   currentPageUid: string
+  fetchStatus: FetchStatus
 
   // HACK: for typecheck
   set: <K: $Keys<PreviewStateConfig>>(key: K, value: any) => PreviewState;
@@ -45,7 +50,8 @@ const initialState = new PreviewState()
 
 /* ======= Actions ======= */
 
-export const process = createAction('preview:process')
+const PROCESS = 'preview:process'
+export const process = createAction(PROCESS)
 
 const SET_WIDTH = 'preview:width:set'
 type SetWidth = Action<number, void>
@@ -95,7 +101,7 @@ const reducer = handleActions({
     if (action.error) {
       return state
     }
-    return state.set('body', action.payload)
+    return state.set('body', action.payload).set('fetchStatus', 'loaded')
   },
 
   // HACK: for typecheck
@@ -115,7 +121,12 @@ const reducer = handleActions({
       return state
     }
     return state.set('currentPageUid', action.payload)
-  }
+  },
+
+  // [process]: (state: PreviewState) => {
+  [PROCESS]: (state: PreviewState) => {
+    return state.set('fetchStatus', 'loading')
+  },
 }, initialState)
 
 export default wrapStateWith(PreviewState, reducer, initialState)
