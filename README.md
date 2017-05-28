@@ -86,4 +86,4 @@ pageNumber:
 ## License
 Licensed under [MIT License][license].
 
-[license]: https://izumin.mit-license.org/2016
+[license]: ./LICENSE
