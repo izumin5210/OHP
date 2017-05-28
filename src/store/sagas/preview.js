@@ -14,8 +14,8 @@ function * handleProcess (): Generator<CallEffect | PutEffect | SelectEffect, *,
   yield call(delay, 500)
   const rawBody = yield select(getBody)
   const processor = yield call(DocumentProcessor.execute, rawBody)
-  yield put(Actions.setBody(processor.body))
   yield put(Actions.setOutline(processor.outline))
+  yield put(Actions.setBody(processor.body))
 }
 
 function * watchProcess (): Generator<TakeEffect, *, *> {

@@ -7,6 +7,7 @@ import Page from 'entities/Page'
 
 import type { RootState } from 'store/modules'
 import type { PreviewState } from 'store/modules/preview'
+import type { FetchStatus } from 'types'
 
 import {
   getPageByUid,
@@ -63,4 +64,14 @@ export const getCurrentPageOrder = createSelector(
     page: Page,
     getOrderByUid: (uid: string) => number,
   ) => page != null ? getOrderByUid(page.uid) : 0,
+)
+
+export const getFetchStatus = createSelector(
+  getPreviewState,
+  ({ fetchStatus }: PreviewState) => fetchStatus,
+)
+
+export const isLoading = createSelector(
+  getFetchStatus,
+  (fetchStatus: FetchStatus) => fetchStatus === 'loading',
 )

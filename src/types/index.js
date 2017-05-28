@@ -6,3 +6,4 @@ export type Position = {
 }
 
 export type KeyboardHandler = 'vim' | 'emacs' | ''
+export type FetchStatus = 'none' | 'loading' | 'loaded' | 'failed'
