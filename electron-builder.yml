@@ -3,6 +3,7 @@ appId: info.izumin.ohp
 files:
   - dist/
   - package.json
+  - resources/
 dmg:
   contents:
     - x: 130
