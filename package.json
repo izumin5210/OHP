@@ -118,7 +118,7 @@
     "lint:js:src": "eslint src",
     "lint:js:test": "eslint test",
     "package": "yarn build && build --publish never",
-    "package:release": "yarn build && build --publish onTag",
+    "package:release": "yarn build && build --publish onTag --draft=false",
     "postinstall": "flow-typed install",
     "prebuild": "yarn run clean",
     "pretest": "run-p lint typecheck",
