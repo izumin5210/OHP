@@ -3,8 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <title><%= htmlWebpackPlugin.options.title %></title>
+  <style>
+    .splash {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .splash::before,
+    .splash::after {
+      width: 12px;
+      height: 12px;
+      border-radius: 6px;
+      margin: 0 8px;
+      content: '';
+      animation: scaleAnim 1s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    }
+
+    .splash::before {
+      animation-delay: 0.1s;
+      background-color: #ff80ab;
+    }
+
+    .splash::after {
+      animation-delay: 0.2s;
+      background-color: #b388ff;
+    }
+
+    @keyframes scaleAnim {
+      0% {
+        transform: scale(0);
+      }
+      25% {
+        transform: scale(0.9);
+      }
+      50% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(0);
+      }
+    }
+  </style>
 </head>
 <body>
-  <div id="container"></div>
+  <div id="container" class="splash"></div>
 </body>
 </html>

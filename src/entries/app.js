@@ -32,6 +32,7 @@ function init (initialState: RootState) {
   )
 
   if (containerElement != null) {
+    containerElement.classList.remove('splash')
     run(createComponent(routes), containerElement, store)
 
     if (process.env.NODE_ENV !== 'production' && module.hot) {
