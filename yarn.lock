@@ -4634,9 +4634,9 @@ md5@^2.1.0:
     crypt "~0.0.1"
     is-buffer "~1.1.1"
 
-"mdast-comment-marker@https://github.com/izumin5210/mdast-comment-marker.git#3c5966c":
-  version "1.0.1"
-  resolved "https://github.com/izumin5210/mdast-comment-marker.git#3c5966c"
+mdast-comment-marker@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/mdast-comment-marker/-/mdast-comment-marker-1.0.2.tgz#1ddf0ef811fb52439017c8d2c0b922035f2ba74a"
 
 mdast-util-compact@^1.0.0:
   version "1.0.0"

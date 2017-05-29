@@ -5,11 +5,9 @@ node_js:
 
 sudo: false
 
-matrix:
-  fast_finish: true
-  include:
-  - os: linux
-    dist: trusty
+os:
+- linux
+- osx
 
 cache:
   yarn: true
@@ -32,7 +30,10 @@ notifications:
 
 deploy:
 - provider: script
-  script: yarn run package:release
+  script:
+  - yarn package:release
+  skip_cleanup: true
   on:
     tags: true
     all_branches: true
+    condition: $TRAVIS_OS_NAME = osx
