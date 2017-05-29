@@ -1,4 +1,5 @@
 // @flow
+import { PureComponent } from 'react'
 import Centerizer from './Centerizer'
 import Dot from './Dot'
 
@@ -8,10 +9,20 @@ type Props = {
   fillParent: bool,
 }
 
-export default function Loader (props: Props) {
-  return (
-    <Centerizer {...props}>
-      { circles }
-    </Centerizer>
-  )
+const defaultProps = {
+  fillParent: false,
 }
+
+export default class Loader extends PureComponent<typeof defaultProps, Props, void> {
+  static defaultProps = defaultProps
+
+  // for lint
+  props: Props
+
+  render() {
+    return (
+      <Centerizer {...props}>
+        {circles}
+      </Centerizer>
+    )
+  }
