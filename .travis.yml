@@ -8,8 +8,6 @@ sudo: false
 matrix:
   fast_finish: true
   include:
-  # - os: osx
-  #   osx_image: xcode8.2
   - os: linux
     dist: trusty
 
@@ -20,10 +18,21 @@ cache:
   - "$HOME/.electron"
   - "$HOME/.cache"
 
+env:
+  global:
+  # GH_TOKEN
+  - secure: msxFSk1Mk/wlkRSlW5O4DRD98AgXMgE4V216DmUi+FMNR315JNIeuY+9XKw0o99KXOhUNUyeIuzQbQ5x0KH9/Tt6nyGVcCDwlVPlcQ9TtyZQJBqzgyVTHsuLXih+ffv1QOFU465ODJQL8Gl4a+H1AQNPsKDIzNhAL8wcSGit60dxQ3imZN4J/sFbyGhRSjGm/usUyGR8uxZQLgkXEztc/0rtAHiBBZsd+yyu0ja7GoRXgs4wlMFOcXQBTYldMjLFgVbU4jYp2Z3+KXoiA4eRIHVfmmOXGcI4xj7B8KvcTYcouHgVxjwzhluC7qo2oxPKXWqJwVBXbqP4NahBk88NvzAzgSfI05s41lGTz030lLNomZGzKLGpNTJUk4uqgAiTJvI4UUF++DkHoIk3JOgmsYwecMs+/98Id3CNzKO4wKGEl8AaKnSizBnCv4+5eQlm01FeXjd6wrUy/JL+ThkYKAXRPMx1wd9SXthDiMt7FOyfdaP1mVu0kCGQbTgSCyxaGhcxUB64XA7d8beqZaTshlf9zbiKh53mO0F4vCMsxOwgiaEhgQY7jvY1DX9xFQlLNPtR5tfP59D4861Mv29t/VceQSyQfQBnA05OxXMo+s13/n0VsWr+/D3v1hs6Q771oPV0qf7f7lhlRa5HMpDNkcsOME6BwBT83S3RNNaiCmo=
+
 script:
 - yarn test
-- yarn build
 
 notifications:
   slack:
     secure: XEpDeNPwlurfm7PAef1OzS+kCUIjF2In6WpoLL/1y/LN1uvQR0L8G+vRCbx4Fs3YgfN0+lDiOU/AwqFEvRmHPYalCb8iyupH7I1SxRWAGvDJdXVbslGu5WXI1NJan8zBrxVYTMEdZ8GglDWpd7oBymdP8TspoKABvKFDcgJZmoPcMBv07T+QhXzgUweDGlsmHv5CqoH0JwAHO2NBpEpe9hJo9G7n3U5+wEE7SU4FoOme8vgHkj28CLclyzwEPq5/+FMepNC5MA1NBf8fJoTCkCaytucjijfN4CQlHL1Bu9o9far8PX2AUhga2W+lM+tuzQc4SW3sMu/MwYVK0LHT+Xgk3L9WBZim4ZQykBrRCoBNvC6oVPVXPSnvO3Fo9PSBXvlXeqpgZmoj+C7tXo41Y+PqpDg6X/Y57+aTKAkQLPoD+kMHTsiPzHlkPCYEhptUq2ozmGhd5jv1MsYxTtv4KQ2Mbz1gHTd9T1rLs3BonuULGtqQvT+d8Gy2ShDAJD0e5tldkmxvzB/LzA116rIXzmmBJJeU5K0kc/CTrefdnbb76hEn36ucZxlEDGJtfuEzkHI3TlR/udZxmo3eRb8tJeXTLt6Y4P0mEf3rQ5zKVnKYdpIq12Yh8cP/7FiuH6VzecjEwJLi6USl0MHk4esea8ZdqL7CHAadUw6WAaBBg8Q=
+
+deploy:
+- provider: script
+  script: yarn run package:release
+  on:
+    tags: true
+    all_branches: true

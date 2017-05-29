@@ -1,7 +1,7 @@
 {
   "name": "OHP",
   "description": "OHP is handy presentation tool",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
@@ -117,10 +117,10 @@
     "lint:js:scripts": "eslint scripts",
     "lint:js:src": "eslint src",
     "lint:js:test": "eslint test",
-    "package": "build",
+    "package": "yarn build && build --publish never",
+    "package:release": "yarn build && build --publish onTag",
     "postinstall": "flow-typed install",
     "prebuild": "yarn run clean",
-    "prepackage": "yarn build",
     "pretest": "run-p lint typecheck",
     "start": "electron .",
     "start:dev": "run-p start:dev:*",
