@@ -19,10 +19,12 @@ export default class Loader extends PureComponent<typeof defaultProps, Props, vo
   // for lint
   props: Props
 
-  render() {
+  render () {
+    const { fillParent, ...rest } = this.props
     return (
-      <Centerizer {...props}>
+      <Centerizer {...{ fillParent, ...rest }}>
         {circles}
       </Centerizer>
     )
   }
+}
