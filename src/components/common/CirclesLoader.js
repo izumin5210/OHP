@@ -39,15 +39,26 @@ const Circle = styled.span`
   `}
 `
 
+type Props = {
+  fillParent: boolean,
+}
+
 const Wrapper = styled.div`
   display: flex;
-  align-content: center;
+  align-items: center;
   justify-content: center;
+  ${({ fillParent }: Props) => fillParent ? css`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  ` : css``}
 `
 
 const circles = Array.from(Array(5).keys()).map(i => (<Circle size={12} number={i + 1} />))
 
-export default function CirclesLoader (props: any) {
+export default function CirclesLoader (props: Props) {
   return (
     <Wrapper {...props}>
       { circles }
