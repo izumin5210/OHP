@@ -14,7 +14,7 @@ import { getBody, getWidth, getCurrentPageOrder } from 'store/selectors/preview'
 
 import type { RootState } from 'store/modules'
 
-import CirclesLoader from 'components/common/CirclesLoader'
+import DotLineLoader from 'components/common/DotLineLoader'
 import Scroller from './Scroller'
 
 type RequiredProps = {
@@ -57,7 +57,7 @@ class Container extends PureComponent<void, Props, void> {
 
     if (bodyElement == null) {
       return (
-        <CirclesLoader fillParent />
+        <DotLineLoader fillParent />
       )
     }
 
