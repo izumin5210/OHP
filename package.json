@@ -1,0 +1,14 @@
+{
+  "name": "OHP",
+  "description": "OHP is Hacker's Presentation writer",
+  "version": "0.1.0",
+  "author": {
+    "name": "Masayuki Izumi",
+    "email": "masayuki@izumin.info",
+    "url": "https://github.com/izumin5210"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "private": true,
+  "repository": "git@github.com:izumin5210/OHP.git"
+}
