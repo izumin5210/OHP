@@ -6,7 +6,7 @@ import isArray from 'lodash/isArray'
 import { handlers as pageHandlers } from 'utils/remark-newpage-directive'
 import { handlers as pageNumberHandlers } from 'utils/remark-page-number-directive'
 
-import Page, { PageNumber, CodeBlock } from 'components/page'
+import Page, { PageNumber, CodeBlock, Image } from 'components/page'
 import { Link, List, ListItem } from 'components/outline'
 
 export const sanitize = mergeWith(
@@ -41,6 +41,7 @@ export const components = {
   page: Page,
   pageNumber: PageNumber,
   pre: CodeBlock,
+  img: Image,
 }
 
 export const newpage = {
