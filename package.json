@@ -7,6 +7,9 @@
     "email": "masayuki@izumin.info",
     "url": "https://github.com/izumin5210"
   },
+  "devDependencies": {
+    "lerna": "^2.0.0-rc.5"
+  },
   "license": "MIT",
   "main": "index.js",
   "private": true,
