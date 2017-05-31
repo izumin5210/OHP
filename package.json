@@ -8,7 +8,12 @@
     "url": "https://github.com/izumin5210"
   },
   "devDependencies": {
+    "conventional-changelog-cli": "^1.3.1",
     "lerna": "^2.0.0-rc.5"
+  },
+  "scripts": {
+    "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
+    "version": "yarn generate:changelog && git add CHANGELOG.md"
   },
   "license": "MIT",
   "main": "index.js",

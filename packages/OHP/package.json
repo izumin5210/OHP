@@ -111,7 +111,6 @@
     "build:main": "NODE_ENV=production webpack --bail --config ./scripts/webpack/config.main.prod.js",
     "build:renderer": "NODE_ENV=production webpack --bail --config ./scripts/webpack/config.renderer.prod.js",
     "clean": "rimraf dist",
-    "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
     "generate:langMap": "node -r babel-register ./scripts/createLangMap.js",
     "lint": "run-p lint:*",
     "lint:css": "stylelint 'src/**/*.css'",
@@ -130,7 +129,6 @@
     "start:dev:server": "webpack-dev-server --config ./scripts/webpack/config.renderer.dev.js",
     "test": "run-p test:*",
     "test:js": "NODE_PATH=$PWD/src mocha",
-    "typecheck": "flow",
-    "version": "yarn generate:changelog && git add CHANGELOG.md"
+    "typecheck": "flow"
   }
 }
