@@ -129,6 +129,7 @@
     "start:dev:server": "webpack-dev-server --config ./scripts/webpack/config.renderer.dev.js",
     "test": "run-p test:*",
     "test:js": "NODE_PATH=$PWD/src mocha",
-    "typecheck": "flow"
+    "typecheck": "flow",
+    "version": "yarn generate:changelog && git add CHANGELOG.md"
   }
 }
