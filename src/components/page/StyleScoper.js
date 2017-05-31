@@ -1,6 +1,7 @@
 // @flow
 import { PureComponent } from 'react'
-import ShadowDom from 'react-shadow'
+import { withContext } from 'react-shadow'
+import PropTypes from 'prop-types'
 
 import type { Children } from 'react'
 
@@ -16,6 +17,8 @@ const defaultProps = {
     overflow: 'hidden',
   },
 }
+
+const ShadowDom = withContext({ router: PropTypes.object, store: PropTypes.object })
 
 export default class StyleScoper extends PureComponent<typeof defaultProps, Props, void> {
   static defaultProps = defaultProps

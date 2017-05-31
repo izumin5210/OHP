@@ -16,6 +16,7 @@
     "mdast-util-to-hast": "^2.4.0",
     "mdast-util-toc": "^2.0.1",
     "normalize.css": "^7.0.0",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-ace": "^4.3.0",
     "react-addons-perf": "^15.4.2",
