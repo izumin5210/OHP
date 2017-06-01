@@ -13,6 +13,9 @@
   },
   "scripts": {
     "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
+    "test": "lerna run test",
+    "package": "lerna run --scope OHP -- package",
+    "package:release": "lerna run --scope OHP -- package:release",
     "version": "yarn generate:changelog && git add CHANGELOG.md"
   },
   "license": "MIT",
