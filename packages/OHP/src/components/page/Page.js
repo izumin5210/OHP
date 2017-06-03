@@ -31,7 +31,7 @@ type InjectedProps = {
   baseFontSize: number,
   exportingAsPdf: boolean,
   userStyles: Array<string>,
-  setPositions: (uid: string, startAt: ?Position, endAt: ?Position) => any,
+  setPositions: (uid: string, { beginAt: ?Position, endAt: ?Position }) => any,
   remove: (uid: string) => any,
 }
 
