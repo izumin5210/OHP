@@ -49,7 +49,7 @@ jspm_packages
 .yarn-integrity
 
 # type definitions from flow-typed repository
-flow-typed
+/flow-typed/npm/*_vx.x.x.js
 
 # Build results
 /dist
