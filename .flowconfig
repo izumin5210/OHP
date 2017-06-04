@@ -3,12 +3,10 @@
 .*/node_modules/conventional-changelog-core/test/.*
 .*/node_modules/stylelint/.*
 .*/node_modules/styled-components/.*
-./decls
 
 [include]
 
 [libs]
-./decls
 
 [options]
 module.system=haste
