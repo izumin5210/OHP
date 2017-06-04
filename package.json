@@ -8,12 +8,17 @@
     "url": "https://github.com/izumin5210"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "conventional-changelog-cli": "^1.3.1",
+    "eslint": "^3.19.0",
+    "eslint-config-izumin5210": "^0.2.5",
+    "eslint-plugin-flowtype-errors": "^3.3.0",
     "flow-bin": "^0.47.0",
     "lerna": "^2.0.0-rc.5"
   },
   "scripts": {
     "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
+    "lint": "eslint .",
     "test": "lerna run test",
     "package": "lerna run --scope OHP -- package",
     "package:release": "lerna run --scope OHP -- package:release",
