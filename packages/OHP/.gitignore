@@ -49,5 +49,4 @@ jspm_packages
 .yarn-integrity
 
 # Build results
-/dist
 /release
