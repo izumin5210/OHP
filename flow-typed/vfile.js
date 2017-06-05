@@ -1,7 +1,7 @@
 import type { Node, Location, Position } from 'unist'
 
 declare module 'vfile' {
-  declare interface VFile {
+  declare type VFile = {
     contents: ?Buffer | ?string,
     cwd: string,
     path: ?string,
@@ -17,7 +17,7 @@ declare module 'vfile' {
     fail: (reason: string | Error, position?: Node | Location | Position, ruleId?: string) => VFileMessage,
   }
 
-  declare interface VFileMessage {
+  declare type VFileMessage = {
     reason: string,
     ruleId: ?string,
     source: ?string,

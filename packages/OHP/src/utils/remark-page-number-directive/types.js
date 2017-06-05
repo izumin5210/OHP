@@ -1,6 +1,4 @@
 // @flow
 import type { Text } from 'unist'
 
-export interface PageNumber extends Text {
-  type: 'pageNumber',
-}
+export type PageNumber = Text & { type: 'pageNumber' }

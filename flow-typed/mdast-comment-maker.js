@@ -1,7 +1,7 @@
 import type { Node } from 'unist'
 
 declare module 'mdast-comment-marker' {
-  declare interface Marker {
+  declare type Marker = {
     name: string,
     attributes: string,
     parameters: Object,

@@ -1,30 +1,37 @@
 declare module 'unist' {
-  declare interface Data {
-  }
+  declare var Data: unist$Data;
+  declare var Position: unist$Position;
+  declare var Location: unist$Location;
+  declare var Node: typeof unist$Node;
+  declare var Parent: typeof unist$Parent;
+  declare var Text: typeof unist$Text;
+}
 
-  declare interface Position {
-    line: number,
-    column: number,
-    offset: ?number,
-  }
+declare type unist$Data = {
+}
 
-  declare interface Location {
-    start: Position,
-    end: Position,
-    indent: ?number,
-  }
+declare type unist$Position = {
+  line: number,
+  column: number,
+  offset: ?number,
+}
 
-  declare interface Node {
-    type: string,
-    data: Data,
-    position: Location,
-  }
+declare type unist$Location = {
+  start: unist$Position,
+  end: unist$Position,
+  indent: ?number,
+}
 
-  declare interface Parent extends Node {
-    children: Array<Node>,
-  }
+declare class unist$Node {
+  type: string,
+  data: unist$Data,
+  position: unist$Location,
+}
 
-  declare interface Text extends Node {
-    value: string,
-  }
+declare class unist$Parent extends unist$Node {
+  children: Array<unist$Node>,
+}
+
+declare class unist$Text extends unist$Node {
+  value: string,
 }
