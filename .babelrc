@@ -7,6 +7,13 @@
         "flow"
       ]
     },
+    "test": {
+      "presets": [
+        "es2015",
+        "stage-2",
+        "flow"
+      ]
+    },
     "es": {
       "presets": [
         ["es2015", { "modules": false }],
