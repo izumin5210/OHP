@@ -36,5 +36,8 @@
     "build:js": "babel src -d dist --ignore test.js",
     "build:libdef": "flow gen-flow-files src/index.js --out-dir dist --ignore '*.test.js'",
     "prepublish": "yarn build"
+  },
+  "devDependencies": {
+    "remark": "^7.0.1"
   }
 }
