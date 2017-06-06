@@ -67,16 +67,26 @@ export default class NewpageDirectiveVisitor extends DirectiveCommentVisitor {
   }
 
   buildPage (marker: ?Marker, children: Array<Node>): Page {
+    const props = this.buildProps(marker)
     const data = {
-      hName: this.tagName,
-      hProperties: Object.assign(
-        {},
-        this.options.className != null ? { className: this.options.className } : {},
-        this.options.withPosition ? this.buildPosition(marker) : {},
-      ),
+      ...props,
+      hName: this.options.tagName,
+      hProperties: props,
       hChildren: children.map(toHast).filter(n => n != null),
     }
-    return u(this.typeName, { data }, children)
+    return u(this.options.typeName, { data }, children)
+  }
+
+  buildProps (marker: ?Marker): Object {
+    return {
+      ...this.classNameObject,
+      ...(this.options.withPosition ? this.buildPosition(marker) : {}),
+    }
+  }
+
+  get classNameObject (): { className?: string } {
+    const { className } = this.options
+    return className != null ? { className: className } : {}
   }
 
   buildPosition (marker: ?Marker): {
