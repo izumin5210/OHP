@@ -7,6 +7,13 @@
     "email": "masayuki@izumin.info",
     "url": "https://github.com/izumin5210"
   },
+  "dependencies": {
+    "defaults": "^1.0.3",
+    "mdast-directive-comment": "^0.1.1",
+    "mdast-util-to-hast": "^2.4.0",
+    "remark-html": "^6.0.0",
+    "unist-builder": "^1.0.2"
+  },
   "files": [
     "dist/"
   ],
