@@ -8,25 +8,37 @@
     "url": "https://github.com/izumin5210"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-stage-2": "^6.24.1",
     "conventional-changelog-cli": "^1.3.1",
     "eslint": "^3.19.0",
     "eslint-config-izumin5210": "^0.2.5",
     "eslint-plugin-flowtype-errors": "^3.3.0",
+    "eslint-plugin-jest": "^20.0.3",
     "flow-bin": "^0.47.0",
     "flow-typed": "^2.1.2",
+    "jest": "^20.0.4",
     "lerna": "^2.0.0-rc.5"
-  },
-  "scripts": {
-    "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
-    "lint": "eslint .",
-    "test": "lerna run test",
-    "package": "lerna run --scope OHP -- package",
-    "package:release": "lerna run --scope OHP -- package:release",
-    "version": "yarn generate:changelog && git add CHANGELOG.md"
   },
   "license": "MIT",
   "main": "index.js",
   "private": true,
-  "repository": "git@github.com:izumin5210/OHP.git"
+  "repository": "git@github.com:izumin5210/OHP.git",
+  "scripts": {
+    "bootstrap": "lerna bootstrap --hoist",
+    "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
+    "jest": "jest --config .jestrc.json",
+    "lint": "eslint .",
+    "package": "lerna run --scope OHP -- package",
+    "package:release": "lerna run --scope OHP -- package:release",
+    "prebootstrap": "yarn",
+    "pretest": "yarn typecheck && yarn lint",
+    "test": "yarn jest && lerna run test --scope OHP",
+    "typecheck": "flow",
+    "version": "yarn generate:changelog && git add CHANGELOG.md"
+  }
 }

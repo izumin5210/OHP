@@ -25,11 +25,14 @@ export default class Visitor {
     if (!parent.data) {
       parent.data = { hProperties: {} }
     } else if (!parent.data.hProperties) {
+      // $FlowFixMe
       parent.data.hProperties = {}
     }
 
+    // $FlowFixMe
     parent.data.hProperties.className = cn(
       marker.parameters.className,
+      // $FlowFixMe
       parent.data.hProperties.className,
     )
   }

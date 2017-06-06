@@ -4,6 +4,7 @@ env:
   commonjs: true
   es6: true
   mocha: true
+  jest/globals: true
 
 parser: babel-eslint
 
@@ -15,6 +16,7 @@ parserOptions:
 
 plugins:
 - flowtype-errors
+- jest
 
 extends:
 - izumin5210
@@ -33,3 +35,8 @@ globals:
 
 rules:
   flowtype-errors/show-errors: error
+
+  jest/no-disabled-tests: warn
+  jest/no-focused-tests: error
+  jest/no-identical-title: error
+  jest/valid-expect: error

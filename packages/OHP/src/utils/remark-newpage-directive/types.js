@@ -14,10 +14,8 @@ export type Meta = {
   }
 }
 
-export type VFile = {
+export type VFile = VFileOrigin & {
   meta?: Meta,
-} & VFileOrigin
-
-export interface Page extends Parent {
-  type: 'page',
 }
+
+export type Page = Parent & { type: 'page' }

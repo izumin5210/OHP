@@ -50,3 +50,6 @@ jspm_packages
 
 # type definitions from flow-typed repository
 /flow-typed/npm/*_vx.x.x.js
+
+# Build results
+dist
