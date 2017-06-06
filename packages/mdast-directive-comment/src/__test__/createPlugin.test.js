@@ -2,7 +2,6 @@
 import remark from 'remark'
 
 import type { Parent } from 'unist'
-import type { VFile } from 'vfile'
 import type { Marker } from 'mdast-comment-marker'
 
 import createPlugin from '../createPlugin'
@@ -20,12 +19,8 @@ const createMocks = () => ({
   afterVisiting: jest.fn(),
 })
 
-class SimpleVisitor extends DirectiveCommentVisitor {
+class SimpleVisitor extends DirectiveCommentVisitor<Mocks> {
   static directiveName = 'simple'
-
-  constructor (vfile: VFile, options: Mocks) {
-    super(vfile, options)
-  }
 
   beforeVisiting (parent: Parent, depth: number) {
     this.options.beforeVisiting(parent, depth)
@@ -84,6 +79,16 @@ test('visits twice', () => {
 })
 
 test('visits in reverse order', () => {
+  const input = '<!-- simple foo=bar -->\n<!-- simple foo=baz -->'
+  const mocks = createMocks()
+  remark().use(createPlugin(ReverseVisitor), mocks).processSync(input)
+  const marker1 = mocks.visit.mock.calls[0][0]
+  const marker2 = mocks.visit.mock.calls[1][0]
+  expect(marker1.parameters.foo).toBe('baz')
+  expect(marker2.parameters.foo).toBe('bar')
+})
+
+test('visits comments through key path', () => {
   const input = `
 <!-- simple foo=bar -->
 

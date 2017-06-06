@@ -5,7 +5,6 @@ import visitNode from 'unist-util-visit'
 import type { Parent } from 'unist'
 import type { HTML } from 'mdast'
 import type { VFile } from 'vfile'
-import type { Marker } from 'mdast-comment-marker'
 
 import { isComment } from './utils'
 import DirectiveCommentVisitor from './DirectiveCommentVisitor'
