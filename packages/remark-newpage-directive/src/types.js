@@ -5,6 +5,7 @@ export type Options = {
   typeName?: string,
   tagName?: string,
   className?: string,
+  withPosition?: boolean,
 }
 
 export type Page = Parent & { type: 'page' }

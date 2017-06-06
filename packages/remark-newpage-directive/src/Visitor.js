@@ -16,6 +16,7 @@ export default class NewpageDirectiveVisitor extends DirectiveCommentVisitor {
   static defaultOptions = {
     typeName: 'page',
     tagName: 'div',
+    withPosition: false,
   }
 
   constructor (vfile: VFile, options: Options = {}) {
@@ -71,9 +72,25 @@ export default class NewpageDirectiveVisitor extends DirectiveCommentVisitor {
       hProperties: Object.assign(
         {},
         this.options.className != null ? { className: this.options.className } : {},
+        this.options.withPosition ? this.buildPosition(marker) : {},
       ),
       hChildren: children.map(toHast).filter(n => n != null),
     }
     return u(this.typeName, { data }, children)
+  }
+
+  buildPosition (marker: ?Marker): {
+    beginLineAt?: number,
+    beginColumnAt?: number,
+    endLineAt?: number,
+    endColumnAt?: number,
+  } {
+    const beginAt = marker && marker.node.position.start
+    const endAt = this.prev && this.prev.marker.node.position.start
+    return Object.assign(
+      {},
+      beginAt != null ? { beginLineAt: beginAt.line, beginColumnAt: beginAt.column } : {},
+      endAt != null ? { endLineAt: endAt.line, endColumnAt: endAt.column } : {},
+    )
   }
 }
