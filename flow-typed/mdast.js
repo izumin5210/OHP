@@ -1,195 +1,140 @@
 import type { Node, Parent, Text } from 'unist'
 
 declare module 'mdast' {
-  declare var Root: typeof mdast$Root
-  declare var Paragraph: typeof $mdastParagraph
-  declare var Blockquote: typeof mdast$Blockquote
-  declare var Heading: typeof mdast$Heading
-  declare var Code: typeof mdast$Code
-  declare var InlineCode: typeof mdast$InlineCode
-  declare var YAML: typeof mdast$YAML
-  declare var HTML: typeof mdast$HTML
-  declare var List: typeof mdast$List
-  declare var ListItem: typeof mdast$ListItem
-  declare var Table: typeof mdast$Table
-  declare var TableRow: typeof mdast$TableRow
-  declare var TableCell: typeof mdast$TableCell
-  declare var ThematicBreak: typeof mdast$ThematicBreak
-  declare var Break: typeof mdast$Break
-  declare var Emphasis: typeof mdast$Emphasis
-  declare var Strong: typeof mdast$Strong
-  declare var Delete: typeof mdast$Delete
-  declare var Link: typeof mdast$Link
-  declare var Image: typeof mdast$Image
-  declare var Footnote: typeof mdast$Footnote
-  declare var LinkReference: typeof mdast$LinkReference
-  declare var ImageReference: typeof mdast$ImageReference
-  declare var FootnoteReference: typeof mdast$FootnoteReference
-  declare var Definition: typeof mdast$Definition
-  declare var FootnoteDefinition: typeof mdast$FootnoteDefinition
-  declare var TextNode: typeof mdast$TextNode
-  declare var Root: typeof mdast$Root;
-  declare var Paragraph: typeof mdast$Paragraph;
-  declare var Blockquote: typeof mdast$Blockquote;
-  declare var Heading: typeof mdast$Heading;
-  declare var Code: typeof mdast$Code;
-  declare var InlineCode: typeof mdast$InlineCode;
-  declare var YAML: typeof mdast$YAML;
-  declare var HTML: typeof mdast$HTML;
-  declare var List: typeof mdast$List;
-  declare var ListItem: typeof mdast$ListItem;
-  declare var Table: typeof mdast$Table;
-  declare var TableRow: typeof mdast$TableRow;
-  declare var TableCell: typeof mdast$TableCell;
-  declare var ThematicBreak: typeof mdast$ThematicBreak;
-  declare var Break: typeof mdast$Break;
-  declare var Emphasis: typeof mdast$Emphasis;
-  declare var Strong: typeof mdast$Strong;
-  declare var Delete: typeof mdast$Delete;
-  declare var Link: typeof mdast$Link;
-  declare var Image: typeof mdast$Image;
-  declare var Footnote: typeof mdast$Footnote;
-  declare var LinkReference: typeof mdast$LinkReference;
-  declare var ImageReference: typeof mdast$ImageReference;
-  declare var FootnoteReference: typeof mdast$FootnoteReference;
-  declare var Definition: typeof mdast$Definition;
-  declare var FootnoteDefinition: typeof mdast$FootnoteDefinition;
-  declare var TextNode: typeof mdast$TextNode;
-}
+  declare export type Root = Parent & {
+    type: 'root',
+  }
 
-declare class mdast$Root extends Parent {
-  type: 'root',
-}
+  declare export type Paragraph = Parent & {
+    type: 'paragraph',
+  }
 
-declare class mdast$Paragraph extends Parent {
-  type: 'paragraph',
-}
+  declare export type Blockquote = Parent & {
+    type: 'blockquote',
+  }
 
-declare class mdast$Blockquote extends Parent {
-  type: 'blockquote',
-}
+  declare export type headingDepth = 1 | 2 | 3 | 4 | 5 | 6
 
-declare type headingDepth = 1 | 2 | 3 | 4 | 5 | 6
+  declare export type Heading = Parent & {
+    type: 'heading',
+    depth: headingDepth,
+  }
 
-declare class mdast$Heading extends Parent {
-  type: 'heading',
-  depth: headingDepth,
-}
+  declare export type Code = Text & {
+    type: 'code',
+    lang: ?string,
+  }
 
-declare class mdast$Code extends Text {
-  type: 'code',
-  lang: ?string,
-}
+  declare export type InlineCode = Text & {
+    type: 'inlineCode',
+  }
 
-declare class mdast$InlineCode extends Text {
-  type: 'inlineCode',
-}
+  declare export type YAML = Text & {
+    type: 'yaml',
+  }
 
-declare class mdast$YAML extends Text {
-  type: 'yaml',
-}
+  declare export type HTML = Text & {
+    type: 'html',
+  }
 
-declare class mdast$HTML extends Text {
-  type: 'html',
-}
+  declare export type List = Parent & {
+    type: 'list',
+    ordered: boolean,
+    start: ?number,
+    loose: boolean,
+  }
 
-declare class mdast$List extends Parent {
-  type: 'list',
-  ordered: boolean,
-  start: ?number,
-  loose: boolean,
-}
+  declare export type ListItem = Parent & {
+    type: 'listItem',
+    loose: boolean,
+    checked: ?boolean,
+  }
 
-declare class mdast$ListItem extends Parent {
-  type: 'listItem',
-  loose: boolean,
-  checked: ?boolean,
-}
+  declare export type alignType = 'left' | 'right' | 'center' | null
 
-declare type alignType = 'left' | 'right' | 'center' | null
+  declare export type Table = Parent & {
+    type: 'table',
+    align: Array<alignType>,
+  }
 
-declare class mdast$Table extends Parent {
-  type: 'table',
-  align: Array<alignType>,
-}
+  declare export type TableRow = Parent & {
+    type: 'tableRow',
+  }
 
-declare class mdast$TableRow extends Parent {
-  type: 'tableRow',
-}
+  declare export type TableCell = Parent & {
+    type: 'tableCell',
+  }
 
-declare class mdast$TableCell extends Parent {
-  type: 'tableCell',
-}
+  declare export type ThematicBreak = Node & {
+    type: 'thematicBreak',
+  }
 
-declare class mdast$ThematicBreak extends Node {
-  type: 'thematicBreak',
-}
+  declare export type Break = Node & {
+    type: 'break',
+  }
 
-declare class mdast$Break extends Node {
-  type: 'break',
-}
+  declare export type Emphasis = Parent & {
+    type: 'emphasis',
+  }
 
-declare class mdast$Emphasis extends Parent {
-  type: 'emphasis',
-}
+  declare export type Strong = Parent & {
+    type: 'strong',
+  }
 
-declare class mdast$Strong extends Parent {
-  type: 'strong',
-}
+  declare export type Delete = Parent & {
+    type: 'delete',
+  }
 
-declare class mdast$Delete extends Parent {
-  type: 'delete',
-}
+  declare export type Link = Parent & {
+    type: 'link',
+    title: ?string,
+    url: string,
+  }
 
-declare class mdast$Link extends Parent {
-  type: 'link',
-  title: ?string,
-  url: string,
-}
+  declare export type Image = Node & {
+    type: 'image',
+    title: ?string,
+    alt: ?string,
+    url: string,
+  }
 
-declare class mdast$Image extends Node {
-  type: 'image',
-  title: ?string,
-  alt: ?string,
-  url: string,
-}
+  declare export type Footnote = Parent & {
+    type: 'footnote',
+  }
 
-declare class mdast$Footnote extends Parent {
-  type: 'footnote',
-}
+  declare export type referenceType = 'shortcut' | 'collapsed' | 'full'
 
-declare type referenceType = 'shortcut' | 'collapsed' | 'full'
+  declare export type LinkReference = Node & {
+    type: 'linkReference',
+    identifier: string,
+    referenceType: referenceType,
+  }
 
-declare class mdast$LinkReference extends Node {
-  type: 'linkReference',
-  identifier: string,
-  referenceType: referenceType,
-}
+  declare export type ImageReference = Node & {
+    type: 'imageReference',
+    identifier: string,
+    referenceType: referenceType,
+    alt: ?string,
+  }
 
-declare class mdast$ImageReference extends Node {
-  type: 'imageReference',
-  identifier: string,
-  referenceType: referenceType,
-  alt: ?string,
-}
+  declare export type FootnoteReference = Node & {
+    type: 'footnoteReference',
+    identifier: string,
+  }
 
-declare class mdast$FootnoteReference extends Node {
-  type: 'footnoteReference',
-  identifier: string,
-}
+  declare export type Definition = Node & {
+    type: 'definition',
+    identifier: string,
+    title: ?string,
+    url: string,
+  }
 
-declare class mdast$Definition extends Node {
-  type: 'definition',
-  identifier: string,
-  title: ?string,
-  url: string,
-}
+  declare export type FootnoteDefinition = Node & {
+    type: 'footnoteDefinition',
+    identifier: string,
+  }
 
-declare class mdast$FootnoteDefinition extends Node {
-  type: 'footnoteDefinition',
-  identifier: string,
-}
-
-declare class mdast$TextNode extends Text {
-  type: 'text',
+  declare export type TextNode = Text & {
+    type: 'text',
+  }
 }

@@ -1,14 +1,12 @@
 import type { Node } from 'unist'
 
 declare module 'mdast-comment-marker' {
-  declare type Marker = {
+  declare export type Marker = {
     name: string,
     attributes: string,
     parameters: Object,
     node: Node,
   }
 
-  declare function marker(node: Node): ?Marker
-
-  declare module.exports: marker
+  declare export default function marker(node: Node): ?Marker
 }

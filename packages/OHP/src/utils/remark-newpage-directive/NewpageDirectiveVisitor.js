@@ -2,8 +2,6 @@
 import u from 'unist-builder'
 import toHast from 'mdast-util-to-hast'
 
-// raise "Named import from module `unist`. This module has no named export called `Node`."
-// $FlowFixMe
 import type { Parent, Node } from 'unist'
 import type { Marker } from 'mdast-comment-marker'
 
