@@ -34,6 +34,7 @@
     "build": "yarn build:js && yarn build:es",
     "build:es": "BABEL_ENV=es babel src -d dist/es --ignore test.js",
     "build:js": "babel src -d dist --ignore test.js",
+    "clean": "rimraf dist",
     "prepublish": "yarn run clean && yarn build"
   }
 }
