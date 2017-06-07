@@ -45,12 +45,10 @@ export default class Visitor {
       if (!parent.data) {
         parent.data = { hProperties: {} }
       } else if (!parent.data.hProperties) {
-        // $FlowFixMe
         parent.data.hProperties = {}
       }
       const pageNumber = this.buildPageNumber()
       parent.children.push(pageNumber)
-      // $FlowFixMe
       parent.data.hChildren.push(toHast(pageNumber))
       this.number += 1
     }
