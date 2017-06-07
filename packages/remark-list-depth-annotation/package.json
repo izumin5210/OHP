@@ -31,10 +31,9 @@
     "url": "https://github.com/izumin5210/OHP"
   },
   "scripts": {
-    "build": "yarn build:js && yarn build:es && yarn build:libdef",
+    "build": "yarn build:js && yarn build:es",
     "build:es": "BABEL_ENV=es babel src -d dist/es --ignore test.js",
     "build:js": "babel src -d dist --ignore test.js",
-    "build:libdef": "flow gen-flow-files src/index.js --out-dir dist --ignore '*.test.js'",
-    "prepublish": "yarn build"
+    "prepublish": "yarn run clean && yarn build"
   }
 }
