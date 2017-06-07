@@ -8,6 +8,10 @@
     "url": "https://github.com/izumin5210"
   },
   "bugs": "https://github.com/izumin5210/OHP/issues",
+  "dependencies": {
+    "unist-util-visit": "^1.1.1",
+    "unist-util-visit-children": "^1.1.0"
+  },
   "files": [
     "dist/"
   ],
