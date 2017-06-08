@@ -8,6 +8,9 @@
     "url": "https://github.com/izumin5210"
   },
   "bugs": "https://github.com/izumin5210/OHP/issues",
+  "dependencies": {
+    "mdast-util-toc": "^2.0.1"
+  },
   "files": [
     "dist/"
   ],
