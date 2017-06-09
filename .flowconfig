@@ -1,4 +1,5 @@
 [ignore]
+.*/node_modules/fbjs/lib/.*
 .*/node_modules/immutable/type-definitions/tests/.*
 .*/node_modules/conventional-changelog-core/test/.*
 .*/node_modules/stylelint/.*
