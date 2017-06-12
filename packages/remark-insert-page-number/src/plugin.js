@@ -16,7 +16,6 @@ export default function (args: Options = {}) {
 
   const defaultOptions = {
     typeName: 'pageNumber',
-    tagName: 'span',
     pathInFrontmatter: 'pageNumber',
     defaultProps: {
       enable: true,

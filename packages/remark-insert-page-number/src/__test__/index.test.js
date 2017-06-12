@@ -31,7 +31,6 @@ function process (
   { type: 'options', options: { defaultProps: { enable: false, className: 'options', number: 3 } } },
   { type: 'optionsWithFrontmatter', options: { defaultProps: { enable: true, className: 'options', number: 5 } } },
   { type: 'pathInFrontmatter', options: { pathInFrontmatter: ['defaults', 'page', 'number'] } },
-  { type: 'tagName', options: { tagName: 'footer' } },
 ].forEach(({ type, options, plugins }: { type: string, options?: any, plugins?: Array<*> }) => {
   test(`it works on ${type}`, () => {
     const dir = join(FIXTURES, type)
