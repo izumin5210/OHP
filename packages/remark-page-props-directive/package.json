@@ -1,7 +1,7 @@
 {
   "name": "remark-page-props-directive",
   "description": "Remark plugin for processing page directive",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
@@ -12,7 +12,7 @@
     "mdast-directive-comment": "^0.1.1"
   },
   "devDependencies": {
-    "remark-newpage-directive": "^0.1.0",
+    "remark-newpage-directive": "^0.2.0",
     "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
   },
   "files": [
