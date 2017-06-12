@@ -1,11 +1,10 @@
 // @flow
 import type { VFile } from 'vfile'
-import type { Props } from './types'
 
 export default function getPropsFronFrontmatter (
   vfile: VFile,
   pathInFrontmatter: Array<string> | string,
-): Props | boolean {
+): Object {
   // $FlowFixMe
   const { meta } = vfile
 
@@ -14,9 +13,9 @@ export default function getPropsFronFrontmatter (
   }
 
   if (typeof pathInFrontmatter === 'string') {
-    return meta[pathInFrontmatter]
+    return meta[pathInFrontmatter] || {}
   } else if (Array.isArray(pathInFrontmatter)) {
-    return pathInFrontmatter.reduce((obj: Object, path: string) => (obj || {})[path] || {}, meta)
+    return pathInFrontmatter.reduce((obj: Object, path: string) => (obj || {})[path] || {}, meta) || {}
   }
 
   throw new Error('Invalid options')

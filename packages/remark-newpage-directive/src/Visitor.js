@@ -22,14 +22,14 @@ export default class NewpageDirectiveVisitor extends DirectiveCommentVisitor {
 
   constructor (vfile: VFile, options: Options = {}) {
     super(vfile, defaults(options, NewpageDirectiveVisitor.defaultOptions))
-    this.props = getPropsFromFrontmatter(vfile, options.pathInFrontmatter)
+    this.props = getPropsFromFrontmatter(vfile, this.options.pathInFrontmatter)
   }
 
   prev: {
     marker: Marker,
     index: number,
   }
-  props: Props
+  props: any
 
   beforeVisiting (parent: Parent) {
     // do nothing
@@ -76,7 +76,7 @@ export default class NewpageDirectiveVisitor extends DirectiveCommentVisitor {
 
   buildProps (marker: ?Marker): Object {
     return {
-      ...{ className: cn(this.props.className, this.options.className) },
+      className: cn(this.props.className, this.options.className),
       ...(this.options.withPosition ? this.buildPosition(marker) : {}),
     }
   }
