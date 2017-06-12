@@ -1,6 +1,5 @@
 // @flow
 import u from 'unist-builder'
-import toHast from 'mdast-util-to-hast'
 import defaults from 'defaults'
 import { DirectiveCommentVisitor } from 'mdast-directive-comment'
 
@@ -15,7 +14,6 @@ export default class NewpageDirectiveVisitor extends DirectiveCommentVisitor {
   static reverse = true
   static defaultOptions = {
     typeName: 'page',
-    tagName: 'div',
     withPosition: false,
   }
 
