@@ -2,18 +2,24 @@
 import remark from 'remark'
 import html from 'remark-html'
 import metaPlugin from 'remark-yaml-meta'
-import newpagePlugin from 'remark-newpage-directive'
+import newpagePlugin, { createHandler as createPageHandler } from 'remark-newpage-directive'
 import { readFileSync as read } from 'fs'
 import { join } from 'path'
 
-import plugin from '..'
+import plugin, { createHandler as createPageNumberHandler } from '..'
 
 const FIXTURES = join(__dirname, 'fixtures')
 
-function process (value: string, opts: any = {}, plugins: Array<*> = [metaPlugin, newpagePlugin]): string {
+function process (
+  value: string,
+  opts: any = {},
+  plugins: Array<*> = [metaPlugin, newpagePlugin],
+): string {
+  const pageHandler = createPageHandler('div')
+  const pageNumberHandler = createPageNumberHandler('span')
   return plugins.reduce((r, p) => r.use(p), remark())
     .use(plugin, opts)
-    .use(html)
+    .use(html, { handlers: { page: pageHandler, pageNumber: pageNumberHandler } })
     .processSync(value).toString()
 }
 
