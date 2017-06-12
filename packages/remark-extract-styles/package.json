@@ -1,7 +1,7 @@
 {
-  "name": "mdast-directive-comment",
-  "description": "Helper function for creating plugin to process directive-comments",
-  "version": "0.1.1",
+  "name": "remark-extract-styles",
+  "description": "Remark plugin for extracting stylesheets",
+  "version": "0.1.0",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
@@ -9,7 +9,6 @@
   },
   "bugs": "https://github.com/izumin5210/OHP/issues",
   "dependencies": {
-    "mdast-comment-marker": "^1.0.2",
     "unist-util-visit": "^1.1.1"
   },
   "files": [
@@ -31,10 +30,9 @@
     "url": "https://github.com/izumin5210/OHP"
   },
   "scripts": {
-    "build": "yarn build:js && yarn build:es && yarn build:libdef",
+    "build": "yarn build:js && yarn build:es",
     "build:es": "BABEL_ENV=es babel src -d dist/es --ignore test.js",
     "build:js": "babel src -d dist --ignore test.js",
-    "build:libdef": "flow gen-flow-files src/index.js --out-dir dist --ignore '*.test.js'",
     "clean": "rimraf dist",
     "prepublish": "yarn run clean && yarn build"
   }

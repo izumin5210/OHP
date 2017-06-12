@@ -6,8 +6,10 @@
 .*/node_modules/styled-components/.*
 
 [include]
+../../node_modules
 
 [libs]
+../../flow-typed
 
 [options]
 module.system=haste

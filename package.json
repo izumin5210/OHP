@@ -22,7 +22,10 @@
     "flow-bin": "^0.47.0",
     "flow-typed": "^2.1.2",
     "jest": "^20.0.4",
-    "lerna": "^2.0.0-rc.5"
+    "lerna": "^2.0.0-rc.5",
+    "remark": "^7.0.1",
+    "remark-html": "^6.0.0",
+    "rimraf": "^2.6.1"
   },
   "license": "MIT",
   "main": "index.js",
