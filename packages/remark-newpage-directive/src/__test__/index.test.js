@@ -4,18 +4,22 @@ import html from 'remark-html'
 import { readFileSync as read } from 'fs'
 import { join } from 'path'
 
-import plugin from '..'
+import plugin, { createHandler } from '..'
 
 const FIXTURES = join(__dirname, 'fixtures')
 
 function process (value: string, opts: any) {
-  return remark().use(plugin, opts).use(html).processSync(value).toString()
+  const pageHandler = createHandler('div')
+  return remark()
+    .use(plugin, opts)
+    .use(html, { handlers: { page: pageHandler } })
+    .processSync(value)
+    .toString()
 }
 
 [
   { type: 'normal', options: {} },
   { type: 'no-newpage', options: {} },
-  { type: 'broken-comment', options: {} },
   { type: 'classname', options: { className: 'page' } },
   { type: 'with-position', options: { withPosition: true } },
 ].forEach(({ type, options }) => {
