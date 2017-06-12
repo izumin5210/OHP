@@ -15,7 +15,7 @@
       {
         "targets": {
           "node": 6,
-          "electron": 1.6,
+          "electron": "1.6.6",
           "uglify": true
         },
         "modules": false,
