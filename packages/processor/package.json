@@ -8,6 +8,20 @@
     "url": "https://github.com/izumin5210"
   },
   "bugs": "https://github.com/izumin5210/OHP/issues",
+  "dependencies": {
+    "deepmerge": "^1.3.2",
+    "hast-util-sanitize": "^1.1.0",
+    "remark": "^7.0.1",
+    "remark-extract-styles": "^0.2.0",
+    "remark-insert-page-number": "^0.2.0",
+    "remark-list-depth-annotation": "^0.2.0",
+    "remark-newpage-directive": "^0.2.0",
+    "remark-outline": "^0.2.0",
+    "remark-page-number-directive": "^0.2.0",
+    "remark-page-props-directive": "^0.2.0",
+    "remark-react": "https://github.com/izumin5210/remark-react.git#9e53bc8",
+    "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
+  },
   "files": [
     "dist/"
   ],
