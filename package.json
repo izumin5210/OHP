@@ -32,7 +32,7 @@
   "private": true,
   "repository": "git@github.com:izumin5210/OHP.git",
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap --hoist --npm-client yarn --concurrency 4",
     "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
     "jest": "jest --config .jestrc.json",
     "lint": "eslint .",
