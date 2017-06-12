@@ -16,15 +16,9 @@ export default class Visitor extends DirectiveCommentVisitor {
       return
     }
 
-    if (!parent.data) {
-      parent.data = { hProperties: {} }
-    } else if (!parent.data.hProperties) {
-      parent.data.hProperties = {}
-    }
-
-    parent.data.hProperties.className = cn(
+    parent.data.className = cn(
+      parent.data.className,
       marker.parameters.className,
-      parent.data.hProperties.className,
     )
   }
 }
