@@ -21,7 +21,7 @@ export default class Visitor extends DirectiveCommentVisitor {
 
   visit (marker: Marker, index: number, parent: ?Parent): ?boolean {
     const { number, enable, className } = marker.parameters
-    this.props = { number: this.props.number }
+    this.props = ({ number: this.props.number }: Props)
 
     if (typeof number === 'number') {
       this.props.number = number
