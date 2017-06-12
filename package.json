@@ -38,7 +38,7 @@
     "lint": "eslint .",
     "package": "lerna run --scope OHP -- package",
     "package:release": "lerna run --scope OHP -- package:release",
-    "prebootstrap": "yarn",
+    "prebootstrap": "yarn --no-progress",
     "pretest": "yarn typecheck && yarn lint",
     "test": "yarn jest && lerna run test --scope OHP",
     "typecheck": "flow",
