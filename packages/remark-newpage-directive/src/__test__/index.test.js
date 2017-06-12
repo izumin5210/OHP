@@ -1,6 +1,7 @@
 // @flow
 import remark from 'remark'
 import html from 'remark-html'
+import metaPlugin from 'remark-yaml-meta'
 import { readFileSync as read } from 'fs'
 import { join } from 'path'
 
@@ -11,6 +12,7 @@ const FIXTURES = join(__dirname, 'fixtures')
 function process (value: string, opts: any) {
   const pageHandler = createHandler('div')
   return remark()
+    .use(metaPlugin)
     .use(plugin, opts)
     .use(html, { handlers: { page: pageHandler } })
     .processSync(value)
@@ -20,6 +22,7 @@ function process (value: string, opts: any) {
 [
   { type: 'normal', options: {} },
   { type: 'no-newpage', options: {} },
+  { type: 'frontmatter', options: {} },
   { type: 'classname', options: { className: 'page' } },
   { type: 'with-position', options: { withPosition: true } },
 ].forEach(({ type, options }) => {

@@ -2,11 +2,13 @@
 import u from 'unist-builder'
 import defaults from 'defaults'
 import { DirectiveCommentVisitor } from 'mdast-directive-comment'
+import cn from 'classnames/dedupe'
 
 import type { Parent, Node } from 'unist'
 import type { Marker } from 'mdast-comment-marker'
 import type { VFile } from 'vfile'
 
+import getPropsFromFrontmatter from './getPropsFromFrontmatter'
 import type { Options, Page } from './types'
 
 export default class NewpageDirectiveVisitor extends DirectiveCommentVisitor {
@@ -14,17 +16,20 @@ export default class NewpageDirectiveVisitor extends DirectiveCommentVisitor {
   static reverse = true
   static defaultOptions = {
     typeName: 'page',
+    pathInFrontmatter: 'page',
     withPosition: false,
   }
 
   constructor (vfile: VFile, options: Options = {}) {
     super(vfile, defaults(options, NewpageDirectiveVisitor.defaultOptions))
+    this.props = getPropsFromFrontmatter(vfile, options.pathInFrontmatter)
   }
 
   prev: {
     marker: Marker,
     index: number,
   }
+  props: Props
 
   beforeVisiting (parent: Parent) {
     // do nothing
@@ -71,14 +76,9 @@ export default class NewpageDirectiveVisitor extends DirectiveCommentVisitor {
 
   buildProps (marker: ?Marker): Object {
     return {
-      ...this.classNameObject,
+      ...{ className: cn(this.props.className, this.options.className) },
       ...(this.options.withPosition ? this.buildPosition(marker) : {}),
     }
-  }
-
-  get classNameObject (): { className?: string } {
-    const { className } = this.options
-    return className != null ? { className: className } : {}
   }
 
   buildPosition (marker: ?Marker): {
