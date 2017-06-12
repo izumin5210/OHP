@@ -1,0 +1,36 @@
+{
+  "name": "@ohp/processor",
+  "description": "Markdown processor for OHP app",
+  "version": "0.0.0",
+  "author": {
+    "name": "Masayuki Izumi",
+    "email": "masayuki@izumin.info",
+    "url": "https://github.com/izumin5210"
+  },
+  "bugs": "https://github.com/izumin5210/OHP/issues",
+  "files": [
+    "dist/"
+  ],
+  "homepage": "https://github.com/izumin5210/OHP",
+  "jsnext:main": "dist/es/index.js",
+  "keywords": [
+    "markdown",
+    "mdast",
+    "plugin",
+    "remark"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/izumin5210/OHP"
+  },
+  "scripts": {
+    "build": "yarn build:js && yarn build:es",
+    "build:es": "BABEL_ENV=es babel src -d dist/es --ignore test.js",
+    "build:js": "babel src -d dist --ignore test.js",
+    "clean": "rimraf dist",
+    "prepublish": "yarn run clean && yarn build"
+  }
+}
