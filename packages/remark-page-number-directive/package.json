@@ -9,12 +9,11 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "defaults": "^1.0.3",
     "mdast-directive-comment": "^0.1.1",
-    "mdast-util-to-hast": "^2.4.0",
-    "unist-builder": "^1.0.2"
+    "unist-util-visit": "^1.1.1"
   },
   "devDependencies": {
+    "remark-insert-page-number": "^0.1.0",
     "remark-newpage-directive": "^0.1.0",
     "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
   },

@@ -2,12 +2,12 @@
 # Heading 1
 
 <!-- newpage -->
-<!-- pageNumber className="intro" -->
+<!-- pageNumber enable=false number=1 -->
 
 ## Heading 2-1
 
 <!-- newpage -->
-<!-- pageNumber number=5 -->
+<!-- pageNumber enable className="intro" -->
 
 ## Heading 2-2
 

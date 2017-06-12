@@ -1,19 +1,20 @@
 ---
 pageNumber:
-  enable: false
+  enable: true
   className: pageNumber
-  number: 5
+  number: 2
 ---
 
+<!-- pageNumber enable=false -->
 # Heading 1
 
 <!-- newpage -->
-<!-- pageNumber enable className="intro" -->
+<!-- pageNumber number=1 -->
 
 ## Heading 2-1
 
 <!-- newpage -->
-<!-- pageNumber enable number=2 -->
+<!-- pageNumber className="intro" -->
 
 ## Heading 2-2
 

@@ -1,67 +1,27 @@
 // @flow
-import u from 'unist-builder'
-import toHast from 'mdast-util-to-hast'
-import defaults from 'defaults'
-import cn from 'classnames'
 import { DirectiveCommentVisitor } from 'mdast-directive-comment'
+import visit from 'unist-util-visit'
+import cn from 'classnames/dedupe'
 
 import type { Parent } from 'unist'
 import type { Marker } from 'mdast-comment-marker'
 import type { VFile } from 'vfile'
-
-import type { Props, Options, PageNumber } from './types'
+import type { Props, PageNumber } from 'remark-insert-page-number'
 
 export default class Visitor extends DirectiveCommentVisitor {
   static directiveName = 'pageNumber'
   static typePath = ['page']
-  static defaultOptions = {
-    typeName: 'pageNumber',
-    tagName: 'span',
-    pathInFrontmatter: 'pageNumber',
-    removeDisabledNumber: false,
-    defaultProps: {
-      enable: true,
-      className: '',
-      number: 1,
-    }
+
+  constructor (vfile: VFile, options: any = {}) {
+    super(vfile, options)
+    this.props = {}
   }
 
-  constructor (vfile: VFile, options: Options = {}) {
-    super(vfile, defaults(options, Visitor.defaultOptions))
-
-    this.defaultProps = defaults(
-      typeof this.meta === 'boolean' ? { enable: this.meta } : this.meta,
-      this.options.defaultProps,
-    )
-    this.number = this.defaultProps.number
-  }
-
-  number: number
   props: Props
-  defaultProps: Props
-
-  beforeVisiting (parent: Parent, depth: number) {
-    this.props = { ...this.defaultProps, number: this.number }
-  }
-
-  afterVisiting (parent: Parent, depth: number) {
-    if (depth === 1) {
-      if (!parent.data) {
-        parent.data = { hProperties: {} }
-      } else if (!parent.data.hProperties) {
-        parent.data.hProperties = {}
-      }
-      if (this.props.enable || !this.options.removeDisabledNumber) {
-        const pageNumber = this.buildPageNumber()
-        parent.children.push(pageNumber)
-        parent.data.hChildren.push(toHast(pageNumber))
-      }
-      this.number = this.props.number + 1
-    }
-  }
 
   visit (marker: Marker, index: number, parent: ?Parent): ?boolean {
     const { number, enable, className } = marker.parameters
+    this.props = { number: this.props.number }
 
     if (typeof number === 'number') {
       this.props.number = number
@@ -70,37 +30,22 @@ export default class Visitor extends DirectiveCommentVisitor {
       this.props.enable = enable
     }
     if (typeof className === 'string') {
-      this.props.className = cn(this.props.className, className)
+      this.props.className = className
     }
+
+    visit(parent, 'pageNumber', this.visitPageNumber)
+    this.props.number += 1
   }
 
-  buildPageNumber (): PageNumber {
-    const data = {
-      hName: this.options.tagName,
-      hProperties: { ...this.props },
+  visitPageNumber = (node: PageNumber, index: ?number, parent: ?Parent) => {
+    if (this.props.enable == null) {
+      this.props.enable = node.data.enable
     }
-    const children = [
-      u('text', { value: this.props.number })
-    ]
-    return u(this.options.typeName, { data }, children)
-  }
-
-  get meta (): Props {
-    if (this.vfile.meta == null) {
-      return {}
+    if (this.props.number == null) {
+      this.props.number = node.data.number
     }
-
-    // $FlowFixMe
-    const { meta } = this.vfile
-
-    const { pathInFrontmatter } = this.options
-    if (typeof pathInFrontmatter === 'string') {
-      // $FlowFixMe
-      return meta[pathInFrontmatter]
-    } else if (Array.isArray(pathInFrontmatter)) {
-      return pathInFrontmatter.reduce((obj: Object, path: string) => (obj || {})[path] || {}, meta)
-    }
-
-    throw new Error()
+    this.props.className = cn(node.data.className, this.props.className)
+    node.data = Object.assign({}, node.data, this.props)
+    node.children[0].value = node.data.number
   }
 }
