@@ -1,0 +1,475 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Processing page document returns empty styles 1`] = `Array []`;
+
+exports[`Processing page document returns react components for body correctly 1`] = `
+<div>
+  <section
+    className="page"
+  >
+    <h1>
+      Heading 1-1
+    </h1>
+    <pageNumber
+      className=""
+      enable="true"
+      number="1"
+    >
+      1
+    </pageNumber>
+    <footer>
+      ~ Ln 8, Col 1
+    </footer>
+  </section>
+  
+  
+  <section
+    className="page toc"
+  >
+    <h2>
+      Heading 2-1
+    </h2>
+    <ul>
+      
+      
+      <li>
+        foo
+      </li>
+      
+      
+      <li>
+        bar
+      </li>
+      
+      
+      <li>
+        baz
+      </li>
+      
+      
+    </ul>
+    <pageNumber
+      className=""
+      enable="true"
+      number="2"
+    >
+      2
+    </pageNumber>
+    <footer>
+      Ln 8, Col 1 ~ Ln 17, Col 1
+    </footer>
+  </section>
+  
+  
+  <section
+    className="page intro"
+  >
+    <h2>
+      Heading 2-2
+    </h2>
+    <h3>
+      introduction
+    </h3>
+    <pageNumber
+      className=""
+      enable="true"
+      number="3"
+    >
+      3
+    </pageNumber>
+    <footer>
+      Ln 17, Col 1 ~
+    </footer>
+  </section>
+</div>
+`;
+
+exports[`Processing page document returns react components for outline correctly 1`] = `
+<div>
+  <ul>
+    
+    
+    <li
+      depth="1"
+    >
+      
+      
+      <p>
+        <a
+          href="#heading-1-1"
+        >
+          Heading 1-1
+        </a>
+      </p>
+      
+      
+      <ul>
+        
+        
+        <li
+          depth="2"
+        >
+          <a
+            href="#heading-2-1"
+          >
+            Heading 2-1
+          </a>
+        </li>
+        
+        
+        <li
+          depth="2"
+        >
+          
+          
+          <p>
+            <a
+              href="#heading-2-2"
+            >
+              Heading 2-2
+            </a>
+          </p>
+          
+          
+          <ul>
+            
+            
+            <li
+              depth="3"
+            >
+              <a
+                href="#introduction"
+              >
+                introduction
+              </a>
+            </li>
+            
+            
+          </ul>
+          
+          
+        </li>
+        
+        
+      </ul>
+      
+      
+    </li>
+    
+    
+  </ul>
+</div>
+`;
+
+exports[`Processing pageNumber document returns empty styles 1`] = `Array []`;
+
+exports[`Processing pageNumber document returns react components for body correctly 1`] = `
+<div>
+  <page
+    className=""
+    endColumnAt="1"
+    endLineAt="10"
+  >
+    <h1>
+      Heading 1-1
+    </h1>
+  </page>
+  
+  
+  <page
+    beginColumnAt="1"
+    beginLineAt="10"
+    className=""
+  >
+    <h2>
+      Heading 2-2
+    </h2>
+    <ul>
+      
+      
+      <li>
+        foo
+      </li>
+      
+      
+      <li>
+        bar
+      </li>
+      
+      
+      <li>
+        baz
+      </li>
+      
+      
+    </ul>
+    <span
+      className="pageNumber intro"
+    >
+      1
+    </span>
+  </page>
+</div>
+`;
+
+exports[`Processing pageNumber document returns react components for outline correctly 1`] = `
+<div>
+  <ul>
+    
+    
+    <li
+      depth="1"
+    >
+      
+      
+      <p>
+        <a
+          href="#heading-1-1"
+        >
+          Heading 1-1
+        </a>
+      </p>
+      
+      
+      <ul>
+        
+        
+        <li
+          depth="2"
+        >
+          <a
+            href="#heading-2-2"
+          >
+            Heading 2-2
+          </a>
+        </li>
+        
+        
+      </ul>
+      
+      
+    </li>
+    
+    
+  </ul>
+</div>
+`;
+
+exports[`Processing simple document returns empty styles 1`] = `Array []`;
+
+exports[`Processing simple document returns react components for body correctly 1`] = `
+<div>
+  <page
+    className=""
+    endColumnAt="1"
+    endLineAt="3"
+  >
+    <h1>
+      Heading 1-1
+    </h1>
+    <pageNumber
+      className=""
+      enable="true"
+      number="1"
+    >
+      1
+    </pageNumber>
+  </page>
+  
+  
+  <page
+    beginColumnAt="1"
+    beginLineAt="3"
+    className=""
+  >
+    <h2>
+      Heading 2-2
+    </h2>
+    <ul>
+      
+      
+      <li>
+        foo
+      </li>
+      
+      
+      <li>
+        bar
+      </li>
+      
+      
+      <li>
+        baz
+      </li>
+      
+      
+    </ul>
+    <pageNumber
+      className=""
+      enable="true"
+      number="2"
+    >
+      2
+    </pageNumber>
+  </page>
+</div>
+`;
+
+exports[`Processing simple document returns react components for outline correctly 1`] = `
+<div>
+  <ul>
+    
+    
+    <li
+      depth="1"
+    >
+      
+      
+      <p>
+        <a
+          href="#heading-1-1"
+        >
+          Heading 1-1
+        </a>
+      </p>
+      
+      
+      <ul>
+        
+        
+        <li
+          depth="2"
+        >
+          <a
+            href="#heading-2-2"
+          >
+            Heading 2-2
+          </a>
+        </li>
+        
+        
+      </ul>
+      
+      
+    </li>
+    
+    
+  </ul>
+</div>
+`;
+
+exports[`Processing styles document returns empty styles 1`] = `
+Array [
+  "
+h1 {
+  font-size: 2.6rem;
+}
+",
+  "
+li {
+  color: #333;
+}
+",
+]
+`;
+
+exports[`Processing styles document returns react components for body correctly 1`] = `
+<div>
+  <page
+    className=""
+    endColumnAt="1"
+    endLineAt="9"
+  >
+    <h1>
+      Heading 1-1
+    </h1>
+    <pageNumber
+      className=""
+      enable="true"
+      number="1"
+    >
+      1
+    </pageNumber>
+  </page>
+  
+  
+  <page
+    beginColumnAt="1"
+    beginLineAt="9"
+    className=""
+  >
+    <h2>
+      Heading 2-2
+    </h2>
+    <ul>
+      
+      
+      <li>
+        foo
+      </li>
+      
+      
+      <li>
+        bar
+      </li>
+      
+      
+      <li>
+        baz
+      </li>
+      
+      
+    </ul>
+    <pageNumber
+      className=""
+      enable="true"
+      number="2"
+    >
+      2
+    </pageNumber>
+  </page>
+</div>
+`;
+
+exports[`Processing styles document returns react components for outline correctly 1`] = `
+<div>
+  <ul>
+    
+    
+    <li
+      depth="1"
+    >
+      
+      
+      <p>
+        <a
+          href="#heading-1-1"
+        >
+          Heading 1-1
+        </a>
+      </p>
+      
+      
+      <ul>
+        
+        
+        <li
+          depth="2"
+        >
+          <a
+            href="#heading-2-2"
+          >
+            Heading 2-2
+          </a>
+        </li>
+        
+        
+      </ul>
+      
+      
+    </li>
+    
+    
+  </ul>
+</div>
+`;

@@ -4,21 +4,21 @@
       "presets": [
         "es2015",
         "stage-2",
-        "flow"
+        "react"
       ]
     },
     "test": {
       "presets": [
         "es2015",
         "stage-2",
-        "flow"
+        "react"
       ]
     },
     "es": {
       "presets": [
         ["es2015", { "modules": false }],
         "stage-2",
-        "flow"
+        "react"
       ]
     }
   }
