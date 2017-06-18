@@ -20,6 +20,7 @@ export default class Processor {
       body: bodyVfile.contents,
       outline: outlineVfile.contents,
       styles: bodyVfile.styles,
+      meta: bodyVfile.meta,
     }
   }
 }

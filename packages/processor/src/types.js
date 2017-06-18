@@ -8,4 +8,5 @@ export type Result = {
   body: any,
   outline: any,
   styles: any,
+  meta: Object,
 }
