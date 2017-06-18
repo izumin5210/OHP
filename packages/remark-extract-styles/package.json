@@ -1,7 +1,7 @@
 {
   "name": "remark-extract-styles",
   "description": "Remark plugin for extracting stylesheets",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
