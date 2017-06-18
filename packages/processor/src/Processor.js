@@ -3,15 +3,15 @@ import { bodyToReactFactory, outlineToReactFactory } from './factories'
 import type { Options, Result } from './types'
 
 export default class Processor {
-  constructor (options: Options = {}) {
-    this.bodyToReact = bodyToReactFactory(options.componentByName || {})
-    this.outlineToReact = outlineToReactFactory(options.componentByName || {})
+  constructor ({ body, outline }: Options = {}) {
+    this.bodyToReact = bodyToReactFactory((body ? body.componentByName : null) || {})
+    this.outlineToReact = outlineToReactFactory((outline ? outline.componentByName : null) || {})
   }
 
   bodyToReact: any
   outlineToReact: any
 
-  async process (body: string): Promise<Result> {
+  process = async (body: string): Promise<Result> => {
     const [bodyVfile, outlineVfile] = await Promise.all([
       this.bodyToReact.process(body),
       this.outlineToReact.process(body),
