@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Measure from 'react-measure'
 import debounce from 'lodash/debounce'
 
+import type { Element } from 'react'
 import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
@@ -21,7 +22,7 @@ type RequiredProps = {
 }
 
 type InjectedProps = {
-  bodyElement: any,
+  bodyElement: ?Element<*>,
   width: number,
   currentPageOrder: number,
   setWidth: (width: number) => any,
@@ -31,7 +32,7 @@ type Props = RequiredProps & InjectedProps
 
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
-    bodyElement: (getBody(state) || { contents: null }).contents,
+    bodyElement: getBody(state),
     width: getWidth(state),
     currentPageOrder: getCurrentPageOrder(state),
   }),

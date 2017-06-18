@@ -24,6 +24,10 @@ type RequiredProps = {
   children?: Children,
   beginAt: string,
   endAt: string,
+  beginLineAt: string,
+  beginColumnAt: string,
+  endLineAt: string,
+  endColumnAt: string,
 }
 
 type InjectedProps = {
@@ -58,8 +62,16 @@ const connector: Connector<RequiredProps, Props> = connect(
 )
 
 class PageContainer extends PureComponent<void, Props, State> {
+  static toPosition (lineAtStr: ?string, columnAtStr: ?string): ?Position {
+    if (lineAtStr != null && columnAtStr != null) {
+      return { row: parseInt(lineAtStr, 10), column: parseInt(columnAtStr, 10) }
+    }
+    return null
+  }
+
   constructor (props: Props) {
     super(props)
+    console.log(props)
     this.state = {
       uid: Page.generateUid(),
     }
@@ -69,13 +81,18 @@ class PageContainer extends PureComponent<void, Props, State> {
   state: State
 
   componentDidMount () {
-    const { beginAt, endAt } = this.props
-    this.setPositions(beginAt, endAt)
+    const { beginLineAt, beginColumnAt, endLineAt, endColumnAt } = this.props
+    this.setPositions(beginLineAt, beginColumnAt, endLineAt, endColumnAt)
   }
 
-  componentWillReceiveProps ({ beginAt, endAt }: Props) {
-    if (beginAt !== this.props.beginAt || endAt !== this.props.endAt) {
-      this.setPositions(beginAt, endAt)
+  componentWillReceiveProps ({ beginLineAt, beginColumnAt, endLineAt, endColumnAt }: Props) {
+    if (
+      beginLineAt !== this.props.beginLineAt ||
+        beginColumnAt !== this.props.beginColumnAt ||
+        endLineAt !== this.props.endLineAt ||
+        endColumnAt !== this.props.endColumnAt
+    ) {
+      this.setPositions(beginLineAt, beginColumnAt, endLineAt, endColumnAt)
     }
   }
 
@@ -83,13 +100,16 @@ class PageContainer extends PureComponent<void, Props, State> {
     this.props.remove(this.state.uid)
   }
 
-  setPositions (beginAtStr: string, endAtStr: string) {
-    const beginAt = JSON.parse(beginAtStr.replace('line', 'row'))
-    const endAt = JSON.parse(endAtStr.replace('line', 'row'))
+  setPositions (
+    beginLineAt?: string,
+    beginColumnAt?: string,
+    endLineAt?: string,
+    endColumnAt?: string,
+  ) {
+    const beginAt = PageContainer.toPosition(beginLineAt, beginColumnAt)
+    const endAt = PageContainer.toPosition(endLineAt, endColumnAt)
     assert(beginAt == null || ('row' in beginAt && 'column' in beginAt))
     assert(endAt == null || ('row' in endAt && 'column' in endAt))
-    delete (beginAt || {}).offset
-    delete (endAt || {}).offset
     this.props.setPositions(this.state.uid, { beginAt, endAt })
   }
 
