@@ -26,6 +26,24 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
+"@ohp/processor@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@ohp/processor/-/processor-0.1.0.tgz#e1e4153aaf2bdf511e176c6354400b88eda8417c"
+  dependencies:
+    babel-runtime "^6.23.0"
+    deepmerge "^1.3.2"
+    hast-util-sanitize "^1.1.0"
+    remark "^7.0.1"
+    remark-extract-styles "^0.2.1"
+    remark-insert-page-number "^0.2.0"
+    remark-list-depth-annotation "^0.2.0"
+    remark-newpage-directive "^0.2.0"
+    remark-outline "^0.2.0"
+    remark-page-number-directive "^0.2.0"
+    remark-page-props-directive "^0.2.0"
+    remark-react "https://github.com/izumin5210/remark-react.git#9e53bc8"
+    remark-yaml-meta "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
+
 JSONStream@^0.8.4:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-0.8.4.tgz#91657dfe6ff857483066132b4618b62e8f4887bd"
@@ -1418,7 +1436,7 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-comma-separated-tokens@^1.0.0, comma-separated-tokens@^1.0.1:
+comma-separated-tokens@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/comma-separated-tokens/-/comma-separated-tokens-1.0.3.tgz#6eb01f4730bde7a7fce5d5e2d943bdd637272801"
   dependencies:
@@ -1951,6 +1969,16 @@ deep-equal@^1.0.0, deep-equal@^1.0.1, deep-equal@~1.0.1:
 deep-extend@~0.4.0:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.1.tgz#efe4113d08085f4e6f9687759810f807469e2253"
+
+deepmerge@^1.3.2:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-1.4.3.tgz#f8c9ecb11c176b3dbfc8167b58cc5674c5e658bb"
+
+defaults@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/defaults/-/defaults-1.0.3.tgz#c656051e9817d9ff08ed881477f3fe4019f3ef7d"
+  dependencies:
+    clone "^1.0.2"
 
 define-properties@^1.1.1, define-properties@^1.1.2:
   version "1.1.2"
@@ -3051,37 +3079,12 @@ hast-to-hyperscript@^2.0.1:
     trim "0.0.1"
     unist-util-is "^2.0.0"
 
-hast-util-is-element@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/hast-util-is-element/-/hast-util-is-element-1.0.0.tgz#3f7216978b2ae14d98749878782675f33be3ce00"
-
-hast-util-sanitize@^1.0.0:
+hast-util-sanitize@^1.0.0, hast-util-sanitize@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hast-util-sanitize/-/hast-util-sanitize-1.1.0.tgz#9b4bc3731043fe92e1253a9a4ca7bcc4148d06f2"
   dependencies:
     has "^1.0.1"
     xtend "^4.0.1"
-
-hast-util-to-html@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/hast-util-to-html/-/hast-util-to-html-3.0.0.tgz#19a257cd7af464777c1cccf4d2d53d33147466c1"
-  dependencies:
-    ccount "^1.0.0"
-    comma-separated-tokens "^1.0.1"
-    has "^1.0.1"
-    hast-util-is-element "^1.0.0"
-    hast-util-whitespace "^1.0.0"
-    html-void-elements "^1.0.0"
-    kebab-case "^1.0.0"
-    property-information "^3.1.0"
-    space-separated-tokens "^1.0.0"
-    stringify-entities "^1.0.1"
-    unist-util-is "^2.0.0"
-    xtend "^4.0.1"
-
-hast-util-whitespace@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/hast-util-whitespace/-/hast-util-whitespace-1.0.0.tgz#bd096919625d2936e1ff17bc4df7fd727f17ece9"
 
 hawk@~3.1.3:
   version "3.1.3"
@@ -3178,10 +3181,6 @@ html-minifier@^3.2.3:
 html-tags@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-1.1.1.tgz#869f43859f12d9bdc3892419e494a628aa1b204e"
-
-html-void-elements@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/html-void-elements/-/html-void-elements-1.0.1.tgz#f929bea267a19e3535950502ca12c159f1b559af"
 
 html-webpack-plugin@^2.28.0:
   version "2.28.0"
@@ -4116,6 +4115,13 @@ mdast-comment-marker@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/mdast-comment-marker/-/mdast-comment-marker-1.0.2.tgz#1ddf0ef811fb52439017c8d2c0b922035f2ba74a"
 
+mdast-directive-comment@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/mdast-directive-comment/-/mdast-directive-comment-0.1.1.tgz#4ded23491112f2284065c35dbfc8c7291e2ba9e4"
+  dependencies:
+    mdast-comment-marker "^1.0.2"
+    unist-util-visit "^1.1.1"
+
 mdast-util-compact@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/mdast-util-compact/-/mdast-util-compact-1.0.0.tgz#4c94dedfe35932d5457f29b650b330fdc73e994a"
@@ -4130,7 +4136,7 @@ mdast-util-definitions@^1.2.0:
     has "^1.0.1"
     unist-util-visit "^1.0.0"
 
-mdast-util-to-hast@^2.0.0, mdast-util-to-hast@^2.1.1, mdast-util-to-hast@^2.4.0:
+mdast-util-to-hast@^2.0.0, mdast-util-to-hast@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-2.4.0.tgz#63ce8e43c61d8e5728954a3515e0c936a3b26cea"
   dependencies:
@@ -5403,7 +5409,7 @@ prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8,
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
 
-property-information@^3.0.0, property-information@^3.1.0:
+property-information@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/property-information/-/property-information-3.1.0.tgz#1581bf8a445dfbfef759775a86700e8dda18b4a1"
 
@@ -5881,14 +5887,59 @@ relateurl@0.2.x:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
 
-remark-html@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/remark-html/-/remark-html-6.0.0.tgz#ade7d94b60e452158f28615218450682601dbfc1"
+remark-extract-styles@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/remark-extract-styles/-/remark-extract-styles-0.2.1.tgz#78662a2125184662cc3ba79f8c44a72db007a17e"
   dependencies:
-    hast-util-sanitize "^1.0.0"
-    hast-util-to-html "^3.0.0"
-    mdast-util-to-hast "^2.1.1"
-    xtend "^4.0.1"
+    unist-util-visit "^1.1.1"
+
+remark-insert-page-number@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/remark-insert-page-number/-/remark-insert-page-number-0.2.0.tgz#a09e813260979d9df2d957d1695fe8840afd8f4d"
+  dependencies:
+    classnames "^2.2.5"
+    defaults "^1.0.3"
+    mdast-util-to-hast "^2.4.0"
+    unist-builder "^1.0.2"
+    unist-util-visit "^1.1.1"
+
+remark-list-depth-annotation@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/remark-list-depth-annotation/-/remark-list-depth-annotation-0.2.0.tgz#ab3e5eeb90046c12d51b636c65f06077e03eb42a"
+  dependencies:
+    unist-util-visit "^1.1.1"
+    unist-util-visit-children "^1.1.0"
+
+remark-newpage-directive@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/remark-newpage-directive/-/remark-newpage-directive-0.2.0.tgz#cad2758f67f5e8799bc731d53ecd392218926e61"
+  dependencies:
+    classnames "^2.2.5"
+    defaults "^1.0.3"
+    mdast-directive-comment "^0.1.1"
+    mdast-util-to-hast "^2.4.0"
+    unist-builder "^1.0.2"
+
+remark-outline@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/remark-outline/-/remark-outline-0.2.0.tgz#5c495063affc14a5071306ecd7270f343bfaceb5"
+  dependencies:
+    mdast-util-toc "^2.0.1"
+
+remark-page-number-directive@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/remark-page-number-directive/-/remark-page-number-directive-0.2.0.tgz#de86b86cdeff2eaab8bfed223d8df52c4f5941ec"
+  dependencies:
+    classnames "^2.2.5"
+    mdast-directive-comment "^0.1.1"
+    unist-util-visit "^1.1.1"
+
+remark-page-props-directive@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/remark-page-props-directive/-/remark-page-props-directive-0.2.0.tgz#dda6266580934f3cafaae3669d186611f118827e"
+  dependencies:
+    classnames "^2.2.5"
+    mdast-directive-comment "^0.1.1"
 
 remark-parse@^3.0.0:
   version "3.0.1"

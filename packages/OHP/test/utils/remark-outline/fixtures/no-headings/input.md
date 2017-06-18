@@ -1,5 +1,0 @@
-hoge
-
-fuga
-
-piyo
