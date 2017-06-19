@@ -1,6 +1,6 @@
 // @flow
 import { injectGlobal } from 'styled-components'
-import normalizeCss from 'styles/vendor/normalize.css/normalize.css'
+import normalizeCss from 'styles/vendor/normalize.css/normalize.css.js'
 
 export default function injectGlobalStyle () {
   injectGlobal`${normalizeCss}`

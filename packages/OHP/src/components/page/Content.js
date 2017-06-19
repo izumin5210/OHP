@@ -3,7 +3,7 @@ import { PureComponent } from 'react'
 
 import type { Children, Element } from 'react'
 
-import highlightDefault from 'styles/vendor/highlight.js/default.css'
+import highlightDefault from 'styles/vendor/highlight.js/default.css.js'
 
 type Props = {
   className: string,
