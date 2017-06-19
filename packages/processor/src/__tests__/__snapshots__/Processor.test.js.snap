@@ -12,7 +12,6 @@ exports[`Processing page document returns react components for body correctly 1`
     </h1>
     <pageNumber
       className=""
-      enable="true"
       number="1"
     >
       1
@@ -50,7 +49,6 @@ exports[`Processing page document returns react components for body correctly 1`
     </ul>
     <pageNumber
       className=""
-      enable="true"
       number="2"
     >
       2
@@ -72,7 +70,6 @@ exports[`Processing page document returns react components for body correctly 1`
     </h3>
     <pageNumber
       className=""
-      enable="true"
       number="3"
     >
       3
@@ -269,7 +266,6 @@ exports[`Processing simple document returns react components for body correctly 
     </h1>
     <pageNumber
       className=""
-      enable="true"
       number="1"
     >
       1
@@ -306,7 +302,6 @@ exports[`Processing simple document returns react components for body correctly 
     </ul>
     <pageNumber
       className=""
-      enable="true"
       number="2"
     >
       2
@@ -385,7 +380,6 @@ exports[`Processing styles document returns react components for body correctly 
     </h1>
     <pageNumber
       className=""
-      enable="true"
       number="1"
     >
       1
@@ -422,7 +416,6 @@ exports[`Processing styles document returns react components for body correctly 
     </ul>
     <pageNumber
       className=""
-      enable="true"
       number="2"
     >
       2

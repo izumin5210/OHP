@@ -1,7 +1,7 @@
 {
   "name": "remark-insert-page-number",
   "description": "Remark plugin for inserting page numbers",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
