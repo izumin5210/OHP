@@ -8,14 +8,12 @@
     "url": "https://github.com/izumin5210"
   },
   "dependencies": {
+    "@ohp/processor": "^0.1.0",
     "brace": "^0.10.0",
     "classnames": "^2.2.5",
     "highlight.js": "^9.12.0",
     "immutable": "https://github.com/oreqizer/immutable-js.git#1f66a82",
     "lodash": "^4.17.4",
-    "mdast-comment-marker": "^1.0.2",
-    "mdast-util-to-hast": "^2.4.0",
-    "mdast-util-toc": "^2.0.1",
     "normalize.css": "^7.0.0",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
@@ -36,16 +34,10 @@
     "redux-actions": "^2.0.3",
     "redux-immutable": "^4.0.0",
     "redux-saga": "^0.15.3",
-    "remark": "^7.0.1",
-    "remark-react": "https://github.com/izumin5210/remark-react.git#9e53bc8",
-    "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774",
     "reselect": "^3.0.1",
     "scrollparent": "^2.0.1",
     "styled-components": "^1.4.6",
-    "sweet-scroll": "^2.2.1",
-    "unist-builder": "^1.0.2",
-    "unist-util-visit": "^1.1.1",
-    "unist-util-visit-children": "^1.1.0"
+    "sweet-scroll": "^2.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
@@ -86,7 +78,6 @@
     "react-hot-loader": "3.0.0-beta.7",
     "react-test-renderer": "^15.5.4",
     "redux-logger": "^3.0.1",
-    "remark-html": "^6.0.0",
     "style-loader": "^0.17.0",
     "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",

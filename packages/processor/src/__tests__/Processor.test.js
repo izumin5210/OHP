@@ -45,8 +45,8 @@ function PageNumber ({ number, enable, className }) {
 const testcases: Array<{ type: string, options?: any }> = [
   { type: 'simple' },
   { type: 'styles' },
-  { type: 'page', options: { componentByName: { page: Page } } },
-  { type: 'pageNumber', options: { componentByName: { pageNumber: PageNumber } } },
+  { type: 'page', options: { body: { componentByName: { page: Page } } } },
+  { type: 'pageNumber', options: { body: { componentByName: { pageNumber: PageNumber } } } },
 ]
 
 testcases.forEach(({ type, options }) => {

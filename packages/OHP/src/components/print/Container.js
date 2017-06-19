@@ -2,6 +2,7 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
+import type { Element } from 'react'
 import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
@@ -17,7 +18,7 @@ type RequiredProps = {
 }
 
 type InjectedProps = {
-  bodyElement: any,
+  bodyElement: ?Element<any>,
   startExporting: () => any,
 }
 
@@ -25,7 +26,7 @@ type Props = RequiredProps & InjectedProps
 
 const connector: Connector< RequiredProps, Props> = connect(
   (state: RootState) => ({
-    bodyElement: (getBody(state) || { contents: null }).contents,
+    bodyElement: getBody(state),
   }),
   (dispatch: Dispatch<Action<*, *>>) => ({
     startExporting: () => dispatch(Actions.start())

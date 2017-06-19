@@ -1,11 +1,20 @@
 // @flow
+import type { Component, Element } from 'react'
+
+type ComponentByName = { [key:string]: Class<Component<*, *, *>> }
 
 export type Options = {
-  componentByName?: { [key:string]: any },
+  body?: {
+    componentByName?: ComponentByName,
+  },
+  outline?: {
+    componentByName?: ComponentByName,
+  }
 }
 
 export type Result = {
-  body: any,
-  outline: any,
-  styles: any,
+  body: Element<*>,
+  outline: Element<*>,
+  styles: Array<string>,
+  meta: Object,
 }

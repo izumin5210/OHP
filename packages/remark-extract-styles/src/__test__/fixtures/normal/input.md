@@ -13,11 +13,6 @@ ul {
 }
 </style>
 
-# Heading 1
-- foo
-- bar
-- baz
-
 <style>
 h2 {
   font-size: 1.2rem;
@@ -30,8 +25,10 @@ h3 {
 }
 </style>
 
-## Heading 2
-### Heading 3
+# Heading 1
+- foo
+- bar
+- baz
 
 <style>
 .page {
@@ -39,3 +36,6 @@ h3 {
   height: 768px;
 }
 </style>
+
+## Heading 2
+### Heading 3

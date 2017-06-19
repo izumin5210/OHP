@@ -2,6 +2,7 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
+import type { Element } from 'react'
 import type { Connector } from 'react-redux'
 
 import { getOutline } from 'store/selectors/preview'
@@ -14,14 +15,14 @@ type RequiredProps = {
 }
 
 type InjectedProps = {
-  outlineElement: any,
+  outlineElement: ?Element<any>,
 }
 
 type Props = RequiredProps & InjectedProps
 
 const connector: Connector<RequiredProps, Props> = connect(
   (state: RootState) => ({
-    outlineElement: (getOutline(state) || { contents: null }).contents,
+    outlineElement: getOutline(state),
   }),
 )
 

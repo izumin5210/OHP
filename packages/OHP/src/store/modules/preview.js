@@ -2,8 +2,8 @@
 import { createAction, handleActions } from 'redux-actions'
 import { Record } from 'immutable'
 
+import type { Element } from 'react'
 import type { Action } from 'redux-actions'
-import type { VFile } from 'vfile'
 
 import Page from 'entities/Page'
 import wrapStateWith from 'utils/wrapStateWith'
@@ -14,8 +14,10 @@ import type { FetchStatus } from 'types'
 
 export type PreviewStateConfig = {
   width: number,
-  body: ?VFile,
-  outline: ?VFile,
+  body: ?Element<any>,
+  outline: ?Element<any>,
+  styles: Array<string>,
+  meta: Object,
   currentPageUid: string,
   fetchStatus: FetchStatus,
 }
@@ -24,6 +26,8 @@ const defaultValue: PreviewStateConfig = {
   width: 0,
   body: null,
   outline: null,
+  styles: [],
+  meta: {},
   currentPageUid: new Page().uid,
   fetchStatus: 'none',
 }
@@ -37,8 +41,10 @@ export class PreviewState extends Record(defaultValue) {
 
   // HACK: for typecheck
   width: number
-  body: ?VFile
-  outline: ?VFile
+  body: ?Element<any>
+  outline: ?Element<any>
+  styles: Array<string>
+  meta: Object
   currentPageUid: string
   fetchStatus: FetchStatus
 
@@ -61,17 +67,31 @@ export const setWidth = createAction(
 )
 
 const SET_BODY = 'preview:body:set'
-type SetBody = Action<VFile, void>
+type SetBody = Action<Element<any>, void>
 export const setBody = createAction(
   SET_BODY,
-  (body: VFile) => body
+  (body: Element<any>) => body
 )
 
 const SET_OUTLINE = 'preview:outline:set'
-type SetOutline = Action<VFile, void>
+type SetOutline = Action<Element<any>, void>
 export const setOutline = createAction(
   SET_OUTLINE,
-  (body: VFile) => body
+  (outline: Element<any>) => outline
+)
+
+const SET_STYLES = 'preview:styles:set'
+type SetStyles = Action<Array<string>, void>
+export const setStyles = createAction(
+  SET_STYLES,
+  (styles: Array<string>) => styles
+)
+
+const SET_META = 'preview:meta:set'
+type SetMeta = Action<Object, void>
+export const setMeta = createAction(
+  SET_META,
+  (meta: Object) => meta,
 )
 
 const SET_CURRENT_PAGE_UID = 'preview:currentPageUid:set'
@@ -112,6 +132,26 @@ const reducer = handleActions({
       return state
     }
     return state.set('outline', action.payload)
+  },
+
+  // HACK: for typecheck
+  // [SetStyle]: (state: PreviewState, action: SetStyles) => {
+  [SET_STYLES]: (state: PreviewState, action: SetStyles) => {
+    assert(!action.error)
+    if (action.error) {
+      return state
+    }
+    return state.set('styles', action.payload)
+  },
+
+  // HACK: for typecheck
+  // [SetMeta]: (state: PreviewState, action: SetMeta) => {
+  [SET_META]: (state: PreviewState, action: SetMeta) => {
+    assert(!action.error)
+    if (action.error) {
+      return state
+    }
+    return state.set('meta', action.payload)
   },
 
   // [setCurrentPageUid]: (state: PreviewState, action: SetCurrentPageUid) => {
