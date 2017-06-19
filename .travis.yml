@@ -37,4 +37,4 @@ deploy:
   on:
     tags: true
     all_branches: true
-    condition: $TRAVIS_OS_NAME = osx
+    condition: $TRAVIS_OS_NAME = osx && (echo $$TRAVIS_TAG | grep -q -e "^v\d\+\.\d\+\.\d\+$")
