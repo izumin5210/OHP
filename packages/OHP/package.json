@@ -83,7 +83,6 @@
     "generate:langMap": "node -r babel-register ./scripts/createLangMap.js",
     "generate:styleInterpolations": "node -r babel-register ./scripts/createStyleInterpolations.js",
     "lint": "run-p lint:*",
-    "lint:css": "stylelint 'src/**/*.css'",
     "lint:js": "run-p lint:js:*",
     "lint:js:scripts": "eslint scripts",
     "lint:js:src": "eslint src",
