@@ -1,7 +1,7 @@
 {
   "name": "@ohp/processor",
   "description": "Markdown processor for OHP app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
@@ -14,11 +14,11 @@
     "hast-util-sanitize": "^1.1.0",
     "remark": "^7.0.1",
     "remark-extract-styles": "^0.2.1",
-    "remark-insert-page-number": "^0.2.0",
+    "remark-insert-page-number": "^0.2.1",
     "remark-list-depth-annotation": "^0.2.0",
     "remark-newpage-directive": "^0.2.0",
     "remark-outline": "^0.2.0",
-    "remark-page-number-directive": "^0.2.0",
+    "remark-page-number-directive": "^0.2.1",
     "remark-page-props-directive": "^0.2.0",
     "remark-react": "https://github.com/izumin5210/remark-react.git#9e53bc8",
     "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
