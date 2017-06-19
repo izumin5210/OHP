@@ -12,6 +12,7 @@ import configureStore from 'store/configure'
 import reducer, { RootState } from 'store/modules'
 import sagas from 'store/sagas'
 import * as PreviewActions from 'store/modules/preview'
+import injectGlobalStyle from 'styles/injectGlobalStyle'
 
 import { app as routes } from 'routes'
 
@@ -57,6 +58,7 @@ function init (initialState: RootState) {
 
 window.addEventListener('DOMContentLoaded', () => {
   ipcRenderer.once('initialState', (_e, initialState) => {
+    injectGlobalStyle()
     init(new RootState(initialState))
   })
 })
