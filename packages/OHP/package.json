@@ -97,6 +97,7 @@
     "build:renderer": "NODE_ENV=production webpack --bail --config ./scripts/webpack/config.renderer.prod.js",
     "clean": "rimraf dist",
     "generate:langMap": "node -r babel-register ./scripts/createLangMap.js",
+    "generate:styleInterpolations": "node -r babel-register ./scripts/createStyleInterpolations.js",
     "lint": "run-p lint:*",
     "lint:css": "stylelint 'src/**/*.css'",
     "lint:js": "run-p lint:js:*",
