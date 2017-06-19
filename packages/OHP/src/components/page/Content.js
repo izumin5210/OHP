@@ -3,7 +3,7 @@ import { PureComponent } from 'react'
 
 import type { Children, Element } from 'react'
 
-import { default as highlightDefault } from 'settings/highlightStyles'
+import highlightDefault from 'styles/vendor/highlight.js/default.css'
 
 type Props = {
   className: string,
@@ -39,7 +39,9 @@ export default class Content extends PureComponent<typeof defaultProps, Props, v
       <div {...{ className, style }}>
         { children }
         { this.userStyles }
-        <link rel='stylesheet' href={highlightDefault} />
+        <style>
+          { highlightDefault }
+        </style>
       </div>
     )
   }
