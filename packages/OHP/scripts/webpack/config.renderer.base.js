@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path')
 
 const pkg = require('../../package.json')
@@ -30,8 +29,6 @@ const config = {
       chunks: ['app'],
       inject: true
     }),
-
-    new ExtractTextPlugin('[name]-[hash].css'),
   ],
 
   externals: [
