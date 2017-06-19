@@ -18,7 +18,7 @@ export default function (args: Options = {}) {
     typeName: 'pageNumber',
     pathInFrontmatter: 'pageNumber',
     defaultProps: {
-      enable: true,
+      enable: false,
       className: '',
       number: 1,
     },
