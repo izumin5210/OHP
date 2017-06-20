@@ -40,10 +40,11 @@
     "jest": "jest --config .jestrc.json",
     "lint": "eslint .",
     "package": "lerna run --scope OHP -- package",
-    "package:release": "lerna run --scope OHP -- package:release",
+    "package:release": "lerna run --scope @ohp/app -- package:release",
     "prebootstrap": "yarn --no-progress",
     "pretest": "yarn typecheck && yarn lint",
-    "test": "yarn jest && lerna run test --scope OHP",
+    "run-in-app": "yarn lerna -- run --scope @ohp/app --stream",
+    "test": "yarn jest && lerna run test --scope @ohp/app",
     "typecheck": "flow",
     "version": "yarn generate:changelog && git add CHANGELOG.md"
   }

@@ -3,8 +3,6 @@ const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
-const pkg = require('../../package.json')
-
 const { src, entries } = require('./configuration')
 const base = require('./config.base')
 
@@ -23,7 +21,7 @@ const config = {
     new webpack.NamedModulesPlugin(),
 
     new HtmlWebpackPlugin({
-      title: pkg.name,
+      title: 'OHP',
       filename: 'index.html',
       template: path.resolve(src, 'index.html'),
       chunks: ['app'],
