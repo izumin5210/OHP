@@ -43,6 +43,7 @@
     "package:release": "lerna run --scope @ohp/app -- package:release",
     "prebootstrap": "yarn --no-progress",
     "pretest": "yarn typecheck && yarn lint",
+    "run-in-app": "yarn lerna -- run --scope @ohp/app --stream",
     "test": "yarn jest && lerna run test --scope @ohp/app",
     "typecheck": "flow",
     "version": "yarn generate:changelog && git add CHANGELOG.md"
