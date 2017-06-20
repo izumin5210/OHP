@@ -5,7 +5,7 @@ export const editedSuffix = '*'
 export const defaultBody = `---
 fontSize: 32
 pageNumber:
-  enable: ture
+  enable: true
   className: pageNumber
 ---
 
