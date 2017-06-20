@@ -9,8 +9,8 @@
   },
   "bugs": "https://github.com/izumin5210/OHP/issues",
   "dependencies": {
-    "unist-util-visit": "^1.1.1",
-    "unist-util-visit-children": "^1.1.0"
+    "unist-util-visit": "^1.1.3",
+    "unist-util-visit-children": "^1.1.1"
   },
   "files": [
     "dist/"
