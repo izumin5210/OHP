@@ -8,7 +8,7 @@
     "url": "https://github.com/izumin5210"
   },
   "dependencies": {
-    "@ohp/processor": "^0.1.0",
+    "@ohp/processor": "^0.1.1",
     "brace": "^0.10.0",
     "classnames": "^2.2.5",
     "highlight.js": "^9.12.0",

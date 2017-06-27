@@ -26,20 +26,20 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
-"@ohp/processor@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@ohp/processor/-/processor-0.1.0.tgz#e1e4153aaf2bdf511e176c6354400b88eda8417c"
+"@ohp/processor@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@ohp/processor/-/processor-0.1.1.tgz#3c176eb28ff2d4ef8fb4a74a65685115ae9dd20d"
   dependencies:
     babel-runtime "^6.23.0"
     deepmerge "^1.3.2"
     hast-util-sanitize "^1.1.0"
     remark "^7.0.1"
     remark-extract-styles "^0.2.1"
-    remark-insert-page-number "^0.2.0"
+    remark-insert-page-number "^0.2.1"
     remark-list-depth-annotation "^0.2.0"
     remark-newpage-directive "^0.2.0"
     remark-outline "^0.2.0"
-    remark-page-number-directive "^0.2.0"
+    remark-page-number-directive "^0.2.1"
     remark-page-props-directive "^0.2.0"
     remark-react "https://github.com/izumin5210/remark-react.git#9e53bc8"
     remark-yaml-meta "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
@@ -5154,9 +5154,9 @@ remark-extract-styles@^0.2.1:
   dependencies:
     unist-util-visit "^1.1.1"
 
-remark-insert-page-number@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/remark-insert-page-number/-/remark-insert-page-number-0.2.0.tgz#a09e813260979d9df2d957d1695fe8840afd8f4d"
+remark-insert-page-number@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/remark-insert-page-number/-/remark-insert-page-number-0.2.1.tgz#3cd030445739576e7cb031385c8f219b766ceb93"
   dependencies:
     classnames "^2.2.5"
     defaults "^1.0.3"
@@ -5187,9 +5187,9 @@ remark-outline@^0.2.0:
   dependencies:
     mdast-util-toc "^2.0.1"
 
-remark-page-number-directive@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/remark-page-number-directive/-/remark-page-number-directive-0.2.0.tgz#de86b86cdeff2eaab8bfed223d8df52c4f5941ec"
+remark-page-number-directive@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/remark-page-number-directive/-/remark-page-number-directive-0.2.1.tgz#0b4b4220a9cb2e995703efe87268fb0bc2b1a6c4"
   dependencies:
     classnames "^2.2.5"
     mdast-directive-comment "^0.1.1"
@@ -5223,9 +5223,9 @@ remark-parse@^3.0.0:
     vfile-location "^2.0.0"
     xtend "^4.0.1"
 
-"remark-react@https://github.com/izumin5210/remark-react.git#9e53bc8":
+"remark-react@git+https://github.com/izumin5210/remark-react.git#9e53bc8":
   version "4.0.0"
-  resolved "https://github.com/izumin5210/remark-react.git#9e53bc8"
+  resolved "git+https://github.com/izumin5210/remark-react.git#9e53bc8"
   dependencies:
     camelize "^1.0.0"
     hast-to-hyperscript "^2.0.1"
@@ -5253,9 +5253,9 @@ remark-stringify@^3.0.0:
     unherit "^1.0.4"
     xtend "^4.0.1"
 
-"remark-yaml-meta@https://github.com/izumin5210/remark-yaml-meta.git#3387774":
+"remark-yaml-meta@git+https://github.com/izumin5210/remark-yaml-meta.git#3387774":
   version "0.1.0"
-  resolved "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
+  resolved "git+https://github.com/izumin5210/remark-yaml-meta.git#3387774"
   dependencies:
     js-yaml "^3.5.2"
 
