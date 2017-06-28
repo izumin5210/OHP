@@ -18,7 +18,7 @@ export default function (
   {
     maxDepth = defaultMaxDepth,
     ...rest
-  }: Configuration = defaultConfig,
+  }: Configuration = defaultConfig, // eslint-disable-line indent
 ) {
   const opts = {
     maxDepth,

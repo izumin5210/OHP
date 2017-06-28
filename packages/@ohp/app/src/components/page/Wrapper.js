@@ -36,6 +36,6 @@ const Wrapper = styled.section`
       font-size: ${baseFontSize * (width / actualWidth)}px;
     `
   }}
-`
+` // eslint-disable-line  indent
 
 export default Wrapper

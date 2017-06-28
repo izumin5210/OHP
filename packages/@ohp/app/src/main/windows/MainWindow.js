@@ -31,7 +31,7 @@ export default class MainWindow extends Window {
       initialState = MainWindow.defaultCreateOption.initialState,
       width = MainWindow.defaultCreateOption.width,
       height = MainWindow.defaultCreateOption.height,
-    }: CreateOptions = MainWindow.defaultCreateOption,
+    }: CreateOptions = MainWindow.defaultCreateOption, // eslint-disable-line indent
   ): MainWindow {
     const win = new MainWindow({ width, height })
     win.create(initialState)

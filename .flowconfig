@@ -1,4 +1,6 @@
 [ignore]
+.*/node_modules/ast-types-flow/lib/.*
+.*/node_modules/eslint-plugin-jsx-a11y/.*
 .*/node_modules/fbjs/lib/.*
 .*/node_modules/immutable/type-definitions/tests/.*
 .*/node_modules/conventional-changelog-core/test/.*

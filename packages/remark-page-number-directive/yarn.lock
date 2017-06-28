@@ -36,16 +36,6 @@ esprima@^3.1.1:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-3.1.3.tgz#fdca51cee6133895e3c88d535ce49dbff62a4633"
 
-function-bind@^1.0.2:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
-
-has@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/has/-/has-1.0.1.tgz#8461733f538b0837c9361e39a9ab9e9704dc2f28"
-  dependencies:
-    function-bind "^1.0.2"
-
 js-yaml@^3.5.2:
   version "3.8.4"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.8.4.tgz#520b4564f86573ba96662af85a8cafa7b4b5a6f6"
@@ -65,13 +55,12 @@ mdast-directive-comment@^0.1.1:
     unist-util-visit "^1.1.1"
 
 mdast-util-definitions@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/mdast-util-definitions/-/mdast-util-definitions-1.2.0.tgz#00f67b4289ed36bafc0977b558414ac0c5023b24"
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/mdast-util-definitions/-/mdast-util-definitions-1.2.2.tgz#673f4377c3e23d3de7af7a4fe2214c0e221c5ac7"
   dependencies:
-    has "^1.0.1"
     unist-util-visit "^1.0.0"
 
-mdast-util-to-hast@^2.4.1:
+mdast-util-to-hast@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-2.4.1.tgz#ae6bec08c8704d5f6ddfc7b84afce983c27441a8"
   dependencies:
@@ -94,6 +83,26 @@ normalize-uri@^1.0.0:
 object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+
+remark-insert-page-number@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/remark-insert-page-number/-/remark-insert-page-number-0.2.1.tgz#3cd030445739576e7cb031385c8f219b766ceb93"
+  dependencies:
+    classnames "^2.2.5"
+    defaults "^1.0.3"
+    mdast-util-to-hast "^2.4.0"
+    unist-builder "^1.0.2"
+    unist-util-visit "^1.1.1"
+
+remark-newpage-directive@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/remark-newpage-directive/-/remark-newpage-directive-0.2.0.tgz#cad2758f67f5e8799bc731d53ecd392218926e61"
+  dependencies:
+    classnames "^2.2.5"
+    defaults "^1.0.3"
+    mdast-directive-comment "^0.1.1"
+    mdast-util-to-hast "^2.4.0"
+    unist-builder "^1.0.2"
 
 "remark-yaml-meta@https://github.com/izumin5210/remark-yaml-meta.git#3387774":
   version "0.1.0"
@@ -124,16 +133,16 @@ unist-builder@^1.0.1, unist-builder@^1.0.2:
     object-assign "^4.1.0"
 
 unist-util-generated@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/unist-util-generated/-/unist-util-generated-1.1.0.tgz#8c95657ff12b32eaffe0731fbb37da6995fae01b"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/unist-util-generated/-/unist-util-generated-1.1.1.tgz#99f16c78959ac854dee7c615c291924c8bf4de7f"
 
 unist-util-position@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unist-util-position/-/unist-util-position-3.0.0.tgz#e6e1e03eeeb81c5e1afe553e8d4adfbd7c0d8f82"
 
 unist-util-visit@^1.0.0, unist-util-visit@^1.1.0, unist-util-visit@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-1.1.1.tgz#e917a3b137658b335cb4420c7da2e74d928e4e94"
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-1.1.3.tgz#ec268e731b9d277a79a5b5aa0643990e405d600b"
 
 xtend@^4.0.1:
   version "4.0.1"
