@@ -27,8 +27,8 @@
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
 "@types/node@^7.0.18":
-  version "7.0.32"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.32.tgz#6afe6c66520a4c316623a14aef123908d01b4bba"
+  version "7.0.33"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.33.tgz#ae3c53ad01d7e9d62c7f1a85c5f7500d59b9d25b"
 
 JSONStream@^1.0.4:
   version "1.3.1"
@@ -1628,8 +1628,8 @@ classnames@^2.2.5:
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
 clean-css@4.1.x:
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.4.tgz#eec8811db27457e0078d8ca921fa81b72fa82bf4"
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.5.tgz#d09a87a02a5375117589796ae76a063cacdb541a"
   dependencies:
     source-map "0.5.x"
 
@@ -2511,9 +2511,9 @@ electron-builder-http@19.7.2, electron-builder-http@~19.7.2:
     debug "^2.6.8"
     fs-extra-p "^4.3.0"
 
-electron-builder-util@19.8.0, electron-builder-util@~19.8.0:
-  version "19.8.0"
-  resolved "https://registry.yarnpkg.com/electron-builder-util/-/electron-builder-util-19.8.0.tgz#f6aa75c271cafcc335b965b50416d167e74ad6c5"
+electron-builder-util@19.11.0, electron-builder-util@~19.11.0:
+  version "19.11.0"
+  resolved "https://registry.yarnpkg.com/electron-builder-util/-/electron-builder-util-19.11.0.tgz#41944a8b377cff2ca05d1e7207cc2796c4cbae82"
   dependencies:
     "7zip-bin" "^2.1.0"
     bluebird-lst "^1.0.2"
@@ -2530,8 +2530,8 @@ electron-builder-util@19.8.0, electron-builder-util@~19.8.0:
     tunnel-agent "^0.6.0"
 
 electron-builder@^19.6.1:
-  version "19.10.0"
-  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-19.10.0.tgz#6c03987bae06c85fe88083a73b8c8142f1a3fb14"
+  version "19.11.1"
+  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-19.11.1.tgz#913b84ccd83923827782fc2b4e3fd96a2c7c3736"
   dependencies:
     "7zip-bin" "^2.1.0"
     ajv "^5.2.0"
@@ -2543,18 +2543,18 @@ electron-builder@^19.6.1:
     cuint "^0.2.2"
     debug "^2.6.8"
     electron-builder-http "19.7.2"
-    electron-builder-util "19.8.0"
+    electron-builder-util "19.11.0"
     electron-download-tf "4.3.1"
     electron-osx-sign "0.4.6"
-    electron-publish "19.8.0"
+    electron-publish "19.11.0"
     fs-extra-p "^4.3.0"
-    hosted-git-info "^2.4.2"
+    hosted-git-info "^2.5.0"
     is-ci "^1.0.10"
     isbinaryfile "^3.0.2"
     js-yaml "^3.8.4"
     json5 "^0.5.1"
     minimatch "^3.0.4"
-    normalize-package-data "^2.3.8"
+    normalize-package-data "^2.4.0"
     parse-color "^1.0.0"
     plist "^2.1.0"
     sanitize-filename "^1.6.1"
@@ -2612,24 +2612,24 @@ electron-osx-sign@0.4.6:
     plist "^2.0.1"
     tempfile "^1.1.1"
 
-electron-publish@19.8.0:
-  version "19.8.0"
-  resolved "https://registry.yarnpkg.com/electron-publish/-/electron-publish-19.8.0.tgz#ff288f53f639553791a727dfcad1b9d15c999365"
+electron-publish@19.11.0:
+  version "19.11.0"
+  resolved "https://registry.yarnpkg.com/electron-publish/-/electron-publish-19.11.0.tgz#7b6a57764191308a53b9c3064e6c83d72d29cf3b"
   dependencies:
     bluebird-lst "^1.0.2"
     chalk "^1.1.3"
     electron-builder-http "~19.7.2"
-    electron-builder-util "~19.8.0"
+    electron-builder-util "~19.11.0"
     fs-extra-p "^4.3.0"
     mime "^1.3.6"
 
 electron-to-chromium@^1.3.14:
-  version "1.3.14"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.14.tgz#64af0f9efd3c3c6acd57d71f83b49ca7ee9c4b43"
+  version "1.3.15"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.15.tgz#08397934891cbcfaebbd18b82a95b5a481138369"
 
 electron@^1.6.11:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.7.3.tgz#839cab0a0598835a100dceede215988ba99c325b"
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.7.4.tgz#db8b85ae98dffb7a82938e5ea6eed3cb66f62a65"
   dependencies:
     "@types/node" "^7.0.18"
     electron-download "^3.0.1"
@@ -2777,8 +2777,8 @@ es6-map@^0.1.3, es6-map@^0.1.5:
     event-emitter "~0.3.5"
 
 es6-promise@^4.0.5:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.1.0.tgz#dda03ca8f9f89bc597e689842929de7ba8cebdf0"
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.1.1.tgz#8811e90915d9a0dba36274f0b242dbda78f9c92a"
 
 es6-set@~0.1.5:
   version "0.1.5"
@@ -3920,9 +3920,13 @@ home-path@^1.0.1:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/home-path/-/home-path-1.0.5.tgz#788b29815b12d53bacf575648476e6f9041d133f"
 
-hosted-git-info@^2.1.4, hosted-git-info@^2.4.2:
+hosted-git-info@^2.1.4:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.4.2.tgz#0076b9f46a270506ddbaaea56496897460612a67"
+
+hosted-git-info@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -4063,10 +4067,6 @@ import-lazy@^2.1.0:
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
-
-in-publish@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/in-publish/-/in-publish-2.0.0.tgz#e20ff5e3a2afc2690320b6dc552682a9c7fadf51"
 
 indent-string@^2.1.0:
   version "2.1.0"
@@ -4417,8 +4417,8 @@ isobject@^2.0.0:
     isarray "1.0.0"
 
 isobject@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.0.tgz#39565217f3661789e8a0a0c080d5f7e6bc46e1a0"
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
 
 isomorphic-fetch@^2.1.1:
   version "2.2.1"
@@ -5257,8 +5257,8 @@ mdast-util-definitions@^1.2.0:
     unist-util-visit "^1.0.0"
 
 mdast-util-to-hast@^2.0.0, mdast-util-to-hast@^2.1.1, mdast-util-to-hast@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-2.4.1.tgz#ae6bec08c8704d5f6ddfc7b84afce983c27441a8"
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-2.4.2.tgz#f116e8bf3da772ba5a397a92dab090f5ba91caa0"
   dependencies:
     collapse-white-space "^1.0.0"
     detab "^2.0.0"
@@ -5577,7 +5577,16 @@ nopt@^4.0.1:
     abbrev "1"
     osenv "^0.1.4"
 
-normalize-package-data@^2.3.0, normalize-package-data@^2.3.2, normalize-package-data@^2.3.4, normalize-package-data@^2.3.5, normalize-package-data@^2.3.8:
+normalize-package-data@^2.3.0, normalize-package-data@^2.3.4, normalize-package-data@^2.3.5, normalize-package-data@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.4.0.tgz#12f95a307d58352075a04907b84ac8be98ac012f"
+  dependencies:
+    hosted-git-info "^2.1.4"
+    is-builtin-module "^1.0.0"
+    semver "2 || 3 || 4 || 5"
+    validate-npm-package-license "^3.0.1"
+
+normalize-package-data@^2.3.2:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.3.8.tgz#d819eda2a9dedbd1ffa563ea4071d936782295bb"
   dependencies:
@@ -6294,7 +6303,7 @@ querystringify@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-1.0.0.tgz#6286242112c5b712fa654e526652bf6a13ff05cb"
 
-quibble@^0.5.0:
+quibble@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/quibble/-/quibble-0.5.1.tgz#b7fd1fc0a9c1eea012ac9d71bcb6da8d9a5dc9e9"
   dependencies:
@@ -6377,20 +6386,19 @@ react-hot-loader@3.0.0-beta.7:
     source-map "^0.4.4"
 
 react-lowlight@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-lowlight/-/react-lowlight-1.0.6.tgz#e0eb3a8169cc99dbdb29f757e2a1b5edd0532280"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-lowlight/-/react-lowlight-1.1.1.tgz#27cfa2894d27872a6de6967534852829148a82fa"
   dependencies:
-    in-publish "^2.0.0"
     lowlight "^1.0.0"
     prop-types "^15.5.8"
 
-react-measure@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/react-measure/-/react-measure-2.0.2.tgz#072a9a5fafc01dfbadc1fa5fb09fc351037f636c"
+react-measure@^1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/react-measure/-/react-measure-1.4.7.tgz#a1d2ca0dcfef04978b7ac263a765dcb6a0936fdb"
   dependencies:
     get-node-dimensions "^1.2.0"
-    prop-types "^15.5.10"
-    resize-observer-polyfill "^1.4.2"
+    prop-types "^15.5.4"
+    resize-observer-polyfill "^1.4.1"
 
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
@@ -6825,7 +6833,7 @@ reselect@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
 
-resize-observer-polyfill@^1.4.2:
+resize-observer-polyfill@^1.4.1:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.4.2.tgz#a37198e6209e888acb1532a9968e06d38b6788e5"
 
@@ -7382,8 +7390,8 @@ styled-components@^2.1.0:
     supports-color "^3.2.3"
 
 stylis@^3.0.19:
-  version "3.1.9"
-  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.1.9.tgz#638370451f980437f57c59e58d2e296be29fafb7"
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.2.0.tgz#13a84d4c44d9c31f7ff231626a53135daa87c440"
 
 sumchecker@^1.2.0:
   version "1.3.1"
@@ -7512,13 +7520,13 @@ test-exclude@^4.1.1:
     require-main-filename "^1.0.1"
 
 testdouble@^3.1.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/testdouble/-/testdouble-3.2.1.tgz#24e8984d403ae9c9fd59b0155cff25b881fa52ab"
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/testdouble/-/testdouble-3.2.2.tgz#be1d06a0200a9c1cfbaed2abf431fc30a0865e35"
   dependencies:
     es6-map "^0.1.5"
     lodash "^4.15.0"
-    quibble "^0.5.0"
-    resolve "^1.3.2"
+    quibble "^0.5.1"
+    resolve "^1.3.3"
     stringify-object-es5 "^2.5.0"
 
 text-extensions@^1.0.0:
@@ -7689,8 +7697,8 @@ ua-parser-js@^0.7.9:
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
 
 uglify-js@3.0.x:
-  version "3.0.20"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.20.tgz#cb35b2bcfe478051b6f3282be8db4e4add49a1e5"
+  version "3.0.22"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.22.tgz#0a4d957cf381b38c3f40e9295c442043f04f5805"
   dependencies:
     commander "~2.9.0"
     source-map "~0.5.1"
