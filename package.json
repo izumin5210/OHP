@@ -36,6 +36,8 @@
   "repository": "git@github.com:izumin5210/OHP.git",
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist --npm-client yarn --concurrency 4",
+    "clean": "lerna run clean",
+    "clobber": "yarn run clean && lerna clean",
     "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
     "jest": "jest --config .jestrc.json",
     "lint": "eslint .",
