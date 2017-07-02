@@ -47,6 +47,9 @@
     "prebootstrap": "yarn --no-progress",
     "pretest": "yarn typecheck && yarn lint",
     "run-in-app": "yarn lerna -- run --scope @ohp/app --stream",
+    "start:dev": "run-p start:dev:*",
+    "start:dev:app": "yarn run-in-app -- start:dev:app",
+    "start:dev:server": "yarn run-in-app -- start:dev:server",
     "test": "yarn jest && lerna run test --scope @ohp/app",
     "typecheck": "flow",
     "version": "yarn generate:changelog && git add CHANGELOG.md"
