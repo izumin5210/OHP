@@ -1,5 +1,6 @@
 // @flow
 import { bodyToReactFactory, outlineToReactFactory } from './factories'
+import { InvalidDocumentError } from './errors'
 import type { Options, Result } from './types'
 
 export default class Processor {
@@ -12,15 +13,23 @@ export default class Processor {
   outlineToReact: any
 
   process = async (body: string): Promise<Result> => {
-    const [bodyVfile, outlineVfile] = await Promise.all([
-      this.bodyToReact.process(body),
-      this.outlineToReact.process(body),
-    ])
-    return {
-      body: bodyVfile.contents,
-      outline: outlineVfile.contents,
-      styles: bodyVfile.styles,
-      meta: bodyVfile.meta,
+    try {
+      const [bodyVfile, outlineVfile] = await Promise.all([
+        this.bodyToReact.process(body),
+        this.outlineToReact.process(body),
+      ])
+      return {
+        body: bodyVfile.contents,
+        outline: outlineVfile.contents,
+        styles: bodyVfile.styles,
+        meta: bodyVfile.meta,
+      }
+    } catch (err) {
+      const location: ?Location = err.location
+      if (location != null) {
+        throw new InvalidDocumentError(err.message, location.start, location.end)
+      }
+      throw err
     }
   }
 }
