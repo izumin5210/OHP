@@ -14,6 +14,7 @@ function process (value: string, opts: any) {
 
 [
   { type: 'normal', options: {} },
+  { type: 'target', options: { target: 'link' } },
 ].forEach(({ type, options }) => {
   test(`it works on ${type}`, () => {
     const dir = join(FIXTURES, type)
