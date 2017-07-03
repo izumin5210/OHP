@@ -1,7 +1,7 @@
 {
   "name": "remark-outline",
   "description": "Remark plugin for transforming to outline from markdown document",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",

@@ -1,7 +1,7 @@
 {
   "name": "remark-insert-page-number",
   "description": "Remark plugin for inserting page numbers",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
@@ -15,7 +15,7 @@
     "unist-util-visit": "^1.1.1"
   },
   "devDependencies": {
-    "remark-newpage-directive": "^0.2.0",
+    "remark-newpage-directive": "^0.2.1",
     "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
   },
   "bugs": "https://github.com/izumin5210/OHP/issues",

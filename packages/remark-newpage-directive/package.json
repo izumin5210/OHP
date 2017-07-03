@@ -1,7 +1,7 @@
 {
   "name": "remark-newpage-directive",
   "description": "Remark plugin for processing newpage directive",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
@@ -10,7 +10,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "defaults": "^1.0.3",
-    "mdast-directive-comment": "^0.1.1",
+    "mdast-directive-comment": "^0.1.2",
     "mdast-util-to-hast": "^2.4.1",
     "unist-builder": "^1.0.2"
   },

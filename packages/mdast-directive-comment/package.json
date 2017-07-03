@@ -1,7 +1,7 @@
 {
   "name": "mdast-directive-comment",
   "description": "Helper function for creating plugin to process directive-comments",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
