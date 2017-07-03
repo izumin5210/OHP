@@ -9,6 +9,9 @@ export const optionsByPluginName = {
   newpageDirective: {
     withPosition: true,
   },
+  listDepthAnnotation: {
+    target: 'link',
+  },
   react: {
     sanitize,
     toHast: {

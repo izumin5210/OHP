@@ -13,7 +13,7 @@ const sanitize = merge(
       '*': ['className'],
       'page': ['beginLineAt', 'beginColumnAt', 'endLineAt', 'endColumnAt'],
       'pageNumber': ['enable', 'number'],
-      'li': ['depth'],
+      'a': ['depth'],
     }
   },
 )
