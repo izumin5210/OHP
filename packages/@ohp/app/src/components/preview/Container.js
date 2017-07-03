@@ -8,7 +8,7 @@ import type { Element } from 'react'
 import type { Dispatch } from 'redux'
 import type { Action } from 'redux-actions'
 import type { Connector } from 'react-redux'
-import type { Dimension } from 'react-measure'
+import type { ContentRect } from 'react-measure'
 
 import { setWidth } from 'store/modules/preview'
 import { getBody, getWidth, getCurrentPageOrder } from 'store/selectors/preview'
@@ -49,8 +49,10 @@ class Container extends PureComponent<void, Props, void> {
   // for lint
   props: Props
 
-  onMeasure = ({ width }: Dimension) => {
-    this.props.setWidth(width)
+  onResize = ({ bounds }: ContentRect) => {
+    if (typeof bounds.width === 'number') {
+      this.props.setWidth(bounds.width)
+    }
   }
 
   renderContent () {
@@ -63,8 +65,15 @@ class Container extends PureComponent<void, Props, void> {
     }
 
     return (
-      <Measure onMeasure={this.onMeasure}>
-        { bodyElement }
+      <Measure
+        onResize={this.onResize}
+        bounds
+      >
+        {({ measureRef }) => (
+          <div ref={measureRef}>
+            { bodyElement }
+          </div>
+        )}
       </Measure>
     )
   }
