@@ -5223,9 +5223,9 @@ remark-parse@^3.0.0:
     vfile-location "^2.0.0"
     xtend "^4.0.1"
 
-"remark-react@git+https://github.com/izumin5210/remark-react.git#9e53bc8":
+"remark-react@https://github.com/izumin5210/remark-react.git#9e53bc8":
   version "4.0.0"
-  resolved "git+https://github.com/izumin5210/remark-react.git#9e53bc8"
+  resolved "https://github.com/izumin5210/remark-react.git#9e53bc8"
   dependencies:
     camelize "^1.0.0"
     hast-to-hyperscript "^2.0.1"
@@ -5253,9 +5253,9 @@ remark-stringify@^3.0.0:
     unherit "^1.0.4"
     xtend "^4.0.1"
 
-"remark-yaml-meta@git+https://github.com/izumin5210/remark-yaml-meta.git#3387774":
+"remark-yaml-meta@https://github.com/izumin5210/remark-yaml-meta.git#3387774":
   version "0.1.0"
-  resolved "git+https://github.com/izumin5210/remark-yaml-meta.git#3387774"
+  resolved "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
   dependencies:
     js-yaml "^3.5.2"
 
