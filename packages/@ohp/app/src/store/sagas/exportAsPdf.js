@@ -16,7 +16,7 @@ function * handleStart (): Generator<PutEffect, *, *> {
 }
 
 function * handleComplete (): Generator<PutEffect, *, *> {
-  yield put(pushLocation(getPathFromKey('document#edit')))
+  yield put(pushLocation(getPathFromKey('app#index')))
 }
 
 function * watchPrepare (): Generator<*, *, *> {
