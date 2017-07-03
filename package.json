@@ -24,6 +24,7 @@
     "flow-typed": "^2.1.2",
     "jest": "^20.0.4",
     "lerna": "^2.0.0-rc.5",
+    "npm-run-all": "^4.0.2",
     "react": "^15.6.1",
     "react-test-renderer": "^15.6.1",
     "remark": "^7.0.1",
@@ -36,6 +37,8 @@
   "repository": "git@github.com:izumin5210/OHP.git",
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist --npm-client yarn --concurrency 4",
+    "clean": "lerna run clean",
+    "clobber": "yarn run clean && lerna clean",
     "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
     "jest": "jest --config .jestrc.json",
     "lint": "eslint .",
@@ -44,6 +47,9 @@
     "prebootstrap": "yarn --no-progress",
     "pretest": "yarn typecheck && yarn lint",
     "run-in-app": "yarn lerna -- run --scope @ohp/app --stream",
+    "start:dev": "run-p start:dev:*",
+    "start:dev:app": "yarn run-in-app -- start:dev:app",
+    "start:dev:server": "yarn run-in-app -- start:dev:server",
     "test": "yarn jest && lerna run test --scope @ohp/app",
     "typecheck": "flow",
     "version": "yarn generate:changelog && git add CHANGELOG.md"

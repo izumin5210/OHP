@@ -2684,8 +2684,8 @@ encoding@^0.1.11:
     iconv-lite "~0.4.13"
 
 enhanced-resolve@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-3.1.0.tgz#9f4b626f577245edcf4b2ad83d86e17f4f421dec"
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-3.3.0.tgz#950964ecc7f0332a42321b673b38dc8ff15535b3"
   dependencies:
     graceful-fs "^4.1.2"
     memory-fs "^0.4.0"
@@ -3817,8 +3817,8 @@ hash-base@^2.0.0:
     inherits "^2.0.1"
 
 hash.js@^1.0.0, hash.js@^1.0.3:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.2.tgz#bf5c887825cfe40b9efde7bf11bd2db26e6bf01b"
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.3.tgz#340dedbe6290187151c1ea1d777a3448935df846"
   dependencies:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.0"
@@ -6392,13 +6392,13 @@ react-lowlight@^1.0.6:
     lowlight "^1.0.0"
     prop-types "^15.5.8"
 
-react-measure@^1.4.7:
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/react-measure/-/react-measure-1.4.7.tgz#a1d2ca0dcfef04978b7ac263a765dcb6a0936fdb"
+react-measure@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-measure/-/react-measure-2.0.2.tgz#072a9a5fafc01dfbadc1fa5fb09fc351037f636c"
   dependencies:
     get-node-dimensions "^1.2.0"
-    prop-types "^15.5.4"
-    resize-observer-polyfill "^1.4.1"
+    prop-types "^15.5.10"
+    resize-observer-polyfill "^1.4.2"
 
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
@@ -6588,8 +6588,8 @@ reduce-reducers@^0.1.0:
   resolved "https://registry.yarnpkg.com/reduce-reducers/-/reduce-reducers-0.1.2.tgz#fa1b4718bc5292a71ddd1e5d839c9bea9770f14b"
 
 redux-actions@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/redux-actions/-/redux-actions-2.0.3.tgz#1550aba9def179166ccd234d07672104a736d889"
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/redux-actions/-/redux-actions-2.2.0.tgz#64ddb473aa25ef6afcfa1e924ba85d575cef0ce3"
   dependencies:
     invariant "^2.2.1"
     lodash "^4.13.1"
@@ -6833,7 +6833,7 @@ reselect@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
 
-resize-observer-polyfill@^1.4.1:
+resize-observer-polyfill@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.4.2.tgz#a37198e6209e888acb1532a9968e06d38b6788e5"
 
@@ -7390,8 +7390,8 @@ styled-components@^2.1.0:
     supports-color "^3.2.3"
 
 stylis@^3.0.19:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.2.0.tgz#13a84d4c44d9c31f7ff231626a53135daa87c440"
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.2.1.tgz#7a88988f8ccb5c238be3cc3cec173735cc594740"
 
 sumchecker@^1.2.0:
   version "1.3.1"
@@ -7697,8 +7697,8 @@ ua-parser-js@^0.7.9:
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
 
 uglify-js@3.0.x:
-  version "3.0.22"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.22.tgz#0a4d957cf381b38c3f40e9295c442043f04f5805"
+  version "3.0.23"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.23.tgz#a58c6b97e6d6763d94dbc265fe8e8c1725e64666"
   dependencies:
     commander "~2.9.0"
     source-map "~0.5.1"

@@ -83,6 +83,19 @@ pageNumber:
 
 - [[source](https://gist.github.com/izumin5210/b4a61ed5003b1666dfe8ecd5baf683f1)] [Performance of rendering over 10k items using React // Speaker Deck](https://speakerdeck.com/izumin5210/performance-of-rendering-over-10k-items-using-react)
 
+
+## Development
+```
+# Run `yarn install` and `lerna bootstrap`
+$ yarn bootstrap
+
+# Start webpack-dev-server and electron
+$ yarn start:dev
+
+# Or, run `yarn start:dev:app` and `yarn start:dev:server`
+```
+
+
 ## License
 Licensed under [MIT License][license].
 
