@@ -86,13 +86,12 @@ exports[`Processing page document returns react components for outline correctly
   <ul>
     
     
-    <li
-      depth="1"
-    >
+    <li>
       
       
       <p>
         <a
+          depth="1"
           href="#heading-1-1"
         >
           Heading 1-1
@@ -103,10 +102,9 @@ exports[`Processing page document returns react components for outline correctly
       <ul>
         
         
-        <li
-          depth="2"
-        >
+        <li>
           <a
+            depth="2"
             href="#heading-2-1"
           >
             Heading 2-1
@@ -114,13 +112,12 @@ exports[`Processing page document returns react components for outline correctly
         </li>
         
         
-        <li
-          depth="2"
-        >
+        <li>
           
           
           <p>
             <a
+              depth="2"
               href="#heading-2-2"
             >
               Heading 2-2
@@ -131,10 +128,9 @@ exports[`Processing page document returns react components for outline correctly
           <ul>
             
             
-            <li
-              depth="3"
-            >
+            <li>
               <a
+                depth="3"
                 href="#introduction"
               >
                 introduction
@@ -214,13 +210,12 @@ exports[`Processing pageNumber document returns react components for outline cor
   <ul>
     
     
-    <li
-      depth="1"
-    >
+    <li>
       
       
       <p>
         <a
+          depth="1"
           href="#heading-1-1"
         >
           Heading 1-1
@@ -231,10 +226,9 @@ exports[`Processing pageNumber document returns react components for outline cor
       <ul>
         
         
-        <li
-          depth="2"
-        >
+        <li>
           <a
+            depth="2"
             href="#heading-2-2"
           >
             Heading 2-2
@@ -315,13 +309,12 @@ exports[`Processing simple document returns react components for outline correct
   <ul>
     
     
-    <li
-      depth="1"
-    >
+    <li>
       
       
       <p>
         <a
+          depth="1"
           href="#heading-1-1"
         >
           Heading 1-1
@@ -332,10 +325,9 @@ exports[`Processing simple document returns react components for outline correct
       <ul>
         
         
-        <li
-          depth="2"
-        >
+        <li>
           <a
+            depth="2"
             href="#heading-2-2"
           >
             Heading 2-2
@@ -429,13 +421,12 @@ exports[`Processing styles document returns react components for outline correct
   <ul>
     
     
-    <li
-      depth="1"
-    >
+    <li>
       
       
       <p>
         <a
+          depth="1"
           href="#heading-1-1"
         >
           Heading 1-1
@@ -446,10 +437,9 @@ exports[`Processing styles document returns react components for outline correct
       <ul>
         
         
-        <li
-          depth="2"
-        >
+        <li>
           <a
+            depth="2"
             href="#heading-2-2"
           >
             Heading 2-2
