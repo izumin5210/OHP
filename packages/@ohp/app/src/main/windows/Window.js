@@ -1,5 +1,5 @@
 // @flow
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, shell } from 'electron'
 
 import type { BrowserWindowOptions, BrowserWindowEvents, WebContentsEvents } from 'electron'
 
@@ -39,6 +39,10 @@ export default class Window {
 
   create (initialState?: Object) {
     this.window.loadURL(this.url)
+    this.window.webContents.on('new-window', (event, url) => {
+      event.preventDefault()
+      shell.openExternal(url)
+    })
     if (initialState != null) {
       this.window.webContents.on('did-finish-load', () => {
         this.send('initialState', initialState)
