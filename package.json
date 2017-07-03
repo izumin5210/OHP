@@ -1,7 +1,7 @@
 {
   "name": "OHP",
   "description": "OHP is Hacker's Presentation writer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
@@ -38,12 +38,12 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist --npm-client yarn --concurrency 4",
     "clean": "lerna run clean",
-    "clobber": "yarn run clean && lerna clean",
+    "clobber": "yarn run clean && lerna clean --yes",
     "generate:changelog": "conventional-changelog --preset atom --infile CHANGELOG.md --same--file",
     "jest": "jest --config .jestrc.json",
     "lint": "eslint .",
-    "package": "lerna run --scope OHP -- package",
-    "package:release": "lerna run --scope @ohp/app -- package:release",
+    "package": "yarn clobber && lerna exec --scope @ohp/app 'yarn && yarn package'",
+    "package:release": "yarn clobber && lerna exec --scope @ohp/app  'yarn && yarn package:release'",
     "prebootstrap": "yarn --no-progress",
     "pretest": "yarn typecheck && yarn lint",
     "run-in-app": "yarn lerna -- run --scope @ohp/app --stream",

@@ -1,7 +1,7 @@
 {
   "name": "remark-list-depth-annotation",
   "description": "Remark plugin for annotating depth to list items",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",

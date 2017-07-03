@@ -9,6 +9,8 @@
     "publish": {
       "ignore": [
         "src/__tests__/**/*",
+        "package-lock.json",
+        "yarn.lock",
         "*.md"
       ]
     }

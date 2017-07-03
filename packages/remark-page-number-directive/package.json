@@ -1,7 +1,7 @@
 {
   "name": "remark-page-number-directive",
   "description": "Remark plugin for processing pageNumber directive",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": {
     "name": "Masayuki Izumi",
     "email": "masayuki@izumin.info",
@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "mdast-directive-comment": "^0.1.1",
+    "mdast-directive-comment": "^0.1.2",
     "unist-util-visit": "^1.1.1"
   },
   "devDependencies": {
-    "remark-insert-page-number": "^0.2.1",
-    "remark-newpage-directive": "^0.2.0",
+    "remark-insert-page-number": "^0.2.2",
+    "remark-newpage-directive": "^0.2.1",
     "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
   },
   "files": [
