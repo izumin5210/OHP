@@ -31,10 +31,9 @@ notifications:
 
 deploy:
 - provider: script
-  script:
-  - yarn package:release
+  script: echo $TRAVIS_TAG | grep -q -E "^v\d+\.\d+\.\d+$" && yarn package:release
   skip_cleanup: true
   on:
     tags: true
     all_branches: true
-    condition: $TRAVIS_OS_NAME = osx && (echo $$TRAVIS_TAG | grep -q -e "^v\d\+\.\d\+\.\d\+$")
+    condition: $TRAVIS_OS_NAME = osx
