@@ -22,11 +22,15 @@ function * handleProcess (): Generator<CallEffect | PutEffect | SelectEffect, *,
   // debounce by 500ms
   yield call(delay, 500)
   const rawBody = yield select(getBody)
-  const { body, outline, styles, meta } = yield call(getProcessor().process, rawBody)
-  yield put(Actions.setBody(body))
-  yield put(Actions.setStyles(styles))
-  yield put(Actions.setOutline(outline))
-  yield put(Actions.setMeta(meta))
+  try {
+    const { body, outline, styles, meta } = yield call(getProcessor().process, rawBody)
+    yield put(Actions.setBody(body))
+    yield put(Actions.setStyles(styles))
+    yield put(Actions.setOutline(outline))
+    yield put(Actions.setMeta(meta))
+  } catch (e) {
+    // TODO: Should handle errors
+  }
 }
 
 function * watchProcess (): Generator<TakeEffect, *, *> {
