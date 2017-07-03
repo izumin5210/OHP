@@ -21,7 +21,7 @@
     "remark-page-number-directive": "^0.2.1",
     "remark-page-props-directive": "^0.2.0",
     "remark-react": "https://github.com/izumin5210/remark-react.git#9e53bc8",
-    "remark-yaml-meta": "https://github.com/izumin5210/remark-yaml-meta.git#3387774"
+    "remark-yaml-meta": "https://github.com/appden/remark-yaml-meta.git#f710d64"
   },
   "files": [
     "dist/"
