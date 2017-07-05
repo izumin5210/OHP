@@ -28,7 +28,9 @@
     "url": "https://github.com/izumin5210/OHP"
   },
   "scripts": {
-    "build": "",
+    "build": "yarn build:js && yarn build:es",
+    "build:es": "tsc --target ES2016 --outDir ./dist/es",
+    "build:js": "tsc",
     "clean": "rimraf dist",
     "prepublish": "yarn run clean && yarn build"
   }
