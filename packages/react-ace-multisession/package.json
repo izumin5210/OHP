@@ -8,6 +8,10 @@
     "url": "https://github.com/izumin5210"
   },
   "bugs": "https://github.com/izumin5210/OHP/issues",
+  "dependencies": {
+    "@types/react": "^15.0.34",
+    "brace": "^0.10.0"
+  },
   "files": [
     "dist/"
   ],
