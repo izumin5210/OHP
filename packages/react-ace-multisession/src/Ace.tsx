@@ -1,33 +1,19 @@
 import * as ace from 'brace'
 import * as React from 'react'
 
-export interface RequiredProps {
+import { EditorProps } from './EditorProps'
+import { EditorEventListener, EditorEventName, mapEventNameToCallbackNames } from './EditorEvent'
+
+export type RequiredProps = Partial<EditorProps> & Partial<EditorEventListener> & {
   id?: string,
-  keyboardHandler?: string,
-  mode?: string,
-  theme?: string,
   value: string,
-  onBlur?: () => void,
-  onChange?: (e: ace.EditorChangeEvent) => void,
-  onChangeSelectionStyle?: (e: Object) => void,
-  onChangeSession?: (e: Object) => void,
-  onCopy?: (text: String) => void,
-  onFocus?: () => void,
-  onPaste?: (e: Object) => void,
 }
 
-export interface DefaultProps extends Partial<RequiredProps> {
+export type DefaultProps = EditorEventListener & {
   id: string,
-  onBlur: () => void,
-  onChange: (e: ace.EditorChangeEvent) => void,
-  onChangeSelectionStyle: (e: Object) => void,
-  onChangeSession: (e: Object) => void,
-  onCopy: (text: String) => void,
-  onFocus: () => void,
-  onPaste: (e: Object) => void,
 }
 
-type Props = RequiredProps & DefaultProps
+export type Props = RequiredProps & DefaultProps & EditorProps
 
 export interface State {
 }
@@ -54,6 +40,9 @@ export default class Ace extends React.PureComponent<RequiredProps, State> {
     this.theme = theme
     this.mode = mode
     this.value = value
+    Object.keys(mapEventNameToCallbackNames).forEach((name: EditorEventName) => {
+      this.replaceEventListener(name, this.props as Props, {})
+    });
   }
 
   componentWillReceiveProps (nextProps: Readonly<RequiredProps>) {
@@ -62,15 +51,37 @@ export default class Ace extends React.PureComponent<RequiredProps, State> {
     this.mapPropsToEditor('mode',            nextProps, oldProps)
     this.mapPropsToEditor('theme',           nextProps, oldProps)
     this.mapPropsToEditor('value',           nextProps, oldProps)
+    Object.keys(mapEventNameToCallbackNames).forEach((name: EditorEventName) => {
+      this.replaceEventListener(name, nextProps as Props, oldProps)
+    });
   }
 
   private mapPropsToEditor (
     key: keyof Props & keyof this,
-    nextProps: Readonly<RequiredProps>,
-    oldProps: Readonly<RequiredProps>,
+    nextProps: Readonly<Partial<Props>>,
+    oldProps: Readonly<Partial<Props>>,
   ) {
     if (nextProps[key] != oldProps[key]) {
       this[key] = nextProps[key]
+    }
+  }
+
+  private replaceEventListener (
+    name: EditorEventName,
+    nextProps: Readonly<EditorEventListener>,
+    oldProps: Partial<Readonly<EditorEventListener>> = {},
+  ) {
+    const key = mapEventNameToCallbackNames[name]
+    const oldCb = oldProps[key]
+    const nextCb = nextProps[key]
+    if (oldCb != nextCb) {
+      if (oldCb != null) {
+        // FIXME: removeEventListener() and off() have not been defined
+        (this.editor as any).off(name, oldCb)
+      }
+      if (nextCb != null) {
+        this.editor.on(name, nextCb)
+      }
     }
   }
 
