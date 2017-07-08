@@ -11,6 +11,7 @@ export type RequiredProps = Partial<EditorProps> & Partial<EditorEventListener> 
 
 export type DefaultProps = EditorEventListener & {
   id: string,
+  commands: EditorProps['commands'],
 }
 
 export type Props = RequiredProps & DefaultProps & EditorProps
@@ -21,6 +22,7 @@ export interface State {
 export default class Ace extends React.PureComponent<RequiredProps, State> {
   public static defaultProps: DefaultProps = {
     id: 'ace-multisession',
+    commands: [],
     onBlur: () => {},
     onChange: () => {},
     onChangeSelectionStyle: () => {},
@@ -34,12 +36,13 @@ export default class Ace extends React.PureComponent<RequiredProps, State> {
   editorRef: HTMLElement
 
   componentDidMount () {
-    const { id, keyboardHandler, mode, theme, value } = this.props as Props
+    const { id, keyboardHandler, mode, theme, value, commands } = this.props as Props
     this.editor = ace.edit(id)
     this.keyboardHandler = keyboardHandler
     this.theme = theme
     this.mode = mode
     this.value = value
+    this.commands = commands
     Object.keys(mapEventNameToCallbackNames).forEach((name: EditorEventName) => {
       this.replaceEventListener(name, this.props as Props, {})
     });
@@ -51,6 +54,7 @@ export default class Ace extends React.PureComponent<RequiredProps, State> {
     this.mapPropsToEditor('mode',            nextProps, oldProps)
     this.mapPropsToEditor('theme',           nextProps, oldProps)
     this.mapPropsToEditor('value',           nextProps, oldProps)
+    this.mapPropsToEditor('commands',        nextProps, oldProps)
     Object.keys(mapEventNameToCallbackNames).forEach((name: EditorEventName) => {
       this.replaceEventListener(name, nextProps as Props, oldProps)
     });
@@ -99,6 +103,10 @@ export default class Ace extends React.PureComponent<RequiredProps, State> {
 
   set value (value: string) {
     this.editor.setValue(value)
+  }
+
+  set commands(commands: ace.EditorCommand[]) {
+    this.editor.commands.addCommands(commands)
   }
 
   render () {
