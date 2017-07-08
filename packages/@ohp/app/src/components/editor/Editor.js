@@ -1,6 +1,6 @@
 // @flow
 import { PureComponent } from 'react'
-import AceEditor from 'react-ace'
+import AceEditor from 'react-ace-multisession'
 import 'brace/mode/markdown'
 import 'brace/theme/tomorrow'
 import 'brace/keybinding/vim'
