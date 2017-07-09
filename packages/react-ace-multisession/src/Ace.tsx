@@ -1,16 +1,22 @@
 import * as ace from 'brace'
 import * as React from 'react'
 
-import { EditorProps } from './EditorProps'
-import { EditorEventListener, EditorEventName, mapEventNameToCallbackNames } from './EditorEvent'
+import EditorPropsMapper from './EditorPropsMapper'
+import EditorEventHandler from './EditorEventHandler'
+import EditorProps from './EditorProps'
+import { EditorEventListener } from './EditorEvent'
 
 export type RequiredProps = Partial<EditorProps> & Partial<EditorEventListener> & {
   id?: string,
   value: string,
+  width: number | string,
+  height: number | string,
+  style: Object,
 }
 
-export type DefaultProps = EditorEventListener & {
+export type DefaultProps = {
   id: string,
+  cursorPos: EditorProps['cursorPos'],
   commands: EditorProps['commands'],
 }
 
@@ -22,91 +28,42 @@ export interface State {
 export default class Ace extends React.PureComponent<RequiredProps, State> {
   public static defaultProps: DefaultProps = {
     id: 'ace-multisession',
+    cursorPos: 1,
     commands: [],
-    onBlur: () => {},
-    onChange: () => {},
-    onChangeSelectionStyle: () => {},
-    onChangeSession: () => {},
-    onCopy: () => {},
-    onFocus: () => {},
-    onPaste: () => {},
   }
 
   editor: ace.Editor
   editorRef: HTMLElement
+  private mapper: EditorPropsMapper
+  private handler: EditorEventHandler
 
   componentDidMount () {
-    const { id, keyboardHandler, mode, theme, value, commands } = this.props as Props
+    const { id } = this.props as Props
     this.editor = ace.edit(id)
-    this.keyboardHandler = keyboardHandler
-    this.theme = theme
-    this.mode = mode
-    this.value = value
-    this.commands = commands
-    Object.keys(mapEventNameToCallbackNames).forEach((name: EditorEventName) => {
-      this.replaceEventListener(name, this.props as Props, {})
-    });
+    this.mapper = new EditorPropsMapper(this.editor, this.props)
+    this.handler = new EditorEventHandler(this.props)
+    this.mapper.initialize()
+    this.handler.register(this.editor)
+  }
+
+  componentWillUnmount () {
+    this.handler.unregister(this.editor)
   }
 
   componentWillReceiveProps (nextProps: Readonly<RequiredProps>) {
-    const oldProps = this.props as Props
-    this.mapPropsToEditor('keyboardHandler', nextProps, oldProps)
-    this.mapPropsToEditor('mode',            nextProps, oldProps)
-    this.mapPropsToEditor('theme',           nextProps, oldProps)
-    this.mapPropsToEditor('value',           nextProps, oldProps)
-    this.mapPropsToEditor('commands',        nextProps, oldProps)
-    Object.keys(mapEventNameToCallbackNames).forEach((name: EditorEventName) => {
-      this.replaceEventListener(name, nextProps as Props, oldProps)
-    });
+    this.handler.enableSilent(true)
+    this.mapper.update(nextProps)
+    this.handler.updateListener(nextProps)
+    this.handler.enableSilent(false)
   }
 
-  private mapPropsToEditor (
-    key: keyof Props & keyof this,
-    nextProps: Readonly<Partial<Props>>,
-    oldProps: Readonly<Partial<Props>>,
-  ) {
-    if (nextProps[key] != oldProps[key]) {
-      this[key] = nextProps[key]
+  get style (): Object {
+    const { width, height, style } = this.props
+    return {
+      ...style,
+      width,
+      height,
     }
-  }
-
-  private replaceEventListener (
-    name: EditorEventName,
-    nextProps: Readonly<EditorEventListener>,
-    oldProps: Partial<Readonly<EditorEventListener>> = {},
-  ) {
-    const key = mapEventNameToCallbackNames[name]
-    const oldCb = oldProps[key]
-    const nextCb = nextProps[key]
-    if (oldCb != nextCb) {
-      if (oldCb != null) {
-        // FIXME: removeEventListener() and off() have not been defined
-        (this.editor as any).off(name, oldCb)
-      }
-      if (nextCb != null) {
-        this.editor.on(name, nextCb)
-      }
-    }
-  }
-
-  set keyboardHandler (handler: string | undefined) {
-    this.editor.setKeyboardHandler(handler != null ? `ace/keyboard/${handler}` : '')
-  }
-
-  set mode (mode: string | undefined) {
-    this.editor.getSession().setMode(`ace/mode/${mode}`)
-  }
-
-  set theme (theme: string | undefined) {
-    this.editor.setTheme(`ace/theme/${theme}`)
-  }
-
-  set value (value: string) {
-    this.editor.setValue(value)
-  }
-
-  set commands(commands: ace.EditorCommand[]) {
-    this.editor.commands.addCommands(commands)
   }
 
   render () {
@@ -114,6 +71,7 @@ export default class Ace extends React.PureComponent<RequiredProps, State> {
     return (
       <div
         id={id}
+        style={this.style}
         ref={(ref: HTMLDivElement) => { this.editorRef = ref }}
       />
     )

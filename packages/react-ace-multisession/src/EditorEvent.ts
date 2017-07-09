@@ -26,13 +26,3 @@ export interface EditorEventListener {
   onFocus: OnFocus,
   onPaste: OnPaste,
 }
-
-export const mapEventNameToCallbackNames: { [key in EditorEventName]: keyof EditorEventListener } = {
-  blur: 'onBlur',
-  change: 'onChange',
-  changeSelectionStyle: 'onChangeSelectionStyle',
-  changeSession: 'onChangeSession',
-  copy: 'onCopy',
-  focus: 'onFocus',
-  paste: 'onPaste',
-}
